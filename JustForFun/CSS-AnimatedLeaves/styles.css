@@ -1,0 +1,118 @@
+body{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+section{
+    width: 100%;
+    height: 100vh;
+    background: radial-gradient(#333333, #000000);
+}
+
+.set{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.set div{
+    position: absolute;
+    display: block;
+}
+
+.set div:nth-child(1){
+    left: 60%;
+    animation: leaves 15s linear infinite;
+    animation-delay: -7s;
+}
+
+.set div:nth-child(2){
+    left: 80%;
+    animation: leaves 20s linear infinite;
+    animation-delay: -5s;
+}
+
+.set div:nth-child(3){
+    left: 9%;
+    animation: leaves 25s linear infinite;
+}
+
+.set div:nth-child(4){
+    left: 60%;
+    animation: leaves 15s linear infinite;
+}
+
+.set div:nth-child(5){
+    left: 40%;
+    animation: leaves 28s linear infinite;
+}
+
+.set div:nth-child(6){
+    left: 85%;
+    animation: leaves 12s linear infinite;
+    animation-delay: -10s;
+}
+
+.set div:nth-child(7){
+    left: 30%;
+    animation: leaves 23s linear infinite;
+}
+
+.set div:nth-child(8){
+    left: 1%;
+    animation: leaves 11s linear infinite;
+    animation-delay: -5s;
+}
+
+@keyframes leaves {
+    0%{
+        opacity: 0;
+        top: -10%;
+        transform: translateX(20px) rotate(0deg);
+    }
+    10%{
+        opacity: 1;
+    }
+    20%{
+        transform: translateX(-20px) rotate(45deg);
+    }
+    40%{
+        transform: translateX(20px) rotate(90deg);
+    }
+    60%{
+        transform: translateX(-20px) rotate(135deg);
+    }
+    80%{
+        transform: translateX(-20px) rotate(180deg);
+    }
+    100%{
+        top: 110%;
+        transform: translateX(-20px) rotate(225deg);
+    }
+}
+
+.set2{
+    transform: scale(0.5) rotateY(180deg);
+    filter: blur(4px);
+}
+
+.set3{
+    transform: scale(1.5) rotateX(180deg);
+    filter: blur(2px);
+}
+
+h2{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    font-size: 9em;
+    font-family: sans-serif;
+}
