@@ -1,43 +1,47 @@
 
 const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
-//    console.log(checkboxes);
-
-let lastChecked;
-console.log('last checked ' + lastChecked);
-
+var lastChecked;
 function handleCheck(e) {
-    //if shift key down
+    // if shift key down
     // and they are checking it
-
-    let inBetween = false;
-
+    var inBetween = false;
     if(e.shiftKey && this.checked){
-
-        checkboxes.forEach(function (checkbox) {
-
+        checkboxes.forEach(checkbox => {
             console.log(checkbox);
-            console.log('last checked ' + lastChecked);
-
             if(checkbox === this || checkbox === lastChecked){
-                console.log('last checked ' + lastChecked);
-
                 inBetween = !inBetween;
                 console.log('check them inbetween');
             }
-
             if(inBetween){
                 checkbox.checked = true;
             }
         });
-
     }
-
     lastChecked = this;
-    console.log('last checked ' + lastChecked);
-
-//        console.log(e);
 }
+checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
 
-checkboxes.forEach(function (checkbox) {
-    return checkbox.addEventListener('click', handleCheck);
-});
+//
+// const checkboxes = document.querySelectorAll('.inbox input[type="checkbox"]');
+// let lastChecked;
+// function handleCheck(e) {
+//     // Check if they had the shift key down
+//     // AND check that they are checking it
+//     let inBetween = false;
+//     if (e.shiftKey && this.checked) {
+//         // go ahead and do what we please
+//         // loop over every single checkbox
+//         checkboxes.forEach(checkbox => {
+//             console.log(checkbox);
+//         if (checkbox === this || checkbox === lastChecked) {
+//             inBetween = !inBetween;
+//             console.log('Starting to check them inbetween!');
+//         }
+//         if (inBetween) {
+//             checkbox.checked = true;
+//         }
+//     });
+//     }
+//     lastChecked = this;
+// }
+// checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
