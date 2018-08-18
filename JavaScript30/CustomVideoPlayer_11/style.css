@@ -69,7 +69,7 @@ body {
     bottom:0;
     width: 100%;
     transform: translateY(100%) translateY(-5px);
-    transition:all .3s;
+    transition:all 1s;
     flex-wrap:wrap;
     background:rgba(0,0,0,0.1);
 }
