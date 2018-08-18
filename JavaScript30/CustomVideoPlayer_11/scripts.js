@@ -39,20 +39,36 @@ function handleRangeUpdate() {
     // console.log(this.name);
 }
 
+function handleProgress() {
+    const percent = (video.currentTime / video.duration) * 100;
+    progressBar.style.flexBasis = percent + '%';
+    // console.log(progressBar.style.flexBasis);
+}
 
-
+function scrub(e) {
+    const scrubTime = (e.offsetX / progress.offsetWidth)* video.duration;
+    video.currentTime = scrubTime;
+    console.log(e);
+}
 
 // hook up event listners
 
 video.addEventListener('click', togglePlay);
+
 video.addEventListener('play', updateButton);
+
 video.addEventListener('pause', updateButton);
 
+video.addEventListener('timeupdate', handleProgress);
+
+
 toggle.addEventListener('click', togglePlay);
+
 
 skipButtons.forEach( function (button){
     button.addEventListener('click', skip);
 });
+
 
 ranges.forEach( function (range){
     range.addEventListener('change', handleRangeUpdate);
@@ -60,4 +76,24 @@ ranges.forEach( function (range){
 
 ranges.forEach( function (range){
     range.addEventListener('mousemove', handleRangeUpdate);
+});
+
+
+var mousedown = false;
+progress.addEventListener('click', scrub);
+
+progress.addEventListener('mousemove', function (e) {
+    if(mousedown){
+        scrub(e);
+    }
+});
+
+// progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
+
+progress.addEventListener('mousedown', function () {
+    mousedown = true;
+});
+
+progress.addEventListener('mouseup', function () {
+    mousedown = false;
 });
