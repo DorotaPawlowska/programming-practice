@@ -26,7 +26,7 @@ function checkSlide(e) {
     // console.count(e);
     sliderImages.forEach(function (sliderImage) {
         //half way through the image
-        const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 2;
+        const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 3;
         //bottom of the image
         const imageBottom = sliderImage.offsetTop + sliderImage.height;
         // console.log(slideInAt);
