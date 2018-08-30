@@ -63,6 +63,7 @@ nav ul {
     display: none;
 }
 
+/* to już było */
 .trigger-enter .dropdown {
     display: block;
 }
@@ -70,6 +71,8 @@ nav ul {
 .trigger-enter-active .dropdown {
     opacity: 1;
 }
+
+/* ------------------ ^^^^^^^^^ */
 
 .dropdownBackground {
     width:100px;
