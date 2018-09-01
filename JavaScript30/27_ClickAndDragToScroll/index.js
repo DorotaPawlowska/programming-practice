@@ -36,5 +36,3 @@ slider.addEventListener('mousemove', (e) => {
     // console.count(isDown);
     // console.log(startX);
 });
-
-
