@@ -38,7 +38,7 @@ legend,button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}
 /* Some default styles to make each box visible */
 .box {
   color:white;
-  font-size: 50px;
+  font-size: 20px;
   text-align: center;
   text-shadow:4px 4px 0 rgba(0,0,0,0.1);
   padding:10px;
@@ -60,26 +60,10 @@ legend,button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}
 /* We start writing out flexbox here. The above is just page setup */
 .container {
   display: flex; /*inline-flex;*/
-  /* border: 10px solid goldenrod;
+  justify-content: space-evenly;
+  border: 5px solid mistyrose;
+  flex-direction: column;
   min-height: 100vh;
-  flex-wrap: wrap; */
-}
-
-.box{
-  flex: 1;
-  /* order: 1; */
-  /* width:33.33333%; /* calc()*/
-  /* margin: 10px; */
-  /* padding: 10px; */
-  /* border: 10px solid mistyrose;  */
-}
-
-.box3{
-  order: 1;
-}
-
-.box5{
-  order: 2;
 }
 
 
