@@ -62,11 +62,21 @@ legend,button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}
   display: flex; /*inline-flex;*/
   border: 5px solid mistyrose;
   height: 100vh;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: center;
+  align-items: flex-start;
 }
 
 .box{
   width: 33.3333%;
+}
+
+.box2{
+  padding-bottom: 200px;
+}
+.box6{
+  padding-bottom: 0;
+}
+
+.box9{
+  padding-bottom: 50px;
+  align-self: stretch;
 }
