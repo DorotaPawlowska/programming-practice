@@ -62,14 +62,24 @@ legend,button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0;}
   display: flex; /*inline-flex;*/
 }
 
-.box{
-  flex: 1;
+.box1{
+  /* flex-grow: 1; */
+  /* flex-shrink: 1; */
+  /* flex: 1; */
+
+  /* flex-basis: 150px;
+  flex-grow: 10;
+  flex-shrink: 5; */
+
+  flex: 10 5 150px;
 }
 
 .box2{
-  flex: 2;
+  /* flex-basis: 150px;
+  flex-grow: 1;
+  flex-shrink: 1; */
+
+  flex: 1 1 150px;
+
 }
 
-.box5{
-  flex: 3;
-}
