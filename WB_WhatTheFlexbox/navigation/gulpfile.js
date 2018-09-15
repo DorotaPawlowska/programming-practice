@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('styles', function(){
-  gulp.src('css/styles.css')
+  gulp.src('css/style.css')
   .pipe(autoprefixer({
     browsers: ['last 2 versions'],
     cascade: false
@@ -11,5 +11,5 @@ gulp.task('styles', function(){
 });
 
 gulp.task('watch', function(){
-  gulp.watch('css/styles.css', ['styles']);
+  gulp.watch('css/style.css', ['styles']);
 });
