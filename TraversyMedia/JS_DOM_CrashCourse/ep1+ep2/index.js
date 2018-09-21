@@ -144,27 +144,38 @@
 
 // =======================traversing the DOM - creating elements========================================================
 //create a div
-var newDiv = document.createElement('div');
+// var newDiv = document.createElement('div');
 
-//add class
-newDiv.className = 'hello';
+// //add class
+// newDiv.className = 'hello';
 
-//add id
-newDiv.id = 'hello1';
+// //add id
+// newDiv.id = 'hello1';
 
-//add attr
-newDiv.setAttribute('title', 'hello div');
+// //add attr
+// newDiv.setAttribute('title', 'hello div');
 
-//create text node
-var newDivText = document.createTextNode('hello Word');
+// //create text node
+// var newDivText = document.createTextNode('hello Word');
 
-//add text to div
-newDiv.appendChild(newDivText);
+// //add text to div
+// newDiv.appendChild(newDivText);
 
-var container = document.querySelector('header .container');
-var h1 = document.querySelector('header h1');
+// var container = document.querySelector('header .container');
+// var h1 = document.querySelector('header h1');
 
-newDiv.style.fontSize = '30px';
-container.insertBefore(newDiv, h1);
+// newDiv.style.fontSize = '30px';
+// container.insertBefore(newDiv, h1);
 
-console.log(newDiv);
+// console.log(newDiv);
+
+// =======================traversing the DOM - eventListners========================================================
+
+var button = document.getElementById('button').addEventListener('click', buttonClick);
+
+function buttonClick(){
+  // console.log('button clicked');
+  document.getElementById('header-title').textContent = 'Changed';
+  document.querySelector('#main').style.backgroundColor = '#f4f4f4';
+}
+
