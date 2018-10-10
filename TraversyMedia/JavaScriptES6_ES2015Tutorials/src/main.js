@@ -47,37 +47,48 @@
 
 //  ============================================
 
-class User{
-  constructor(username, email, password){
-    this.username = username;
-    this.email = email;
-    this.password = password;
-  }
+// class User{
+//   constructor(username, email, password){
+//     this.username = username;
+//     this.email = email;
+//     this.password = password;
+//   }
 
-  static countUsers(){
-    console.log('there are 50 users');
-  }
+//   static countUsers(){
+//     console.log('there are 50 users');
+//   }
 
-  register(){
-    console.log(this.username + ' is now registered');
-  }
+//   register(){
+//     console.log(this.username + ' is now registered');
+//   }
+// }
+
+// let bob = new User('bob', 'bob@email.com', '123456');
+// bob.register()
+// User.countUsers();
+
+// class Member extends User{
+//   constructor(username, email, password, memberPackage){
+//     super(username, email, password);
+//     this.memberPackage = memberPackage;
+//   }
+
+//   getPackage(){
+//     console.log(this.username + ' is subscribed to the ' + this.memberPackage + ' package');
+//   }
+// }
+
+// let mike = new Member('mike', 'mike@email.com', '0987765', 'standard');
+// mike.getPackage();
+// mike.register();
+
+let name = 'john';
+function makeUppercase(word){
+  return word.toUpperCase();
 }
 
-let bob = new User('bob', 'bob@email.com', '123456');
-bob.register()
-User.countUsers();
+let template = `
+<h1>${makeUppercase('hello')}, ${name}</h1>
+<p>template in  JavaScript</p>`;
 
-class Memeber extends User{
-  constructor(username, email, password, memberPackage){
-    super(username, email, password);
-    this.memberPackage = memberPackage;
-  }
-
-  getPackage(){
-    console.log(this.username + ' is subscribed to the ' + this.memberPackage + ' package');
-  }
-}
-
-let mike = new Memeber('mike', 'mike@email.com', '0987765', 'standard');
-mike.getPackage();
-mike.register();
+document.getElementById('template').innerHTML = template;
