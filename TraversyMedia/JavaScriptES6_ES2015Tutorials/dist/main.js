@@ -1,20 +1,48 @@
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+// var a = "test";
+// var b = "test2";
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+// console.log(a);
+// console.log(b);
 
-var User = function () {
-  function User() {
-    _classCallCheck(this, User);
+function testVar() {
+  var a = 30;
+  if (true) {
+    var a = 50;
+    console.log(' var in' + a);
   }
+  console.log('out' + a);
+}
 
-  _createClass(User, [{
-    key: 'register',
-    value: function register() {
-      console.log('user registered...');
-    }
-  }]);
+testVar();
 
-  return User;
-}();
+function testLet() {
+  var a = 30;
+  if (true) {
+    var _a = 50;
+    console.log(' let in' + _a);
+  }
+  console.log('out' + a);
+}
+
+testLet();
+
+// for(var i = 0; i < 10; i++){
+//   console.log(i);
+// }
+// console.log(i);
+
+// for(let i = 0; i < 10; i++){
+//   console.log(i);
+// }
+// console.log(i);
+
+// --------------------------------------------
+var colors = [];
+colors.push('red');
+colors.push('blue');
+
+// colors = "green";
+
+console.log(colors);
