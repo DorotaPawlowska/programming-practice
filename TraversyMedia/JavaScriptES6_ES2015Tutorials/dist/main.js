@@ -123,22 +123,90 @@
 
 //===============================================================================
 
-function greet() {
-  var $greeting = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'hello world';
+// function greet($greeting = 'hello world'){
+//   console.log($greeting)
+// }
 
-  console.log($greeting);
-}
+// greet();
 
-greet();
+// // === next topic == ===
 
-// === == ===
+// let args1 = [1,2,3];
+// let args2 = [4,5,6];
 
-var args1 = [1, 2, 3];
-var args2 = [4, 5, 6];
+// function test(){
+//   console.log(args1+','+args2);
+// }
 
-function test() {
-  console.log(args1 + ',' + args2);
-}
+// test.apply(null, args1);
+// test(...args1, ...args2);
 
-test.apply(null, args1);
-test.apply(undefined, args1.concat(args2));
+//=================================================================================
+
+var myArray = [11, 13, 44, 66, 98];
+var mySet = new Set(myArray);
+
+mySet.add('100');
+mySet.add({ a: 1, b: 2 });
+mySet.delete(44);
+mySet.clear();
+mySet.add('100');
+mySet.add(44);
+mySet.add({ a: 1, b: 2 });
+
+console.log(mySet);
+console.log(mySet.size);
+console.log('------------------========----------------');
+
+mySet.forEach(function (val) {
+  console.log(val);
+});
+
+var myMap = new Map([['a1', 'hello'], ['b2', 'goodby']]);
+myMap.set('c3', 'foo');
+myMap.delete('a1');
+
+console.log(myMap);
+console.log(myMap.size);
+
+var carWeakSet = new WeakSet();
+var car1 = {
+  make: 'Honda',
+  model: 'Civic'
+};
+carWeakSet.add(car1);
+
+var car2 = {
+  make: 'Toyota',
+  model: 'Camry'
+};
+carWeakSet.add(car2);
+
+carWeakSet.delete(car1);
+console.log(carWeakSet);
+
+// ------ ==== ------
+var car2WeakMap = new WeakMap();
+var key1 = {
+  id: 1
+};
+
+var car3 = {
+  make: 'Honda',
+  model: 'Civic'
+};
+
+var key2 = {
+  id: 2
+};
+
+var car4 = {
+  make: 'Jeep',
+  model: 'Civic'
+};
+
+car2WeakMap.set(key1, car3);
+car2WeakMap.set(key2, car4);
+
+car2WeakMap.delete(key1);
+console.log(car2WeakMap);
