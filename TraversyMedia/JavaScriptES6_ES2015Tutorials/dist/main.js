@@ -38,7 +38,8 @@
 // }
 // console.log(i);
 
-// --------------------------------------------
+// ============================================================
+
 // const colors = [];
 // colors.push('red');
 // colors.push('blue');
@@ -89,29 +90,55 @@
 //   return word.toUpperCase();
 // }
 
+//================================================================================
+
 // let template = `
 // <h1>${makeUppercase('hello')}, ${name}</h1>
 // <p>template in  JavaScript</p>`;
 
 // document.getElementById('template').innerHTML = template;
 
-var theString = "hello i love javascript";
+// ===========================================================================
+
+// let theString = "hello i love javascript";
 
 // startsWith();
 // endsWith();
 // includes();
 
-console.log(theString.startsWith('hello'));
-console.log(theString.endsWith('script'));
-console.log(theString.includes('love'));
+// console.log(theString.startsWith('hello'));
+// console.log(theString.endsWith('script'));
+// console.log(theString.includes('love'));
 
 //hex
-console.log(0xff);
+// console.log(0xff);
 //binary
-console.log(43);
+// console.log(0b101011);
 //octal
-console.log(355);
+// console.log(0o543);
 
-console.log(Number.isFinite(5));
-console.log(Number.isNaN(NaN));
-console.log(Number.isInteger(3));
+// console.log(Number.isFinite(5));
+// console.log(Number.isNaN(NaN));
+// console.log(Number.isInteger(3));
+
+//===============================================================================
+
+function greet() {
+  var $greeting = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'hello world';
+
+  console.log($greeting);
+}
+
+greet();
+
+// === == ===
+
+var args1 = [1, 2, 3];
+var args2 = [4, 5, 6];
+
+function test() {
+  console.log(args1 + ',' + args2);
+}
+
+test.apply(null, args1);
+test.apply(undefined, args1.concat(args2));
