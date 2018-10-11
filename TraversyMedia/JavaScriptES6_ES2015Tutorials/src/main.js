@@ -141,70 +141,107 @@
 
 //=================================================================================
 
-let myArray = [11, 13, 44, 66, 98];
-let mySet = new Set(myArray);
+// let myArray = [11, 13, 44, 66, 98];
+// let mySet = new Set(myArray);
 
-mySet.add('100');
-mySet.add({a:1, b:2});
-mySet.delete(44);
-mySet.clear();
-mySet.add('100');
-mySet.add(44);
-mySet.add({a:1, b:2});
+// mySet.add('100');
+// mySet.add({a:1, b:2});
+// mySet.delete(44);
+// mySet.clear();
+// mySet.add('100');
+// mySet.add(44);
+// mySet.add({a:1, b:2});
 
-console.log(mySet);
-console.log(mySet.size);
-console.log('------------------========----------------');
+// console.log(mySet);
+// console.log(mySet.size);
+// console.log('------------------========----------------');
 
-mySet.forEach(function(val){
-  console.log(val);
-});
+// mySet.forEach(function(val){
+//   console.log(val);
+// });
 
-let myMap = new Map([['a1','hello'],['b2','goodby']]);
-myMap.set('c3','foo');
-myMap.delete('a1');
+// let myMap = new Map([['a1','hello'],['b2','goodby']]);
+// myMap.set('c3','foo');
+// myMap.delete('a1');
 
-console.log(myMap);
-console.log(myMap.size);
+// console.log(myMap);
+// console.log(myMap.size);
 
-let carWeakSet = new WeakSet();
-let car1 = {
-  make: 'Honda',
-  model: 'Civic'
+// let carWeakSet = new WeakSet();
+// let car1 = {
+//   make: 'Honda',
+//   model: 'Civic'
+// }
+// carWeakSet.add(car1);
+
+// let car2 = {
+//   make: 'Toyota',
+//   model: 'Camry'
+// }
+// carWeakSet.add(car2);
+
+// carWeakSet.delete(car1);
+// console.log(carWeakSet);
+
+// // ------ ==== ------
+// let car2WeakMap = new WeakMap();
+// let key1 = {
+//   id: 1
+// }
+
+// let car3 = {
+//   make: 'Honda',
+//   model: 'Civic'
+// }
+
+// let key2 = {
+//   id: 2
+// }
+
+// let car4 = {
+//   make: 'Jeep',
+//   model: 'Civic'
+// }
+
+// car2WeakMap.set(key1, car3);
+// car2WeakMap.set(key2, car4);
+
+// car2WeakMap.delete(key1);
+// console.log(car2WeakMap);
+
+// =================================================
+
+function Prefixer(prefix){
+  this.prefix = prefix;
 }
-carWeakSet.add(car1);
 
-let car2 = {
-  make: 'Toyota',
-  model: 'Camry'
-}
-carWeakSet.add(car2);
+// Prefixer.prototype.prefixArray = function(arr){
+//   let that = this;
+//   return arr.map(function(x){
+//     console.log(that.prefix + x);
+//   });
+// }
 
-carWeakSet.delete(car1);
-console.log(carWeakSet);
-
-// ------ ==== ------
-let car2WeakMap = new WeakMap();
-let key1 = {
-  id: 1
+Prefixer.prototype.prefixArray = function(arr){
+  return arr.map(x => {
+    console.log(this.prefix + x);
+  });
 }
 
-let car3 = {
-  make: 'Honda',
-  model: 'Civic'
+let pre = new Prefixer('hello ');
+pre.prefixArray(['brad', 'jeff']);
+
+let add = function(a,b){
+  let sum = a + b;
+  console.log(sum);
+  return false;
 }
 
-let key2 = {
-  id: 2
+let add2 = (a,b) => {
+  let sum = a + b;
+  console.log(sum);
+  return false;
 }
 
-let car4 = {
-  make: 'Jeep',
-  model: 'Civic'
-}
-
-car2WeakMap.set(key1, car3);
-car2WeakMap.set(key2, car4);
-
-car2WeakMap.delete(key1);
-console.log(car2WeakMap);
+add(21,2);
+add2(12,2);
