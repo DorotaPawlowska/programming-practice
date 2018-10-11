@@ -82,13 +82,34 @@
 // mike.getPackage();
 // mike.register();
 
-let name = 'john';
-function makeUppercase(word){
-  return word.toUpperCase();
-}
+// let name = 'john';
+// function makeUppercase(word){
+//   return word.toUpperCase();
+// }
 
-let template = `
-<h1>${makeUppercase('hello')}, ${name}</h1>
-<p>template in  JavaScript</p>`;
+// let template = `
+// <h1>${makeUppercase('hello')}, ${name}</h1>
+// <p>template in  JavaScript</p>`;
 
-document.getElementById('template').innerHTML = template;
+// document.getElementById('template').innerHTML = template;
+
+let theString = "hello i love javascript";
+
+// startsWith();
+// endsWith();
+// includes();
+
+console.log(theString.startsWith('hello'));
+console.log(theString.endsWith('script'));
+console.log(theString.includes('love'));
+
+//hex
+console.log(0xff);
+//binary
+console.log(0b101011);
+//octal
+console.log(0o543);
+
+console.log(Number.isFinite(5));
+console.log(Number.isNaN(NaN));
+console.log(Number.isInteger(3));
