@@ -248,60 +248,80 @@
 
 // =============================================================================
 
-var myPromise = Promise.resolve('foo');
+// var myPromise = Promise.resolve('foo');
 
-myPromise.then((res) => console.log(res));
+// myPromise.then((res) => console.log(res));
 
-var myProm = new Promise(function(resolve, reject){
-  setTimeout(()=> resolve(4), 2000);
-});
+// var myProm = new Promise(function(resolve, reject){
+//   setTimeout(()=> resolve(4), 2000);
+// });
 
-myProm.then((res) => {
-  res += 3;
-  console.log(res);
-});
+// myProm.then((res) => {
+//   res += 3;
+//   console.log(res);
+// });
 
-function getData(method, url){
-  return new Promise(function(resolve, reject){
-    var xhr = new XMLHttpRequest();
-    xhr.open(method, url);
-    xhr.onload = function(){
-      if(this.status >= 200 && this.status < 300){
-        resolve(xhr.response);
-      }else{
-        reject({
-          status: this.status,
-          statusText: xhr.statusText
-        });
-      }
-    };
-    xhr.onerror = function(){
-      reject({
-        status: this.status,
-        statusText: xhr.statusText
-      });
-    };
-    xhr.send();
-  });
+// function getData(method, url){
+//   return new Promise(function(resolve, reject){
+//     var xhr = new XMLHttpRequest();
+//     xhr.open(method, url);
+//     xhr.onload = function(){
+//       if(this.status >= 200 && this.status < 300){
+//         resolve(xhr.response);
+//       }else{
+//         reject({
+//           status: this.status,
+//           statusText: xhr.statusText
+//         });
+//       }
+//     };
+//     xhr.onerror = function(){
+//       reject({
+//         status: this.status,
+//         statusText: xhr.statusText
+//       });
+//     };
+//     xhr.send();
+//   });
+// }
+
+// getData( 'GET', 'https://jsonplaceholder.typicode.com/todos')
+//       .then(function(data){
+//         // console.log(data);
+//         let todos = JSON.parse(data);
+//         let output = '';
+//         for(let todo of todos){
+//           output += `
+//           <li>
+//             <h3>${todo.title}</h3>
+//             <p>completed: ${todo.completed}</p>
+//           </li>
+//           `;
+//         }
+
+//         document.getElementById('template').innerHTML = output;
+//       })
+//       .catch(function(error){
+//         console.log(error);
+//       });
+
+// ===============================================================
+
+function *g1(){
+  console.log('hello');
+  yield 'yield 1 ran';
+  console.log('world');
+  yield 'yield 2 ran';
+
+  return 'Returned';
 }
 
-getData( 'GET', 'https://jsonplaceholder.typicode.com/todos')
-      .then(function(data){
-        // console.log(data);
-        let todos = JSON.parse(data);
-        let output = '';
-        for(let todo of todos){
-          output += `
-          <li>
-            <h3>${todo.title}</h3>
-            <p>completed: ${todo.completed}</p>
-          </li>
-          `;
-        }
+var g = g1();
 
-        document.getElementById('template').innerHTML = output;
-      })
-      .catch(function(error){
-        console.log(error);
-      });
-      
+// console.log(g.next().value);
+// console.log(g.next().value);
+// console.log(g.next().value);
+
+for(let val of g){
+  console.log(val);
+}

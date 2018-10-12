@@ -1,5 +1,7 @@
 'use strict';
 
+var _marked = /*#__PURE__*/regeneratorRuntime.mark(g1);
+
 // var a = "test";
 // var b = "test2";
 
@@ -250,77 +252,117 @@
 
 // =============================================================================
 
-var myPromise = Promise.resolve('foo');
+// var myPromise = Promise.resolve('foo');
 
-myPromise.then(function (res) {
-  return console.log(res);
-});
+// myPromise.then((res) => console.log(res));
 
-var myProm = new Promise(function (resolve, reject) {
-  setTimeout(function () {
-    return resolve(4);
-  }, 2000);
-});
+// var myProm = new Promise(function(resolve, reject){
+//   setTimeout(()=> resolve(4), 2000);
+// });
 
-myProm.then(function (res) {
-  res += 3;
-  console.log(res);
-});
+// myProm.then((res) => {
+//   res += 3;
+//   console.log(res);
+// });
 
-function getData(method, url) {
-  return new Promise(function (resolve, reject) {
-    var xhr = new XMLHttpRequest();
-    xhr.open(method, url);
-    xhr.onload = function () {
-      if (this.status >= 200 && this.status < 300) {
-        resolve(xhr.response);
-      } else {
-        reject({
-          status: this.status,
-          statusText: xhr.statusText
-        });
+// function getData(method, url){
+//   return new Promise(function(resolve, reject){
+//     var xhr = new XMLHttpRequest();
+//     xhr.open(method, url);
+//     xhr.onload = function(){
+//       if(this.status >= 200 && this.status < 300){
+//         resolve(xhr.response);
+//       }else{
+//         reject({
+//           status: this.status,
+//           statusText: xhr.statusText
+//         });
+//       }
+//     };
+//     xhr.onerror = function(){
+//       reject({
+//         status: this.status,
+//         statusText: xhr.statusText
+//       });
+//     };
+//     xhr.send();
+//   });
+// }
+
+// getData( 'GET', 'https://jsonplaceholder.typicode.com/todos')
+//       .then(function(data){
+//         // console.log(data);
+//         let todos = JSON.parse(data);
+//         let output = '';
+//         for(let todo of todos){
+//           output += `
+//           <li>
+//             <h3>${todo.title}</h3>
+//             <p>completed: ${todo.completed}</p>
+//           </li>
+//           `;
+//         }
+
+//         document.getElementById('template').innerHTML = output;
+//       })
+//       .catch(function(error){
+//         console.log(error);
+//       });
+
+// ===============================================================
+
+function g1() {
+  return regeneratorRuntime.wrap(function g1$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          console.log('hello');
+          _context.next = 3;
+          return 'yield 1 ran';
+
+        case 3:
+          console.log('world');
+          _context.next = 6;
+          return 'yield 2 ran';
+
+        case 6:
+          return _context.abrupt('return', 'Returned');
+
+        case 7:
+        case 'end':
+          return _context.stop();
       }
-    };
-    xhr.onerror = function () {
-      reject({
-        status: this.status,
-        statusText: xhr.statusText
-      });
-    };
-    xhr.send();
-  });
+    }
+  }, _marked, this);
 }
 
-getData('GET', 'https://jsonplaceholder.typicode.com/todos').then(function (data) {
-  // console.log(data);
-  var todos = JSON.parse(data);
-  var output = '';
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
+var g = g1();
 
+// console.log(g.next().value);
+// console.log(g.next().value);
+// console.log(g.next().value);
+
+var _iteratorNormalCompletion = true;
+var _didIteratorError = false;
+var _iteratorError = undefined;
+
+try {
+  for (var _iterator = g[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    var val = _step.value;
+
+    console.log(val);
+  }
+} catch (err) {
+  _didIteratorError = true;
+  _iteratorError = err;
+} finally {
   try {
-    for (var _iterator = todos[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var todo = _step.value;
-
-      output += '\n          <li>\n            <h3>' + todo.title + '</h3>\n            <p>completed: ' + todo.completed + '</p>\n          </li>\n          ';
+    if (!_iteratorNormalCompletion && _iterator.return) {
+      _iterator.return();
     }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
   } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
+    if (_didIteratorError) {
+      throw _iteratorError;
     }
   }
-
-  document.getElementById('template').innerHTML = output;
-}).catch(function (error) {
-  console.log(error);
-});
+}
