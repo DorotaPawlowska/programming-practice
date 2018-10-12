@@ -211,37 +211,97 @@
 
 // =================================================
 
-function Prefixer(prefix){
-  this.prefix = prefix;
-}
+// function Prefixer(prefix){
+//   this.prefix = prefix;
+// }
+
+// // Prefixer.prototype.prefixArray = function(arr){
+// //   let that = this;
+// //   return arr.map(function(x){
+// //     console.log(that.prefix + x);
+// //   });
+// // }
 
 // Prefixer.prototype.prefixArray = function(arr){
-//   let that = this;
-//   return arr.map(function(x){
-//     console.log(that.prefix + x);
+//   return arr.map(x => {
+//     console.log(this.prefix + x);
 //   });
 // }
 
-Prefixer.prototype.prefixArray = function(arr){
-  return arr.map(x => {
-    console.log(this.prefix + x);
+// let pre = new Prefixer('hello ');
+// pre.prefixArray(['brad', 'jeff']);
+
+// let add = function(a,b){
+//   let sum = a + b;
+//   console.log(sum);
+//   return false;
+// }
+
+// let add2 = (a,b) => {
+//   let sum = a + b;
+//   console.log(sum);
+//   return false;
+// }
+
+// add(21,2);
+// add2(12,2);
+
+// =============================================================================
+
+var myPromise = Promise.resolve('foo');
+
+myPromise.then((res) => console.log(res));
+
+var myProm = new Promise(function(resolve, reject){
+  setTimeout(()=> resolve(4), 2000);
+});
+
+myProm.then((res) => {
+  res += 3;
+  console.log(res);
+});
+
+function getData(method, url){
+  return new Promise(function(resolve, reject){
+    var xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+    xhr.onload = function(){
+      if(this.status >= 200 && this.status < 300){
+        resolve(xhr.response);
+      }else{
+        reject({
+          status: this.status,
+          statusText: xhr.statusText
+        });
+      }
+    };
+    xhr.onerror = function(){
+      reject({
+        status: this.status,
+        statusText: xhr.statusText
+      });
+    };
+    xhr.send();
   });
 }
 
-let pre = new Prefixer('hello ');
-pre.prefixArray(['brad', 'jeff']);
+getData( 'GET', 'https://jsonplaceholder.typicode.com/todos')
+      .then(function(data){
+        // console.log(data);
+        let todos = JSON.parse(data);
+        let output = '';
+        for(let todo of todos){
+          output += `
+          <li>
+            <h3>${todo.title}</h3>
+            <p>completed: ${todo.completed}</p>
+          </li>
+          `;
+        }
 
-let add = function(a,b){
-  let sum = a + b;
-  console.log(sum);
-  return false;
-}
-
-let add2 = (a,b) => {
-  let sum = a + b;
-  console.log(sum);
-  return false;
-}
-
-add(21,2);
-add2(12,2);
+        document.getElementById('template').innerHTML = output;
+      })
+      .catch(function(error){
+        console.log(error);
+      });
+      

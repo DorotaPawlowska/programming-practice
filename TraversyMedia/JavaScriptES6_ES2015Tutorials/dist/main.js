@@ -213,39 +213,114 @@
 
 // =================================================
 
-function Prefixer(prefix) {
-  this.prefix = prefix;
-}
+// function Prefixer(prefix){
+//   this.prefix = prefix;
+// }
+
+// // Prefixer.prototype.prefixArray = function(arr){
+// //   let that = this;
+// //   return arr.map(function(x){
+// //     console.log(that.prefix + x);
+// //   });
+// // }
 
 // Prefixer.prototype.prefixArray = function(arr){
-//   let that = this;
-//   return arr.map(function(x){
-//     console.log(that.prefix + x);
+//   return arr.map(x => {
+//     console.log(this.prefix + x);
 //   });
 // }
 
-Prefixer.prototype.prefixArray = function (arr) {
-  var _this = this;
+// let pre = new Prefixer('hello ');
+// pre.prefixArray(['brad', 'jeff']);
 
-  return arr.map(function (x) {
-    console.log(_this.prefix + x);
+// let add = function(a,b){
+//   let sum = a + b;
+//   console.log(sum);
+//   return false;
+// }
+
+// let add2 = (a,b) => {
+//   let sum = a + b;
+//   console.log(sum);
+//   return false;
+// }
+
+// add(21,2);
+// add2(12,2);
+
+// =============================================================================
+
+var myPromise = Promise.resolve('foo');
+
+myPromise.then(function (res) {
+  return console.log(res);
+});
+
+var myProm = new Promise(function (resolve, reject) {
+  setTimeout(function () {
+    return resolve(4);
+  }, 2000);
+});
+
+myProm.then(function (res) {
+  res += 3;
+  console.log(res);
+});
+
+function getData(method, url) {
+  return new Promise(function (resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+    xhr.onload = function () {
+      if (this.status >= 200 && this.status < 300) {
+        resolve(xhr.response);
+      } else {
+        reject({
+          status: this.status,
+          statusText: xhr.statusText
+        });
+      }
+    };
+    xhr.onerror = function () {
+      reject({
+        status: this.status,
+        statusText: xhr.statusText
+      });
+    };
+    xhr.send();
   });
-};
+}
 
-var pre = new Prefixer('hello ');
-pre.prefixArray(['brad', 'jeff']);
+getData('GET', 'https://jsonplaceholder.typicode.com/todos').then(function (data) {
+  // console.log(data);
+  var todos = JSON.parse(data);
+  var output = '';
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
 
-var add = function add(a, b) {
-  var sum = a + b;
-  console.log(sum);
-  return false;
-};
+  try {
+    for (var _iterator = todos[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var todo = _step.value;
 
-var add2 = function add2(a, b) {
-  var sum = a + b;
-  console.log(sum);
-  return false;
-};
+      output += '\n          <li>\n            <h3>' + todo.title + '</h3>\n            <p>completed: ' + todo.completed + '</p>\n          </li>\n          ';
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
 
-add(21, 2);
-add2(12, 2);
+  document.getElementById('template').innerHTML = output;
+}).catch(function (error) {
+  console.log(error);
+});
