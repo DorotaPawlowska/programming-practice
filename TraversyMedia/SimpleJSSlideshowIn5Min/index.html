@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+<body>
+
+  <img name="slide" width="400" height="200" src="" alt="image">
+
+  <script>
+    var i = 0;
+    var images = [];
+    var time = 1000;
+
+    images[0] = 'image1.jpg';
+    images[1] = 'image2.jpg';
+    images[2] = 'image3.jpg';
+    images[3] = 'image4.jpg';
+
+    function changeImg(){
+      document.slide.src = images[i];
+
+      if(i < images.length - 1){
+        i++;
+      } else {
+        i = 0;
+      }
+      setTimeout('changeImg()', time);
+    }
+
+    window.onload = changeImg;
+  </script>
+
+</body>
+</html>
