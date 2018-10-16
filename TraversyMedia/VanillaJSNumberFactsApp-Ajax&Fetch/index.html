@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>number facts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <style>
+    #fact{
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-dark">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div class="card bg-primary text-white mt-5 p-4">
+          <h1>number facts</h1>
+          <p>enter a number and get a random fact</p>
+          <input type="number" class="form-control form-control-lg" id="numberInput" placeholder="enter any number...">
+          <div id="fact" class="card-body">
+            <h4 class="card-title">
+              number fact
+            </h4>
+            <p id="factText" class="card-text"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  let fact = document.querySelector('#fact');
+  let factText = document.querySelector('#factText');
+  let numberInput = document.querySelector('#numberInput');
+
+  numberInput.addEventListener('input', getFactFetch);
+
+  function getFactAjax(){
+    let number = numberInput.value;
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://numbersapi.com/'+number);
+    xhr.onload = function(){
+      if(this.status == 200 && number != ''){
+        fact.style.display = 'block';
+        factText.innerText = this.responseText;
+      }
+    }
+    xhr.send();
+  }
+
+  function getFactFetch(){
+    let number = numberInput.value;
+    fetch('http://numbersapi.com/'+number)
+      .then(response => response.text())
+      .then(data => {
+        if( number != ''){
+        fact.style.display = 'block';
+        factText.innerText = data;
+      }
+      })
+      .catch(err => console.log(err));
+  }
+
+</script>
+
+</body>
+</html>
