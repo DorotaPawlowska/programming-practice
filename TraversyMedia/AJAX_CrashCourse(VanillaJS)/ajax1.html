@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ajax 1 - text file</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <button id="button">get text file</button>
+  <div id="text"></div>
+  <script>
+    document.getElementById('button').addEventListener('click', loadText);
+
+    function loadText(){
+      // console.log('button clicked');
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'sample.txt', true);
+      console.log('ready state: ', xhr.readyState);
+
+      xhr.onprogress = function(){
+        console.log('ready state: ', xhr.readyState);
+      }
+
+      xhr.onload = function(){
+        console.log('ready state: ', xhr.readyState);
+        if(this.status === 200){
+          // console.log(this.responseText);
+          document.getElementById('text').innerHTML = this.responseText;
+        } else if(this.status === 404){
+          document.getElementById('text').innerHTML = 'not found';
+        }
+      }
+
+      xhr.onerror = function(){
+        console.log('req error');
+      }
+
+        // xhr.onreadystatechange = function(){
+        //   console.log('ready state: ', xhr.readyState);
+        //   if(this.readyState === 4 && this.status === 200){
+        //   // console.log(this.responseText);
+        //   }
+        // }
+
+      xhr.send();
+    }
+
+  </script>
+
+</body>
+</html>

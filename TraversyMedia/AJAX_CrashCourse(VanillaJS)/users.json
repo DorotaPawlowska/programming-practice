@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Rick",
+    "email": "rick@gamil.com"
+  },
+  {
+    "id": 2,
+    "name": "Sandy",
+    "email": "sandy@gamil.com"
+  },
+  {
+    "id": 3,
+    "name": "Rock",
+    "email": "rock@gamil.com"
+  }
+]

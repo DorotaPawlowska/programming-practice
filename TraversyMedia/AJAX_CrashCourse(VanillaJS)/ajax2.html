@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ajax 2 - local json</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <script src="main.js"></script>
+</head>
+<body>
+  <button id="button1">get user</button>
+  <button id="button2">get users</button>
+  <br><br>
+  <h1>user</h1>
+  <div id="user"></div>
+  <h1>users</h1>
+  <div id="users"></div>
+
+  <script>
+    document.getElementById('button1').addEventListener('click', loadUser);
+    document.getElementById('button2').addEventListener('click', loadUsers);
+
+    function loadUser(){
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'user.json', true);
+      xhr.onload = function(){
+        if(this.status === 200){
+          var user = JSON.parse(this.responseText);
+          // console.log(user.name);
+          var output = '';
+          output += '<ul>' +
+          '<li>ID:' + user.id + '</li>' +
+          '<li>NAME:' + user.name + '</li>' +
+          '<li>EMAIL:' + user.email + '</li>' +
+          '</ul>';
+          document.getElementById('user').innerHTML = output;
+        }
+      }
+      xhr.onerror = function(){
+        console.log("error");
+      }
+      xhr.send();
+    }
+  </script>
+</body>
+</html>
