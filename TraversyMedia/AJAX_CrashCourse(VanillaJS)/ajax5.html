@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>ajax 5 - fetch from php mysql</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <script src="main.js"></script>
+</head>
+<body>
+  <button id="button">get user</button>
+  <br><br>
+  <h1>users</h1>
+  <div id="users"></div>
+
+  <script>
+    document.getElementById('button').addEventListener('click', loadUsers);
+
+    function loadUsers(){
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', 'users.php', true);
+      xhr.onload = function(){
+        if(this.status === 200){
+          var users = JSON.parse(this.responseText);
+          var output = '';
+
+          for( var i in users){
+            output += '<ul>' +
+            '<li>ID:' + users[i].id + '</li>' +
+            '<li>NAME:' + users[i].name + '</li>' +
+            '</ul>';
+          }
+
+          document.getElementById('users').innerHTML = output;
+        }
+      }
+      xhr.onerror = function(){
+        console.log("error");
+      }
+      xhr.send();
+    }
+
+  </script>
+</body>
+</html>
