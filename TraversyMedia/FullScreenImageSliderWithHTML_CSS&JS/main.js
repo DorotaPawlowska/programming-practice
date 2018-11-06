@@ -38,13 +38,11 @@ let sliderImages = document.querySelectorAll('.slide'),
     }
 
 //right arrow click
-arrowRight.addEventListener('click', () => {
-  if(current === sliderImages.length - 1){
-    current = -1;
-  }
-  slideRight();
-});
-
-
+    arrowRight.addEventListener('click', () => {
+      if(current === sliderImages.length - 1){
+        current = -1;
+      }
+      slideRight();
+    });
 
     startSlide();
