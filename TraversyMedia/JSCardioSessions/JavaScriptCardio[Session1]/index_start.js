@@ -3,16 +3,34 @@
 // ex. reverseString('hello') === 'olleh'
 
 function reverseString(str) {
-  return 'Let\'s Start'
+  var revStr = "";
+  var i;
+  for (i = str.length; i >= 0; i--) {
+    revStr += str.charAt(i);
+  }
+  return revStr;
 }
-
-
 
 // CHALLENGE 2: VALIDATE A PALINDROME
 // Return true if palindrome and false if not
 // ex. isPalindrome('racecar') === 'true', isPalindrome('hello') == false
 
-function isPalindrome(str) {}
+function isPalindrome(str) {
+    var i, j, sum = 0;
+  for(i = 0, j = str.length; i < str.length, j >= 0; i++, j--){
+      console.log(str.charAt(j));
+      console.log(str.charAt(i));
+    if(str.charAt(i) == str.charAt(j)){
+      console.log(sum++);
+    }
+  }
+
+  if(sum == str.length){
+    return true;
+  } else {
+    return false;
+  }
+}
 
 
 
