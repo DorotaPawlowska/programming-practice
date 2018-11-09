@@ -19,7 +19,7 @@ function isPalindrome(str) {
     let i, j, a, b;
     let sum = 0;
 
-  for(i = 0, j = str.length-1; i < str.length-1, j >= 0; i++, j--){
+  for(i = 0, j = str.length-1; i < str.length, j >= 0; i++, j--){
       b = str.charAt(j);
       a = str.charAt(i);
     if(a.toLowerCase() === b.toLowerCase()){
@@ -34,15 +34,20 @@ function isPalindrome(str) {
   }
 }
 
-
-
 // CHALLENGE 3: REVERSE AN INTEGER
 // Return an integer in reverse
 // ex. reverseInt(521) === 125
 
-function reverseInt(int) {}
-
-
+function reverseInt(int) {
+  let a = int.toString();
+  // console.log(a);
+  let newInt = [];
+  let i;
+  for(i = a.length; i >= 0 ; i--){
+    newInt += a.charAt(i);
+  }
+  return parseInt(newInt);
+}
 
 // CHALLENGE 4: CAPITALIZE LETTERS
 // Return a string with the first letter of every word capitalized
@@ -63,8 +68,3 @@ function maxCharacter(str) {}
 function fizzBuzz() {}
 
 
-
-// Call Function
-const output = reverseString('hello');
-
-console.log(output);
