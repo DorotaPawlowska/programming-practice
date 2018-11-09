@@ -16,16 +16,18 @@ function reverseString(str) {
 // ex. isPalindrome('racecar') === 'true', isPalindrome('hello') == false
 
 function isPalindrome(str) {
-    var i, j, sum = 0;
-  for(i = 0, j = str.length; i < str.length, j >= 0; i++, j--){
-      console.log(str.charAt(j));
-      console.log(str.charAt(i));
-    if(str.charAt(i) == str.charAt(j)){
-      console.log(sum++);
+    let i, j, a, b;
+    let sum = 0;
+
+  for(i = 0, j = str.length-1; i < str.length-1, j >= 0; i++, j--){
+      b = str.charAt(j);
+      a = str.charAt(i);
+    if(a.toLowerCase() === b.toLowerCase()){
+      sum++;
     }
   }
 
-  if(sum == str.length){
+  if(sum === str.length){
     return true;
   } else {
     return false;
