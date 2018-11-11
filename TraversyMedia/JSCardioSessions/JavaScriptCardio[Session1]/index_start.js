@@ -5,6 +5,7 @@
 function reverseString(str) {
   var revStr = "";
   var i;
+
   for (i = str.length; i >= 0; i--) {
     revStr += str.charAt(i);
   }
@@ -16,8 +17,8 @@ function reverseString(str) {
 // ex. isPalindrome('racecar') === 'true', isPalindrome('hello') == false
 
 function isPalindrome(str) {
-    let i, j, a, b;
-    let sum = 0;
+  let i, j, a, b;
+  let sum = 0;
 
   for(i = 0, j = str.length-1; i < str.length, j >= 0; i++, j--){
       b = str.charAt(j);
@@ -40,9 +41,9 @@ function isPalindrome(str) {
 
 function reverseInt(int) {
   let a = int.toString();
-  // console.log(a);
   let newInt = [];
   let i;
+
   for(i = a.length; i >= 0 ; i--){
     newInt += a.charAt(i);
   }
@@ -56,6 +57,7 @@ function reverseInt(int) {
 function capitalizeLetters(str) {
   var capLet = "";
   var i;
+
   capLet += str.charAt(0).toUpperCase();
   for (i = 1; i < str.length; i++) {
     if(str.charAt(i-1) === ' '){
@@ -73,9 +75,9 @@ function capitalizeLetters(str) {
 function maxCharacter(str) {
   let tab = str.split('');
   let tab2 = [];
-  console.log(tab);
   let letter;
   let i, x;
+
   for(i = 0; i < tab.length-1; i++){
     x = tab[i];
     letter = tab.filter((val) => {
@@ -92,6 +94,7 @@ function maxCharacter(str) {
 // Write a program that prints all the numbers from 1 to 100. For multiples of 3, instead of the number, print "Fizz", for multiples of 5 print "Buzz". For numbers which are multiples of both 3 and 5, print "FizzBuzz".
 function fizzBuzz() {
   let i = 0;
+  
   for(i = 1; i <= 100; i++){
     if((i%3 == 0) && (i%5 == 0)){
       console.log("FizzBuzz");
