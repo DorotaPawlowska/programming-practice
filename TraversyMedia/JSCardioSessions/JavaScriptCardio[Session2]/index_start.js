@@ -4,6 +4,19 @@
 
 function longestWord(sen) {
   // SOLUTION 1 - Return a single longest word
+  let str = sen.split(' ');
+  console.log(str);
+  let tab = [];
+  let i;
+  for( i = 0; i < str.length; i++){
+    let t = str[i];
+    if(t.length > tab.length){
+      tab = t;
+    }
+  }
+  return console.log(tab.toString());
+
+  
   // SOLUTION 2 - Return an array and include multiple words if they have the same length
   // SOLUTION 3 - Only return an array if multiple words, otherwise return a string
 }
@@ -38,4 +51,4 @@ function letterChanges(str) {}
 // Call Function
 const output = longestWord('Hello, my name is Brad');
 
-console.log(output);
+// console.log(output);
