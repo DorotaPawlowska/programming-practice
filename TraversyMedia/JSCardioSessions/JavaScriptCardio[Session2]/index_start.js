@@ -4,6 +4,7 @@
 
 function longestWord(sen) {
   // SOLUTION 1 - Return a single longest word
+  /*
   let str = sen.split(' ');
   console.log(str);
   let tab = [];
@@ -15,11 +16,27 @@ function longestWord(sen) {
     }
   }
   return console.log(tab.toString());
+  */
 
-  
   // SOLUTION 2 - Return an array and include multiple words if they have the same length
+
+  let str = sen.split(' ');
+  let tab = [];
+  let tabel = [];
+  let i;
+  for( i = 0; i < str.length; i++){
+    let t = str[i];
+    if(t.length > tab.length){
+      tab = t;
+    }
+    tabel = str.filter((val) => {
+      return val.length === tab.length;
+    })
+  }
+    return console.log(tabel);
+  }
+
   // SOLUTION 3 - Only return an array if multiple words, otherwise return a string
-}
 
 // CHALLENGE 2: ARRAY CHUNKING
 // Split an array into chunked arrays of a specific length
@@ -49,6 +66,6 @@ function isAnagram(str1, str2) {}
 function letterChanges(str) {}
 
 // Call Function
-const output = longestWord('Hello, my name is Brad');
+const output = longestWord('Hello, hello, hello, onomatopeja, onomatopeja, my name is Brad');
 
 // console.log(output);
