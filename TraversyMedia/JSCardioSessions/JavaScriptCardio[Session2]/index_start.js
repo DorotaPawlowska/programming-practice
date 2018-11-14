@@ -57,13 +57,27 @@ function longestWord(sen) {
   }
 }
 
-
 // CHALLENGE 2: ARRAY CHUNKING
 // Split an array into chunked arrays of a specific length
 // ex. chunkArray([1, 2, 3, 4, 5, 6, 7], 3) === [[1, 2, 3],[4, 5, 6],[7]]
 // ex. chunkArray([1, 2, 3, 4, 5, 6, 7], 2) === [[1, 2],[3, 4],[5, 6],[7]]
 
-function chunkArray(arr, len) {}
+function chunkArray(arr, len) {
+  let i = 0;
+  let t = [];
+  let t2 = [];
+
+  for(i = 0; i < arr.length; i++){
+    t.push(arr[i]);
+    if(t.length === len){
+      t2.push(t);
+      t = [];
+    }else if( i === arr.length-1){
+      t2.push(t);
+    }
+  }
+  return console.log(t2);
+}
 
 // CHALLENGE 3: FLATTEN ARRAY
 // Take an array of arrays and flatten to a single array
@@ -86,6 +100,5 @@ function isAnagram(str1, str2) {}
 function letterChanges(str) {}
 
 // Call Function
-const output = longestWord('Hello, hello, hello, onomatopeja, my name is Brad');
 
 // console.log(output);
