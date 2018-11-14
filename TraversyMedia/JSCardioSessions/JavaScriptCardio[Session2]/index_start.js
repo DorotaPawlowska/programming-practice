@@ -83,7 +83,17 @@ function chunkArray(arr, len) {
 // Take an array of arrays and flatten to a single array
 // ex. [[1, 2], [3, 4], [5, 6], [7]] = [1, 2, 3, 4, 5, 6, 7]
 
-function flattenArray(arrays) {}
+function flattenArray(arrays) {
+  let arr = [];
+  let i, j;
+
+  for( i = 0; i < arrays.length; i++){
+    for(j = 0; j < arrays[i].length; j++){
+      arr.push(arrays[i][j]);
+    }
+  }
+  return console.log(arr);
+}
 
 // CHALLENGE 4: ANAGRAM
 // Return true if anagram and false if not
