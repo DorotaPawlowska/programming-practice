@@ -100,7 +100,30 @@ function flattenArray(arrays) {
 // ex. 'elbow' === 'below'
 // ex. 'Dormitory' === 'dirty room##'
 
-function isAnagram(str1, str2) {}
+function isAnagram(str1, str2) {
+  let tab1 = str1.toLowerCase().split('').sort().filter( (value) => {
+    return value != ' ';
+  });
+
+  let tab2 = str2.toLowerCase().split('').sort().filter( (value) => {
+    return value != ' ';
+  });
+
+  let tr = 0, fa = 0, i;
+  for( i = 0; i < tab1.length; i++){
+    if(tab1[i] === tab2[i]){
+      tr++;
+    }else{
+      fa++;
+    }
+  }
+
+  if(tr === tab1.length){
+    return true;
+  }else{
+    return false;
+  }
+}
 
 // CHALLENGE 5: LETTER CHANGES
 // Change every letter of the string to the one that follows it and capitalize the vowels
