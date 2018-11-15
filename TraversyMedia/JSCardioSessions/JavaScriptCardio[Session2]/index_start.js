@@ -130,7 +130,37 @@ function isAnagram(str1, str2) {
 // Z should turn to A
 // ex. 'hello there' === 'Ifmmp UIfsf'
 
-function letterChanges(str) {}
+function letterChanges(str) {
+  let i, lett, lett2, end = '', words = ' ';
+
+  for( i = 0; i < str.length; i++){
+    lett = str.charCodeAt(i);
+    letter = str.charAt(i);
+
+    if(letter!== ' '){
+      if(lett >= 122){
+        lett = 97;
+        lett2 = String.fromCharCode(lett);
+        if(lett2 === 'u' || lett2 === 'i' || lett2 === 'a' || lett2 === 'e' || lett2 === 'o' ){
+          words += end.concat(lett2.toUpperCase());
+        }else{
+          words += end.concat(lett2);
+        }
+      }else{
+        lett2 = String.fromCharCode(lett+1);
+        if(lett2 === 'u' || lett2 === 'i' || lett2 === 'a' || lett2 === 'e' || lett2 === 'o' ){
+          words += end.concat(lett2.toUpperCase());
+        }else{
+          words += end.concat(lett2);
+        }
+      }
+
+    }else{
+      words += end.concat(' ');
+    }
+  }
+  console.log(words);
+}
 
 // Call Function
 
