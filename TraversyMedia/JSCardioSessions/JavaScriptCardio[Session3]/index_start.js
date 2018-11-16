@@ -2,7 +2,15 @@
 // Return a sum of all parameters entered regardless of the amount of numbers - NO ARRAYS
 // ex. addAll(2,5,6,7) === 20
 
-function addAll() {}
+function addAll(...args) {
+  
+  let sum = 0;
+  for( let arg of args){
+    sum += arg;
+  }
+  
+  return sum;
+}
 
 // CHALLENGE 2: SUM ALL PRIMES
 // Pass in a number to loop up to and add all of the prime numbers. A prime number is a whole number greater than 1 whose only factors are 1 and itself
