@@ -3,10 +3,10 @@
 // ex. reverseString('hello') === 'olleh'
 
 function reverseString(str) {
-  var revStr = "";
-  var i;
+  let revStr = "";
+  let i;
 
-  for (i = str.length; i >= 0; i--) {
+  for (i = str.length-1; i >= 0; i--) {
     revStr += str.charAt(i);
   }
   return revStr;
@@ -94,7 +94,7 @@ function maxCharacter(str) {
 // Write a program that prints all the numbers from 1 to 100. For multiples of 3, instead of the number, print "Fizz", for multiples of 5 print "Buzz". For numbers which are multiples of both 3 and 5, print "FizzBuzz".
 function fizzBuzz() {
   let i = 0;
-  
+
   for(i = 1; i <= 100; i++){
     if((i%3 == 0) && (i%5 == 0)){
       console.log("FizzBuzz");

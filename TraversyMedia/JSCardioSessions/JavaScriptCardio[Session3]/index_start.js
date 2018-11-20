@@ -17,7 +17,22 @@ function addAll(...args) {
 // ex. sumAllPrimes(10) == 17
 
 function sumAllPrimes(num) {
-
+  let i, j;
+  let zero = 0;
+  let sum = 0;
+  for( i = 1; i <= num; i++){
+    for(j = 1; j <= i; j++){
+        let div = i%j;
+        if(div === 0){
+          zero++;
+        }
+    }
+    if(zero === 2){
+      sum += i;
+    }
+    zero = 0;
+  }
+  return sum;
 }
 
 // CHALLENGE 3: SEEK & DESTROY
@@ -25,7 +40,7 @@ function sumAllPrimes(num) {
 // ex. seekAndDestroy([2, 3, 4, 6, 6, 'hello'], 2, 6) == [3, 4, 'hello']
 
 function seekAndDestroy() {
-  
+
 }
 
 // CHALLENGE 4: SORT BY HEIGHT
