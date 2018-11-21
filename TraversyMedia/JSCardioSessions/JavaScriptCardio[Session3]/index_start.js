@@ -39,8 +39,24 @@ function sumAllPrimes(num) {
 // Remove from the array whatever is in the following arguments. Return the leftover numbers in an array
 // ex. seekAndDestroy([2, 3, 4, 6, 6, 'hello'], 2, 6) == [3, 4, 'hello']
 
-function seekAndDestroy() {
+function seekAndDestroy(...args) {
 
+  let arr = [];
+  for( let arg of args){
+    arr.push(arg);
+  }
+
+  let i,j;
+  let tab = arr[0];
+  for(i = 0; i < tab.length; i++){
+    for(j = 1; j < arr.length; j++){
+      if(tab[i] === arr[j]){
+        tab.splice(i, 1);
+        i--;
+      }
+    }
+  }
+    return tab;
 }
 
 // CHALLENGE 4: SORT BY HEIGHT
