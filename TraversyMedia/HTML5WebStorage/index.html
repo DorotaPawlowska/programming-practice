@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>session storage and local storage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    input[type="text"]{
+      width: 97%;
+      height: 20px;
+      border-radius: 5px;
+      border: #666666 1px solid;
+    }
+    #box{
+      width: 270px;
+      padding: 10px;
+      background: #cccccc;
+      border-radius: 5px;
+      margin: auto;
+      overflow: hidden;
+    }
+  </style>
+
+</head>
+<body>
+
+  <section id="box">
+    <form>
+      <p>the key: <br><input type="text" id="key"/></p>
+      <p>the value: <br><input type="text" id="value"/></p>
+      <p><input type="submit" id="button" value="Submit"/></p>
+      <button id="btn">Clear storage</button>
+    </form>
+  </section>
+
+  <section id="display_data"></section>
+
+<script>
+
+
+  function doFirst(){
+    const button = document.getElementById('button');
+    button.addEventListener('click', save);
+    const btn = document.getElementById('btn');
+    btn.addEventListener('click', clear);
+    display();
+  }
+
+  function save(){
+    let key = document.getElementById('key').value;
+    let value = document.getElementById('value').value;
+    localStorage.setItem(key, value);
+    display();
+    key.value = '';
+    value.value = '';
+  }
+
+  function display(){
+    let display_data = document.getElementById('display_data');
+    display_data.innerHTML = '';
+    for( let i = 0; i < localStorage.length; i++){
+      let k = localStorage.key(i);
+      let v = localStorage.getItem(k);
+      display_data.innerHTML += k + ' - ' + v + '<br>';
+    }
+  }
+
+  function clear(){
+    localStorage.clear();
+    location.reload();
+  }
+
+  window.addEventListener('load', doFirst);
+</script>
+</body>
+</html>
