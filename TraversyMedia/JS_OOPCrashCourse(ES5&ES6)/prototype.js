@@ -11,7 +11,7 @@ Book.prototype.getSummaty = function(){
 
 Book.prototype.getAge = function(){
   const years = new Date().getFullYear() - this.year;
-  return `${this.title} is ${years} years old`
+  return `${this.title} is ${years} years old`;
 }
 
 Book.prototype.revise = function(newYear){
