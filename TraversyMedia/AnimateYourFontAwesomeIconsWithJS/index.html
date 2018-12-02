@@ -10,7 +10,7 @@
   rel="stylesheet"
   integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <style>
-    #chain, #battery, #hourglass{
+    #chain, #battery, #hourglass, #envelope, #folder, #grin, #hand{
       font-size: 50px;
     }
   </style>
@@ -21,6 +21,14 @@
   <div id="battery" class="fa"></div>
   <hr/>
   <div id="hourglass" class="fa"></div>
+  <hr/>
+  <div id="envelope" class="fa"></div>
+  <hr/>
+  <div id="folder" class="fa"></div>
+  <hr/>
+  <div id="grin" class="fa"></div>
+  <hr/>
+  <div id="hand" class="fa"></div>
 
 
   <script>
@@ -68,6 +76,65 @@
 
     hourGlass();
     setInterval(hourGlass, 3000);
+
+    function envelopeM(){
+      let envelope = document.getElementById('envelope');
+      envelope.innerHTML = '&#xf0e0;';
+      setTimeout(function(){
+        envelope.innerHTML = '&#xf2b6;';
+      }, 1000);
+    }
+
+    envelopeM();
+    setInterval(envelopeM, 2000);
+
+    function folder(){
+      let folder = document.getElementById('folder');
+      folder.innerHTML = '&#xf07b;';
+      setTimeout(function(){
+        folder.innerHTML = '&#xf07c;';
+      }, 1000);
+    }
+
+    folder();
+    setInterval(folder, 2000);
+
+    function grin(){
+      let grin = document.getElementById('grin');
+      grin.innerHTML = '&#xf119;';
+      setTimeout(function(){
+        grin.innerHTML = '&#xf11a;';
+      }, 1000);
+      setTimeout(function(){
+        grin.innerHTML = '&#xf118;';
+      }, 2000);
+      setTimeout(function(){
+        grin.innerHTML = '&#xf11a;';
+      }, 3000);
+    }
+
+    grin();
+    setInterval(grin, 4000);
+
+    function hand(){
+      let hand = document.getElementById('hand');
+      hand.innerHTML = '&#xf256;';
+      setTimeout(function(){
+        hand.innerHTML = '&#xf255;';
+      }, 1000);
+      setTimeout(function(){
+        hand.innerHTML = '&#xf257;';
+      }, 2000);
+      setTimeout(function(){
+        hand.innerHTML = '&#xf258;';
+      }, 3000);
+      setTimeout(function(){
+        hand.innerHTML = '&#xf259;';
+      }, 4000);
+    }
+
+    hand();
+    setInterval(hand, 5000);
 
   </script>
 </body>
