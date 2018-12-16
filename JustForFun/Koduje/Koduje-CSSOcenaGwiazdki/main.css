@@ -1,0 +1,46 @@
+body{
+  background: #444444;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.stars{
+  background: #ffffff;
+  height: 30px;
+  width: 200px;
+  padding: 10px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+.stars input{
+  position: absolute;
+  left: -999999px;
+}
+
+label{
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  /* border: 1px solid #000000; */
+  color: transparent;
+}
+
+label::before{
+  content: "★";
+  color: #c0c0c0;
+  font-size: 30px;
+  line-height: 30px;
+  margin-right: -100%;
+}
+
+label:hover::before,
+label:hover ~ label::before,
+.stars input:checked ~ label::before{
+  color: gold;
+}
