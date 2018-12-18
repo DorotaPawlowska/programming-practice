@@ -9,8 +9,9 @@
   <script src="main.js"></script>
 </head>
 <body>
+  <div class="wrapper">
   <div class="container">
-    <div class="cube show-left">
+    <div class="cube ">
       <div class="front">front</div>
       <div class="back">back</div>
       <div class="right">right</div>
@@ -19,9 +20,41 @@
       <div class="bottom">bottom</div>
     </div>
   </div>
+</div>
 
   <script>
-    const cube = document.querySelector('.cube');
+
+
+    function cubeAnimate(){
+      const cube = document.querySelector('.cube');
+      setTimeout(function(){
+        cube.classList.remove('show-back');
+        cube.classList.add('show-left');
+      }, 1000);
+      setTimeout(function(){
+        cube.classList.remove('show-left');
+        cube.classList.add('show-right');
+      }, 2000);
+      setTimeout(function(){
+        cube.classList.remove('show-right');
+        cube.classList.add('show-top');
+      }, 3000);
+      setTimeout(function(){
+        cube.classList.remove('show-top');
+        cube.classList.add('show-bottom');
+      }, 4000);
+      setTimeout(function(){
+        cube.classList.remove('show-bottom');
+        cube.classList.add('show-front');
+      }, 5000);
+      setTimeout(function(){
+        cube.classList.remove('show-front');
+        cube.classList.add('show-back');
+      }, 6000);
+    }
+
+    cubeAnimate();
+    setInterval(cubeAnimate, 7000);
 
 
   </script>

@@ -1,11 +1,11 @@
 
-/* body{
+.wrapper{
   background: goldenrod;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-} */
+}
 
 .container{
   width: 200px;
@@ -65,10 +65,10 @@
   transform: rotateY(-90deg);
 }
 .cube.show-top{
-  transform: rotateY(-90deg);
+  transform: rotateX(-90deg);
 }
 .cube.show-bottom{
-  transform: rotateY(90deg);
+  transform: rotateX(90deg);
 }
 .cube.show-front{
   transform: rotateY(0deg);
