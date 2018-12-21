@@ -1,0 +1,40 @@
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.doors{
+  width: 10px;
+  height: 10px;
+  background: brown;
+
+  border-left: 40px solid black;
+  border-right: 40px solid black;
+  border-top: 3px solid gray;
+  border-bottom: 70px solid blueviolet;
+
+  transform: scale(2);
+}
+
+.doors::after{
+  content: '';
+  background: gold;
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  top: 6px;
+  left: 7px;
+}
+
+.doors::before{
+  content: '';
+  background: aqua;
+  width: 6px;
+  height: 3px;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+
+}
