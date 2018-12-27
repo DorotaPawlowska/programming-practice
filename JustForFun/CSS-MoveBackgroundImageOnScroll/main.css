@@ -1,0 +1,13 @@
+body{
+  margin: 0;
+  padding: 0;
+  height: 3000px;
+}
+
+section{
+  position: relative;
+  width: 100%;
+  height: 2000px;
+  background: url('img/bg3.jpg');
+  background-attachment: fixed;
+}

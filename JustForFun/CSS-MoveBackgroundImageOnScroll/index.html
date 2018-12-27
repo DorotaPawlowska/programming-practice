@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Scroll Image</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+
+  <!-- <script src="main.js"></script> -->
+</head>
+<body>
+  <section></section>
+
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+  crossorigin="anonymous"></script>
+  <script>
+    $(window).scroll(function(){
+      const $scroll_position = $(window).scrollTop()/2;
+      $('section').css({
+        'background-position-x' : - $scroll_position + 'px',
+      })
+    })
+  </script>
+</body>
+</html>
