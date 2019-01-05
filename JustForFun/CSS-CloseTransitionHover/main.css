@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Just+Another+Hand');
+
+body{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Just Another Hand', sans-serif;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+  font-size: 10em;
+  display: flex;
+}
+
+ul li{
+  list-style: none;
+  transition: .5s;
+}
+
+ul:hover li{
+  transform: rotate(180deg);
+}
+
+ul:hover li:last-child{
+  transition-delay: .5s;
+}
+
+ul li span{
+  display: inline-block;
+  transition: .5s;
+
+}
+
+ul:hover li:last-child span:nth-child(2){
+  transform: rotate(180deg) translateY(-25px);
+  transition-delay: 1s;
+}
+
+ul:hover li:last-child span:nth-child(1){
+  transform: rotate(90deg) translateY(10px);
+  transition-delay: 1.5s;
+}
