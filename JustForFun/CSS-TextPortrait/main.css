@@ -1,0 +1,21 @@
+@import url('httos://fonts.googleapis.com/css?family=Poppins:400,500,600,700,900');
+
+body{
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #000000;
+}
+
+p{
+  font-size: 16px;
+  line-height: 10px;
+  background: url(Bruce-Lee.jpg);
+  background-attachment: fixed;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255,255,255, .1);
+}
