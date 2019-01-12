@@ -40,3 +40,44 @@ body{
   background: transparent;
   border: none;
 }
+
+.addNoteBtn{
+  background: #34b399;
+  border: none;
+  color: #ffffff;
+  font-weight: bold;
+  padding: 5px;
+  text-transform: uppercase;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, .5);
+  cursor: pointer;
+}
+
+.saveBtn,
+.deleteBtn{
+  border: none;
+  position: absolute;
+  top: 2px;
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+}
+
+.deleteBtn{
+  border-radius: 50%;
+  right: 5px;
+  background: #ff0000;
+}
+
+.deleteBtn::before{
+  content: 'd';
+}
+
+.saveBtn{
+  border-radius: 50%;
+  left: 5px;
+  background: green;
+}
+
+.saveBtn::before{
+  content: 's';
+}
