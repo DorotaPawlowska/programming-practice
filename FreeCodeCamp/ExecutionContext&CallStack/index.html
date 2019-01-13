@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+</head>
+<body>
+
+  <p>Execution Context and Call Stack</p>
+  <script type="text/javascript">
+
+    function a(){ b();}
+    function b(){ c();}
+    function c(){ console.log('c'); }
+
+    a();
+
+    // this.a = 'global scope';
+    // var obj = {
+    //   a: 1,
+    //   method: function(){
+    //     console.log(this.a);
+    //   }
+    // }
+    // obj.method();
+    // var m = obj.method;
+    // m();
+
+    // function Fa(){
+    //   this.x = 1;
+    // }
+    // Fa();
+    // console.log(window.x);
+
+  </script>
+
+</body>
+</html>
