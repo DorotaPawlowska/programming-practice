@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+  <script src="main.js"></script>
+  <!-- <script
+  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+  integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+  crossorigin="anonymous"></script> -->
+
+</head>
+<body>
+  <div class="dropdown">
+    <button id="btn">Dropdown</button>
+    <ul id="list">
+      <li><a href="#">Item 1</a></li>
+      <li><a href="#">Item 2</a></li>
+      <li><a href="#">Item 3</a></li>
+      <li><a href="#">Item 4</a></li>
+    </ul>
+  </div>
+
+    <script type="text/javascript">
+      // $(document).ready(function(){
+      //   $('button').click(function(){
+      //     $('ul').toggleClass('active');
+      //   })
+      // });
+
+      const btn = document.querySelector('#btn');
+      const list = document.querySelector('#list');
+
+      btn.addEventListener('click', function(){
+        // if(list.classList.contains('active')){
+        //   list.classList.remove('active');
+        // }else{
+        //   list.classList.add('active');
+        // }
+        list.classList.toggle('active');
+      });
+
+    </script>
+
+</body>
+</html>
+
