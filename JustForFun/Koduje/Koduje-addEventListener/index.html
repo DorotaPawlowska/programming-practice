@@ -11,6 +11,18 @@
 <body>
   <!-- <div class="box" onclick="foo()"></div>  bardzo ŹLE-->
   <div class="box"></div>
+  <button class="add-item">add</button>
+  <ul class="item-list">
+    <li>foo1</li>
+    <li>foo2</li>
+    <li>foo3</li>
+    <li>foo4</li>
+    <li>foo5</li>
+    <li>foo6</li>
+    <li>foo7</li>
+    <li>foo8</li>
+    <li>foo9</li>
+  </ul>
 
   <script>
   var foo = function(){
@@ -19,6 +31,31 @@
 
   var box = document.querySelector('.box');
   box.addEventListener('click', foo, false);
+
+  var btn = document.querySelector('.add-item');
+  var itemLi = document.querySelector('.item-list');
+  var items = document.querySelectorAll('.item-list li');
+
+  var arrayList = Array.prototype.slice.call(items);
+
+  // arrayList.forEach(function(item){
+  //   item.addEventListener('click', function(){
+  //     alert('foo');
+  //   }, false);
+  // });
+
+  itemLi.addEventListener('click', function(ev){
+    if(ev.target.tagName === 'LI'){
+      console.log(ev.target.tagName);
+      alert('foo');
+    };
+  }, false);
+
+  btn.addEventListener('click', function(){
+    var itemEl = document.createElement('li');
+    itemEl.innerHTML = Math.round(Math.random()*10);
+    itemLi.appendChild(itemEl);
+  }, false);
 
   </script>
 </body>
