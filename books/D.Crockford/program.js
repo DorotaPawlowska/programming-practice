@@ -5,7 +5,7 @@ Function.prototype.method = function (name, func){
     return this;
 };
 
-//zastrzeżone słowa
+// -------- zastrzeżone słowa
 /*
 abstract
 boolean break byte 
@@ -35,6 +35,7 @@ document.writeln('cat'.toUpperCase());
 document.writeln(2+3*5);
 document.writeln((2+3)*5);
 
+// -------- literały obiektowe
 var empty_object = {};
 
 var stooge = {
@@ -59,3 +60,44 @@ var flight = {
         city: "Los Angeles"
     }
 };
+
+// -------- pobieranie
+document.writeln(stooge["first-name"]);
+document.writeln(flight.departure.IATA);
+
+//undefined
+document.writeln(stooge["middle-name"]);
+document.writeln(flight.status);
+document.writeln(stooge["FIRST-NAME"]);
+
+//wartość domyślna jeśli właściwość nie istnieje
+var middle = stooge["middle-name"] || "(brak)";
+var status = flight.status || "nieznany";
+
+//TypeError w consoli
+document.writeln(flight.equipment);
+console.log(flight.equipment);
+// document.writeln(flight.equipment.model);
+// console.log(flight.equipment.model);
+document.writeln(flight.equipment && flight.equipment.model);
+console.log(flight.equipment && flight.equipment.model);
+
+// -------- modyfikacja
+//nadpisanie
+stooge['first-name'] = 'Lester';
+
+//dodanie
+stooge['middle-name'] = 'Lester';
+flight.equipment = {
+    model: 'Boeing 777'
+};
+flight.status = 'spóźniony';
+
+// -------- referencja
+var x = stooge;
+x.nickname = 'Curly';
+var nick = stooge.nickname;
+document.writeln(nick);
+
+var a = {}, b = {}, c ={};
+a = b = c = {};
