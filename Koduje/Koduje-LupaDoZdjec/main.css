@@ -1,0 +1,28 @@
+.photo{
+    width: 400px;
+    height: 400px;
+    background-image: url('img/snieg.jpg');
+    background-size: 400px;
+    position: relative;
+    margin-right: 20px;
+}
+
+.magnifier{
+    width: 200px;
+    height: 200px;
+    border: 1px solid #c9c9c9;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    background: #c9c9c9;
+    opacity: .5;
+}
+
+.zoom{
+    width: 400px;
+    height: 400px;
+    background-image: url('img/snieg.jpg');
+    background-size: 800px;
+    background-repeat: no-repeat;
+}
