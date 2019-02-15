@@ -1,0 +1,38 @@
+article{
+    font-size: 2em;
+    padding: 15px;
+    width: 50%;
+    margin: 0 auto;
+    border-top: 3px solid #c0c0c0;
+    border-bottom: 3px solid #c0c0c0;
+}
+
+.articleProgress{
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #696e9e;
+}
+
+.articleProgress::-webkit-progress-bar{
+    background-color: #5e6390;
+    border-radius: 2px;
+}
+
+.articleProgress::-moz-progress-bar{
+    background-color: #5e6390;
+    border-radius: 2px;
+}
+
+.articleProgress::-webkit-progress-value{
+    background: #34b399;
+    transition: .5s width linear;
+}
+
+.articleProgress::-moz-progress-value{
+    background: #34b399;
+    transition: .5s width linear;
+}
