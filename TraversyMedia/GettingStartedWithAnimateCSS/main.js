@@ -1,7 +1,9 @@
 
 const btn = document.querySelector('#animateBtn');
-    btn.addEventListener('click', () => animate('#anim-head', 'bounce'), false);
-    btn.addEventListener('click', () => animate('#anim-body', 'rubberBand'), false);
+    btn.addEventListener('click', () => {
+        animate('#anim-head', 'bounce');
+        animate('#anim-body', 'rubberBand');
+    }, false);
 
 const btn2 = document.querySelector('#animateBtn2');
     btn2.addEventListener('click', () => {
@@ -14,7 +16,4 @@ const btn2 = document.querySelector('#animateBtn2');
 function animate(element, animation){
     const elem = document.querySelector(element);
     elem.classList.add('animated', animation);
-    // const wait = setTimeout(function(){
-    //     elem.classList.remove('animated', animation);
-    // }, 1000);
 }
