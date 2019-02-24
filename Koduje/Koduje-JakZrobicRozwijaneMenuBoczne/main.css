@@ -1,0 +1,75 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: #696e9e;
+    overflow: hidden;
+}
+
+.site-nav{
+    height: 20px;
+    width: 100%;
+    background: #4e5279;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.site-nav-trigger{
+    border: 0;
+    border-radius: 5px;
+    background: #ffffff;
+}
+
+.site-menu{
+    display: flex;
+    box-sizing: border-box;
+    position: absolute;
+    top: 20px;
+    right: 0;
+    height: 100%;
+    width: 300px;
+    background: #34b399;
+    transform: translateX(100%);
+    transition: 0.5s transform ease-in-out;
+}
+
+.site-menu ul{
+    padding: 0;
+    list-style-type: none;
+    margin: 0 10px;
+    display: flex;
+    flex-wrap: wrap;   
+    align-content: flex-start; 
+}
+
+.site-menu ul li{
+    background: #ffffff;
+    margin-top: 20px;
+    color: #696e9e;
+    border-radius: 5px;
+    flex-basis: 100%;
+    display: flex;
+    height: 40px;
+}
+
+.site-menu ul li a{
+    display: flex;
+    padding: 10px;
+    box-sizing: border-box;
+    text-decoration: none;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.site-menu ul li a:hover{
+    background: #696e9e;
+    color: #ffffff;
+}
+
+.site-nav-trigger:focus ~ .site-menu, .site-menu:hover{
+    transform: translateX(0)
+}
