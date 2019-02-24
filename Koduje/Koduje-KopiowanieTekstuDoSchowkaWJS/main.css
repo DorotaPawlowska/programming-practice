@@ -1,0 +1,17 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: skyblue;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    height: 100vh;
+}
+
+.box{
+    display: grid;
+    width: 200px;
+    height: 200px;
+    border: 2px solid darkgray;
+}
+
