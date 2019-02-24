@@ -1,0 +1,150 @@
+body{
+    margin: 0;
+    padding: 0;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.svg-image{
+    width: 1600px;
+}
+
+#whole_ambulance,
+#ambulance_shadow,
+#trees_city_front,
+#trees_city_back,
+#city,
+#cloud_city,
+#cloud_2_city,
+#cloud_3_city,
+#right_tire,
+#left_tire{
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    transform-origin: center;
+    transform-origin: 50% 50%;
+    transform-box: fill-box;
+}
+
+#whole_ambulance{
+    animation-name: ambulance;
+    animation-duration: 1.5s;
+}
+
+#ambulance_shadow{
+    animation-name: ambulance-shadow;
+    animation-duration: 1.5s;
+}
+
+#right_tire,
+#left_tire{
+    animation-name: ambulance-tires;
+    animation-duration: 0.3s;
+    transform-origin: center;
+}
+
+#trees_city_front{
+    animation-name: front-trees;
+    animation-duration: 1.2s;
+}
+
+#trees_city_back{
+    animation-name: back-trees;
+    animation-duration: 1.7s;
+}
+
+#city{
+    animation-name: city;
+    animation-duration: 30s; 
+}
+
+#cloud_city{
+    animation-name: city-cloud;
+    animation-duration: 240s; 
+    animation-delay: -100s;
+}
+
+#cloud_2_city{
+    animation-name: city-cloud-2;
+    animation-duration: 120s; 
+}
+
+#cloud_3_city{
+    animation-name: city-cloud-3;
+    animation-duration: 480s; 
+    animation-delay: -200s;
+}
+
+@keyframes ambulance{
+    50%{
+        transform: translateY(10px);
+    }
+}
+
+@keyframes ambulance-shadow{
+    50%{
+        transform: scale(1.03);
+    }
+}
+
+@keyframes ambulance-tires{
+    0%{
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes front-trees{
+    0%{
+        transform: translateX(150px);
+    }
+    100%{
+        transform: translateX(-680px);
+    }
+}
+
+@keyframes back-trees{
+    0%{
+        transform: translateX(330px);
+    }
+    100%{
+        transform: translateX(-500px);
+    }
+}
+
+@keyframes city{
+    0%{
+        transform: translateX(1920px);
+    }
+    100%{
+        transform: translateX(-2400px);
+    }
+}
+
+@keyframes city-cloud{
+    0%{
+        transform: translateX(-1920px);
+    }
+    100%{
+        transform: translateX(2400px);
+    }
+}
+
+@keyframes city-cloud-2{
+    0%{
+        transform: translateX(-1920px);
+    }
+    100%{
+        transform: translateX(2400px);
+    }
+}
+
+@keyframes city-cloud-3{
+    0%{
+        transform: translateX(1920px);
+    }
+    100%{
+        transform: translateX(-2400px);
+    }
+}
