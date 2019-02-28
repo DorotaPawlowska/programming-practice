@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css"> -->
+    <!-- <script src="main.js"></script> -->
+</head>
+<body>
+    
+<script>
+
+function makeItem(){
+    return{
+        data: {
+            item: {
+                name: 'Shoes',
+                size: {
+                    US: 10,
+                    EU: 44
+                }
+            }
+        },
+        status: 'live'
+    }
+}
+
+function makeArrayOfItems(){
+    return{
+        data: {
+            items: [
+                {name: 'Shoes', price: 100},
+                {name: 'Shirt', price: 250}
+            ]
+        },
+        status: 'live'
+    }
+}
+
+// const res = makeItem();
+// console.log(res);
+// const status = res.status;
+// const data = res.data;
+
+
+// const {data, status} = makeItem(); 
+// const {data: { item: { name, size: { EU: normal, US: weird } } }, status} = makeItem(); 
+// console.log({data, status});
+// console.log(data.item);
+// console.log(item, status);
+// console.log(name, size);
+// console.log(name, weird, normal);
+
+// const res = makeArrayOfItems();
+// console.log(res);
+
+const { data: { items: [item1, item2] } } = makeArrayOfItems();
+console.log(item1, item2);
+
+</script>
+
+</body>
+</html>
