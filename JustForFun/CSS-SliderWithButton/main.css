@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,700');
+
+body{
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* background: #000000; */
+}
+
+ul{
+    margin: 0 0 40px;
+    padding: 0;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; 
+}
+
+ul li{
+    list-style: none;
+    margin: 0 0 40px;
+}
+
+ul li .slide{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform: rotateY(90deg);
+    transform-origin: left;
+}
+
+ul li input[type="radio"]{
+    position: relative;
+    z-index: 1;
+    height: 20px;
+    width: 20px;
+}
+
+ul li input[type="radio"]:checked ~ .slide{
+    transition: transform 0.5s;
+    transform: rotateY(0deg);
+    transform-origin: right;
+}
+
+ul li .slide .content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, .9);
+    padding: 40px;
+}
+
+ul li .slide .content h2{
+    margin: 0;
+    padding: 0;
+    font-size: 42px;
+}
+
+ul li .slide .content p{
+    font-size: 18px;
+
+}
+
+ul li .slide img{
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+ul li input[type="radio"]:checked ~ .slide img{
+    animation: animate 40s linear infinite;
+}
+
+@keyframes animate{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.5);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
