@@ -31,7 +31,6 @@ body{
 .temperature-section{
     display: flex;
     align-items: center;
-    cursor: pointer;
 }
 
 .temperature-section span{

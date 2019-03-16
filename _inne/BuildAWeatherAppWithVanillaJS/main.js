@@ -10,7 +10,8 @@ window.addEventListener('load', () => {
     const locTimeZ = document.querySelector('.location-timezone');
     const iconPic = document.querySelector('.icon');
 
-    const errorCallback = (error) => { // Define callback function for failed attempt
+    const errorCallback = (error) => { 
+        // Define callback function for failed attempt
         if(error.code == 1){
             result.innerHTML = "You've decided not to share your position, but it's OK. We won't ask you again.";
         } else if(error.code == 2){
@@ -19,6 +20,21 @@ window.addEventListener('load', () => {
             result.innerHTML = "The attempt timed out before it could get the location data.";
         } else{
             result.innerHTML = "Geolocation failed due to unknown error.";
+        }
+    }
+
+    const setIcon = (icon, iconID) => {
+        const skycons = new Skycons({"color": "#003366"});
+        const currentIcon = icon.replace(/-/g, "_").toUpperCase();
+        skycons.play();
+        return skycons.set(iconID, Skycons[currentIcon]);
+    }
+
+    const setUnits = (units) => {
+        if(units === "us"){
+            tempSecSpan.textContent = "F";
+        }else{
+            tempSecSpan.textContent = "C";
         }
     }
 
@@ -38,7 +54,7 @@ window.addEventListener('load', () => {
                 .then(data => {
                     console.log(data);
                     const { summary, temperature, icon } = data.currently;
-                    const sumDay = data.daily.summary;
+                    const sumDay = data.hourly.summary;
                     const timeZone = data.timezone;
                     const units = data.flags.units;
 
@@ -51,23 +67,11 @@ window.addEventListener('load', () => {
                     // set icon
                     setIcon(icon, iconPic);
 
-                    // change degree
-                    if(units === "us"){
-                        tempSecSpan.textContent = "F";
-                    }else{
-                        tempSecSpan.textContent = "C";
-                    }
+                    // set units
+                    setUnits(units);
                 });
         }, errorCallback);        
     }else{
         alert("Sorry, your browser does not support HTML5 geolocation.");
     }
-
-    function setIcon(icon, iconID){
-        const skycons = new Skycons({"color": "#003366"});
-        const currentIcon = icon.replace(/-/g, "_").toUpperCase();
-        skycons.play();
-        return skycons.set(iconID, Skycons[currentIcon]);
-    }
-
 });
