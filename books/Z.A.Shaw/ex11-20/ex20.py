@@ -9,7 +9,7 @@ def rewind(f):
     f.seek(0)
 
 def print_a_line(line_counter, f):
-    print(line_counter, f.readline())
+    print(line_counter, f.readline(), end = " ")
 
 current_file = open(input_file)
 
@@ -24,15 +24,15 @@ rewind(current_file)
 print("Wydrukujmy trzy linie:")
 
 current_line = 1
-print(current_line)
+# print(current_line)
 print_a_line(current_line, current_file)
 
 # current_line = current_line + 1
 current_line += 1
-print(current_line)
+# print(current_line)
 print_a_line(current_line, current_file)
 
 # current_line = current_line + 1
 current_line += 1
-print(current_line)
+# print(current_line)
 print_a_line(current_line, current_file)
