@@ -30,26 +30,42 @@
 
 // console.log(life3);
 
-const name1 = "Dev Ed1";
-const text2 = "inny przykład";
+// const name1 = "Dev Ed1";
+// const text2 = "inny przykład";
 
-function upperCase(text){
-    console.log(text.toUpperCase());
-}
+// function upperCase(text){
+//     console.log(text.toUpperCase());
+// }
 
-upperCase(name1);
+// upperCase(name1);
 
-function adder(num1, num2){
-    console.log(num1 + num2);
-}
+// function adder(num1, num2){
+//     console.log(num1 + num2);
+// }
 
 // adder(3,4);
 
-const upperCaseES5 = (text) => {
-    console.log(text.toUpperCase());
-}
+// const upperCaseES5 = (text) => {
+//     console.log(text.toUpperCase());
+// }
 
-upperCaseES5(text2);
+// upperCaseES5(text2);
 
 // console.log(name1); // global scoope
 // console.log(name2); // local scoope in function upperCase()
+
+const name = 'Dorin';
+console.log(typeof name);
+const myAge = 24;
+console.log(typeof myAge);
+const yourAge = 21;
+console.log(myAge + yourAge);
+
+console.log('hello' + ' ' + 'my name is' + ' ' + name + ' ' + 'and i have' + ' ' + myAge +  ' ' + 'years.' );
+console.log('hello it\'s me Ed');
+console.log("hello it's me Ed");
+console.log(`hello it's me aggain`);
+console.log(`hello it's me ${name} and i have only ${myAge}`);
+
+console.log(typeof (name + myAge));
+console.log(typeof (myAge + name));
