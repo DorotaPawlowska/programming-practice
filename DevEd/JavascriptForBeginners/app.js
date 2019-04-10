@@ -70,22 +70,52 @@
 // console.log(typeof (name + myAge));
 // console.log(typeof (myAge + name));
 
-const age = 16;
-const dice1 = 6;
-const dice2 = 3;
+// const age = 16;
+// const dice1 = 6;
+// const dice2 = 3;
 
-if(age > 18){
-    console.log('you are good to go!');
-} else if(age < 15){
-    console.log('wow you are really young')
-} else {
-    console.log('you are not old enough');
-}
+// if(age > 18){
+//     console.log('you are good to go!');
+// } else if(age < 15){
+//     console.log('wow you are really young')
+// } else {
+//     console.log('you are not old enough');
+// }
 
-if(dice1 === 6 && dice2 === 6){
-    console.log('you rolled a double');
-} else if(dice1 === 6 || dice2 === 6) {
-    console.log('you didnt');
-} else {
-    console.log('no no no');
-}
+// if(dice1 === 6 && dice2 === 6){
+//     console.log('you rolled a double');
+// } else if(dice1 === 6 || dice2 === 6) {
+//     console.log('you didnt');
+// } else {
+//     console.log('no no no');
+// }
+
+const schedule = ['wake up', 'eat', 'watch film', 'go to work'];
+const phoneNumbers = [980897987, 928374732, 982837461, 746254723];
+
+console.log(schedule);
+console.log(schedule[0]);
+console.log(schedule[1]);
+console.log(schedule[2]);
+console.log(schedule[3]);
+
+console.log(phoneNumbers);
+console.log(phoneNumbers[0]);
+console.log(phoneNumbers[1]);
+console.log(phoneNumbers[2]);
+console.log(phoneNumbers[3]);
+
+schedule.push('new item ine array');
+console.log(schedule);
+schedule.pop();
+console.log(schedule);
+schedule.shift();
+console.log(schedule);
+schedule.unshift('new item ine array');
+console.log(schedule);
+
+const eatIndex = schedule.indexOf('eat');
+console.log(schedule.indexOf('watch filmat'));
+console.log(schedule[eatIndex]);
+
+
