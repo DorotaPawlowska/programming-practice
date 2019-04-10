@@ -90,32 +90,60 @@
 //     console.log('no no no');
 // }
 
-const schedule = ['wake up', 'eat', 'watch film', 'go to work'];
-const phoneNumbers = [980897987, 928374732, 982837461, 746254723];
+// const schedule = ['wake up', 'eat', 'watch film', 'go to work'];
+// const phoneNumbers = [980897987, 928374732, 982837461, 746254723];
 
-console.log(schedule);
-console.log(schedule[0]);
-console.log(schedule[1]);
-console.log(schedule[2]);
-console.log(schedule[3]);
+// console.log(schedule);
+// console.log(schedule[0]);
+// console.log(schedule[1]);
+// console.log(schedule[2]);
+// console.log(schedule[3]);
 
-console.log(phoneNumbers);
-console.log(phoneNumbers[0]);
-console.log(phoneNumbers[1]);
-console.log(phoneNumbers[2]);
-console.log(phoneNumbers[3]);
+// console.log(phoneNumbers);
+// console.log(phoneNumbers[0]);
+// console.log(phoneNumbers[1]);
+// console.log(phoneNumbers[2]);
+// console.log(phoneNumbers[3]);
 
-schedule.push('new item ine array');
-console.log(schedule);
-schedule.pop();
-console.log(schedule);
-schedule.shift();
-console.log(schedule);
-schedule.unshift('new item ine array');
-console.log(schedule);
+// schedule.push('new item ine array');
+// console.log(schedule);
+// schedule.pop();
+// console.log(schedule);
+// schedule.shift();
+// console.log(schedule);
+// schedule.unshift('new item ine array');
+// console.log(schedule);
 
-const eatIndex = schedule.indexOf('eat');
-console.log(schedule.indexOf('watch filmat'));
-console.log(schedule[eatIndex]);
+// const eatIndex = schedule.indexOf('eat');
+// console.log(schedule.indexOf('watch filmat'));
+// console.log(schedule[eatIndex]);
 
+const user = {
+    name: 'Edwin',
+    age: 24,
+    married: false,
+    zakupy: ['phone', 'car', 'laptop'],
+    sayName: function() {
+        console.log(this);
+        console.log(this.name);
+    }
+};
+
+user.sayName();
+
+function app(){
+    console.log(123);
+}
+
+window.app();
+app();
+
+console.log(user.zakupy);
+console.log(this);
+
+function sayMayAge(){
+    console.log(`my age is ${this}`);
+}
+
+sayMayAge();
 
