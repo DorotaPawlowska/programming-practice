@@ -54,18 +54,38 @@
 // console.log(name1); // global scoope
 // console.log(name2); // local scoope in function upperCase()
 
-const name = 'Dorin';
-console.log(typeof name);
-const myAge = 24;
-console.log(typeof myAge);
-const yourAge = 21;
-console.log(myAge + yourAge);
+// const name = 'Dorin';
+// console.log(typeof name);
+// const myAge = 24;
+// console.log(typeof myAge);
+// const yourAge = 21;
+// console.log(myAge + yourAge);
 
-console.log('hello' + ' ' + 'my name is' + ' ' + name + ' ' + 'and i have' + ' ' + myAge +  ' ' + 'years.' );
-console.log('hello it\'s me Ed');
-console.log("hello it's me Ed");
-console.log(`hello it's me aggain`);
-console.log(`hello it's me ${name} and i have only ${myAge}`);
+// console.log('hello' + ' ' + 'my name is' + ' ' + name + ' ' + 'and i have' + ' ' + myAge +  ' ' + 'years.' );
+// console.log('hello it\'s me Ed');
+// console.log("hello it's me Ed");
+// console.log(`hello it's me aggain`);
+// console.log(`hello it's me ${name} and i have only ${myAge}`);
 
-console.log(typeof (name + myAge));
-console.log(typeof (myAge + name));
+// console.log(typeof (name + myAge));
+// console.log(typeof (myAge + name));
+
+const age = 16;
+const dice1 = 6;
+const dice2 = 3;
+
+if(age > 18){
+    console.log('you are good to go!');
+} else if(age < 15){
+    console.log('wow you are really young')
+} else {
+    console.log('you are not old enough');
+}
+
+if(dice1 === 6 && dice2 === 6){
+    console.log('you rolled a double');
+} else if(dice1 === 6 || dice2 === 6) {
+    console.log('you didnt');
+} else {
+    console.log('no no no');
+}
