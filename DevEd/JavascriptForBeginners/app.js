@@ -118,32 +118,48 @@
 // console.log(schedule.indexOf('watch filmat'));
 // console.log(schedule[eatIndex]);
 
-const user = {
-    name: 'Edwin',
-    age: 24,
-    married: false,
-    zakupy: ['phone', 'car', 'laptop'],
-    sayName: function() {
-        console.log(this);
-        console.log(this.name);
+// const user = {
+//     name: 'Edwin',
+//     age: 24,
+//     married: false,
+//     zakupy: ['phone', 'car', 'laptop'],
+//     sayName: function() {
+//         console.log(this);
+//         console.log(this.name);
+//     }
+// };
+
+// user.sayName();
+
+// function app(){
+//     console.log(123);
+// }
+
+// window.app();
+// app();
+
+// console.log(user.zakupy);
+// console.log(this);
+
+// function sayMayAge(){
+//     console.log(`my age is ${this}`);
+// }
+
+// sayMayAge();
+
+const names = ['Ed', 'John', 'Maria', 'Burrito', 'Harry', 'Jane']
+
+for(name of names){
+    console.log(`hello there ${name}`);
+    if(name === 'Maria'){
+        console.log('Maria is in my list!');
+        break;
     }
-};
-
-user.sayName();
-
-function app(){
-    console.log(123);
 }
 
-window.app();
-app();
+let loading = 0;
 
-console.log(user.zakupy);
-console.log(this);
-
-function sayMayAge(){
-    console.log(`my age is ${this}`);
+while(loading < 100){
+    console.log('is loading ... ');
+    loading++;
 }
-
-sayMayAge();
-
