@@ -147,19 +147,57 @@
 
 // sayMayAge();
 
-const names = ['Ed', 'John', 'Maria', 'Burrito', 'Harry', 'Jane']
+// const names = ['Ed', 'John', 'Maria', 'Burrito', 'Harry', 'Jane']
 
-for(name of names){
-    console.log(`hello there ${name}`);
-    if(name === 'Maria'){
-        console.log('Maria is in my list!');
-        break;
-    }
-}
+// for(name of names){
+//     console.log(`hello there ${name}`);
+//     if(name === 'Maria'){
+//         console.log('Maria is in my list!');
+//         break;
+//     }
+// }
 
-let loading = 0;
+// let loading = 0;
 
-while(loading < 100){
-    console.log('is loading ... ');
-    loading++;
-}
+// while(loading < 100){
+//     console.log('is loading ... ');
+//     loading++;
+// }
+
+const text = document.querySelector('.title');
+const changeColor = document.querySelector('.changeColor');
+
+// text.style.color = "red";
+// text.style.backgroundColor = "red";
+// text.classList.add('change');
+text.classList.remove('change');
+
+changeColor.addEventListener('click', function(){
+    text.classList.toggle('change');
+});
+
+// const userList = document.querySelectorAll('.nameList li');
+const userList = document.querySelector('.nameList');
+const listInput = document.querySelector('.listInput');
+const addListBtn = document.querySelector('.addListBtn');
+
+console.log(userList);
+
+// for(user of userList){
+//     user.addEventListener('click', function(){
+//         console.log(this);
+//         this.style.color = "red";
+//     });
+// }
+
+console.log(listInput.value);
+
+addListBtn.addEventListener('click', function(){
+    const newLi = document.createElement('li');
+    // const liContent = document.createTextNode('sdf');
+    const liContent = document.createTextNode(listInput.value);
+    // console.log(listInput);
+    // console.log(listInput.value);
+    newLi.appendChild(liContent);
+    userList.appendChild(newLi);
+});
