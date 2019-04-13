@@ -35,7 +35,8 @@ section{
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    opacity: 0;
+    /* opacity: 0; */
+    transition: opacity .5s ease;
 }
 
 .intro h1{
@@ -60,6 +61,7 @@ section{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    transition: opacity .5s ease .5s;
 }
 
 .winner{
@@ -87,6 +89,54 @@ div.fadeOut{
 div.fadeIn{
     opacity: 1;
     pointer-events: all;
+}
+
+@keyframes shakePlayer{
+    0%{
+        transform: rotateY(180deg) translateY(0px);
+    }
+    25%{
+        transform: rotateY(180deg) translateY(-50px);
+    }
+    45%{
+        transform: rotateY(180deg) translateY(0px);
+    }
+    65%{
+        transform: rotateY(180deg) translateY(-50px);
+    }
+    80%{
+        transform: rotateY(180deg) translateY(0px);
+    }
+    90%{
+        transform: rotateY(180deg) translateY(-50px);
+    }
+    100%{
+        transform: rotateY(180deg) translateY(0px);
+    }
+}
+
+@keyframes shakeComputer{
+    0%{
+        transform: translateY(0px);
+    }
+    25%{
+        transform: translateY(-50px);
+    }
+    45%{
+        transform: translateY(0px);
+    }
+    65%{
+        transform: translateY(-50px);
+    }
+    80%{
+        transform: translateY(0px);
+    }
+    90%{
+        transform: translateY(-50px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
 }
 
 
