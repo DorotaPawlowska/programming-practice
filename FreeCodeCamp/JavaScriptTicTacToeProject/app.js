@@ -19,6 +19,56 @@ const emptySquares = () => {
     return orgBoard.filter(s => typeof s == 'number');
 }
 
+const minmax = (newBoard, player) => {
+    let avalibleSpots = emptySquares(newBoard);
+
+    if(checkWin(newBoard, player)){
+        return { score: -10};
+    } else if (checkWin(newBoard, aiPlayer)){
+        return { score: 10};
+    } else if(avalibleSpots.length === 0) {
+        return { score: 0};
+    }
+
+    let moves = [];
+    avalibleSpots.forEach( spot => {
+        let move = {};
+        move.index = newBoard[spot];
+        newBoard[spot] = player;
+
+        if(player == aiPlayer){
+            let result = minmax(newBoard, humanPlayer);
+            move.score = result.score;
+        } else {
+            let result = minmax(newBoard, aiPlayer);
+            move.score = result.score;
+        }
+        newBoard[spot] = move.index;
+        moves.push(move);
+    });
+
+    let bestMove;
+
+    if(player === aiPlayer){
+        let bestScore = -10000;
+        moves.forEach( (move, index) => {
+            if(move.score > bestScore){
+                bestScore = move.score;
+                bestMove = index;
+            }
+        });
+    } else {
+        let bestScore = 10000;
+        moves.forEach( (move, index) => {
+            if(move.score < bestScore){
+                bestScore = move.score;
+                bestMove = index;
+            }
+        });
+    }
+    return moves[bestMove];
+}
+
 const declareWinner = (who) => {
     document.querySelector('.endgame').style.display = 'block';
     document.querySelector('.endgame .text').textContent = who;
@@ -37,7 +87,8 @@ const checkTie = () => {
 }
 
 const bestSpot = () => {
-    return emptySquares()[0];
+    return minmax(orgBoard, aiPlayer).index;
+    // emptySquares()[0];
 }
 
 const gameOver = (gameWon) => {
@@ -53,6 +104,7 @@ const gameOver = (gameWon) => {
 const checkWin = (board, player) => {
     let plays = board.reduce((a, e, i) => (e === player) ? a.concat(i) : a, []);
     let gameWon = null;
+
     for(let [index, win] of winCombinations.entries()){
         if(win.every(elem => plays.indexOf(elem) > -1)){
             gameWon = {index: index, player: player};
@@ -75,7 +127,6 @@ const turnClick = (square) => {
         turn(square.target.id, humanPlayer);
         if(!checkTie()) turn(bestSpot(), aiPlayer);
     }
-
 }
 
 const startGame = () => {
@@ -86,7 +137,7 @@ const startGame = () => {
         cell.textContent = '';
         cell.style.removeProperty('background-color');
         cell.addEventListener('click', turnClick, false);
-    })
+    });
 }
 
 restarBtn.addEventListener('click', startGame);
