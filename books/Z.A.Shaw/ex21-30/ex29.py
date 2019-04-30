@@ -1,4 +1,4 @@
-people = 2
+people = 5
 cats = 13
 dogs = 5
 
@@ -23,5 +23,5 @@ if people <= dogs:
     print("Liczba ludzi jest mniejsza lub równa liczbie psów.")
 
 if people == dogs:
-
     print("Ludzie są psami.")
+
