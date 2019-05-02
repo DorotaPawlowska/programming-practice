@@ -24,7 +24,8 @@ def bear_room():
     2. śmieję się z niedźwiedzia
     3. otwieram drzwi""")
     bear_moved = False
-    answers = True
+    answers = True 
+    # był pomysł ale się rozmył 
 
     while True:
         choice = int(input("> "))
