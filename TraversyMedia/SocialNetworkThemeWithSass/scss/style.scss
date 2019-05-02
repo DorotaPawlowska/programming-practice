@@ -1,0 +1,77 @@
+@import 'config';
+@import 'utilities';
+@import url('https://fonts.googleapis.com/css?family=Raleway|Ubuntu');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6;
+    background: $bg-light;
+    color: $fcolor-dark;
+}
+
+a{
+    text-decoration: none;
+    color: $primary-color;
+}
+
+ul{
+    list-style: none;
+}
+
+img{
+    width: 100%;
+}
+
+// Navbar
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.7rem 2rem;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    top: 0;
+    border-bottom: solid 1px $primary-color;
+    opacity: 0.9;
+
+    ul{
+        display: flex;
+    }
+
+    a{
+        color: $bg-light;
+        padding: 0.45rem;
+        margin: 0 0.25rem;
+
+        &:hover{
+            color: $primary-color;
+        }
+    }
+}
+
+// landing
+.landing{
+    position: relative; 
+    background: url('../dist/img/showcase.jpg') no-repeat center center / cover;
+    height: 100vh;
+
+    &-inner{
+        color: $bg-light;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin: auto;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+}
