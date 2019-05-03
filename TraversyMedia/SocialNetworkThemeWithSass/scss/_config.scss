@@ -6,11 +6,12 @@ $success-color: #28a745;
 $bg-light: #ffffff;
 $fcolor-dark: #333333;
 $grey-light: #cccccc;
+$grey-darker: #888888;
 $max-width: 1100px;
 
 // set text color based on bacground
 @function set-text-color($color){
-    @if(lightness($color) > 50){
+    @if(lightness($color) > 60){
         @return $fcolor-dark;
     } @else {
         @return $bg-light;
@@ -21,4 +22,27 @@ $max-width: 1100px;
 @mixin set-background($color){
     background-color: $color;
     color: set-text-color($color); 
+}
+
+// margin & padding
+$spaceamounts: (1,2,3,4,5);
+
+@each $space in $spaceamounts{
+    // all around margin
+    .m-#{$space}{
+        margin:#{$space}rem ;
+    }
+    // vertical margin
+    .my-#{$space}{
+        margin: #{$space}rem 0;
+    }
+
+    // all around padding
+    .p-#{$space}{
+        padding:#{$space}rem ;
+    }
+    // vertical padding
+    .py-#{$space}{
+        margin: #{$space}rem 0;
+    }
 }
