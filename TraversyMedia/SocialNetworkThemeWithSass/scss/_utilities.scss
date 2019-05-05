@@ -162,3 +162,14 @@
     left: 0;
     background-color: rgba(0,0,0, 0.75);
 }
+
+.table {
+    th, td{
+        padding: 1rem;
+        text-align: left;
+    }
+
+    th{
+        background: $light-color;
+    }
+}
