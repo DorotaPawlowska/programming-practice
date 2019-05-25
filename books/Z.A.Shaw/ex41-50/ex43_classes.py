@@ -9,7 +9,7 @@ class Engine(object):
         pass
 
     def play(self):
-        pass
+        print("metoda play() w klasie Engine")
 
 class Death(Scene):
 
