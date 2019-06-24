@@ -11,7 +11,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       paras: 4,
-      html: 'true',
+      format: 'html',
       text: ''
     };
   }
@@ -21,10 +21,10 @@ class App extends React.Component {
   }
 
   getSampleText(){
-    const cors = 'cors-anywhere.herokuapp.com'; 
-    axios.get('https://'+ cors +'/hipsterjesus.com/api/?paras='+this.state.paras+'&html='+this.state.html+'')
+    // const cors = 'cors-anywhere.herokuapp.com'; 
+    axios.get('https://baconipsum.com/api/?type=meat-and-filler&paras='+this.state.paras+'&format='+this.state.format)
     .then((res) => {
-      this.setState({text: res.data.text}, function(){
+      this.setState({text: res.data}, function(){
         console.log(this.state);
       });
     })
@@ -34,7 +34,7 @@ class App extends React.Component {
   }
 
   showHtml(x){
-    this.setState({html: x}, this.getSampleText);
+    this.setState({format: x}, this.getSampleText);
   }
 
   changeParas(number){
@@ -55,7 +55,7 @@ class App extends React.Component {
 
         <div className="form-group">
           <label>Include HTML:</label>
-          <Select value={this.state.html} onChange={this.showHtml.bind(this)} />
+          <Select value={this.state.format} onChange={this.showHtml.bind(this)} />
         </div>
 
       </form>

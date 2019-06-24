@@ -18,8 +18,9 @@ class Select extends Component{
         return(
             <div>
                 <select className="form-control" onChange={this.onChange.bind(this)}>
-                    <option value="true">Yes</option>
-                    <option value="false">No</option>
+                    <option value="html">html</option>
+                    <option value="json">json</option>
+                    <option value="text">text</option>
                 </select>
             </div>
         )

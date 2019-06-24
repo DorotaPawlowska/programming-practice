@@ -17,7 +17,7 @@ class Text extends Component{
     render(){
         return(
             <div>
-                <input className="form-control" type="number" calue={this.state.value} onChange={this.onChange.bind(this)}/>
+                <input className="form-control" type="number" value={this.state.value} onChange={this.onChange.bind(this)}/>
             </div>
         )
     }
