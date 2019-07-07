@@ -40,7 +40,7 @@ export default class Lyrics extends Component {
                             {track.track_name} by{' '} <span className="text-secondary">{track.artist_name}</span>
                         </h5>
                         <div className="card-body">
-                            <p className="card-text">{lyrics.lyrics_body}</p>
+                            <p className="card-text">{track.has_lyrics === 0 ? 'no lyricks' : lyrics.lyrics_body}</p>
                         </div>
                     </div>
                     <ul className="list-group mt-3">
