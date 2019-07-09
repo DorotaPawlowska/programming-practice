@@ -1,0 +1,6 @@
+POST http://localhost:5000/api/url/shorten
+Content-Type: application/json
+
+{
+  "longUrl": "https://www.amazon.com/Touch-screen-Smart-Display-2-touch/dp/B01LZ70J43/ref=sr_1_1?fst=as%3Aoff&qid=1562700020&refinements=p_n_size_browse-bin%3A2633652011%2Cp_n_feature_thirteen_browse-bin%3A17751773011&rnid=17751770011&s=pc&sr=1-1"
+}
