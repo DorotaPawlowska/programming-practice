@@ -1,6 +1,7 @@
 // ⭐️ Course content ⭐️
 
 // ⌨️ Template Literals (1:06)
+
 let word1 = "Dylan";
 let word2 = "Israel";
 
@@ -90,6 +91,7 @@ function adrMaker(address){
 // adrMaker({city: 'Austin', state: 'Texas'});
 
 // ⌨️ For of loop (13:44)
+
 let incomes = [62000, 67000, 75000];
 let total = 0;
 
@@ -132,6 +134,7 @@ let examp4 = {
 // console.log(examp4);
 
 // ⌨️ Rest operator (20:57)
+
 function addOld(nums){
   console.log(arguments);
 }
@@ -140,12 +143,24 @@ function addRest(...nums){
   console.log(nums);
 }
 
-addOld(4,5,6,78,1);
-addRest(4,5,6,78,1);
-
-
+// addOld(4,5,6,78,1);
+// addRest(4,5,6,78,1);
 
 // ⌨️ Arrow Functions (23:02)
+
+function addArr(...nums){
+
+  let total = nums.reduce(function(x,y){
+    return x+y;
+  });
+
+  let total2 = nums.reduce((x,y) => x+y);
+  
+  console.log(total);
+  console.log(total2);
+}
+
+addArr(4,5,7,8,12);
 
 // ⌨️ Default Params (25:50)
 
