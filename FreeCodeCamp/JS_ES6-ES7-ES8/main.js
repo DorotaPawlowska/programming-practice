@@ -7,7 +7,6 @@ let word2 = "Israel";
 let num1 = 2;
 let num2 = 3;
 
-
 // old way
 const fullName = word1 + ' ' + word2;
 let example = 'hello \n' + 'world';
@@ -21,21 +20,42 @@ world
 ${word2}
 `;
 
-console.log(fullName);
-console.log(fullName2);
-console.log(sum);
-console.log(example);
-console.log(example2);
+// console.log(fullName);
+// console.log(fullName2);
+// console.log(sum);
+// console.log(example);
+// console.log(example2);
 
-document.getElementById('example').innerText = example;
-document.getElementById('example2').innerText = example2;
+// document.getElementById('example').innerText = example;
+// document.getElementById('example2').innerText = example2;
 
+// ⌨️ Destructuring Objects and Arrays (5:32)
 
+const personalInformation = {
+  firstName: 'Dylan',
+  lastName: 'Israel',
+  city: 'Austin',
+  state: 'Texas',
+  zipCode: 73301
+};
 
+// renaming 
+const { firstName: fn, lastName: ln } = personalInformation;
 
-// ⌨️ Destructuring (5:32)
+// console.log(`${fn} ${ln}`);
+
+let names = ['Dylan', 'Coding What', 'Israel'];
+let [ firstName, middleName, lastName ] = ['Dylan', 'Coding What', 'Israel'];
+
+lastName = 'Clements';
+
+// console.log(firstName + ' ' + middleName + ' ' + lastName);
 
 // ⌨️ Object Literal (9:42)
+
+
+
+
 
 // ⌨️ For of loop (13:44)
 
