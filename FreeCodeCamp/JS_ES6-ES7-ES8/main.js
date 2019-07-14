@@ -1,6 +1,6 @@
 // ⭐️ Course content ⭐️
 
-// ⌨️ Template Literals (1:06)
+// #############################  ⌨️ Template Literals (1:06)
 
 let word1 = "Dylan";
 let word2 = "Israel";
@@ -30,7 +30,7 @@ ${word2}
 // document.getElementById('example').innerText = example;
 // document.getElementById('example2').innerText = example2;
 
-// ⌨️ Destructuring Objects and Arrays (5:32)
+// #############################  ⌨️ Destructuring Objects and Arrays (5:32)
 
 const personalInformation = {
   firstName: 'Dylan',
@@ -52,7 +52,7 @@ lastName = 'Clements';
 
 // console.log(firstName + ' ' + middleName + ' ' + lastName);
 
-// ⌨️ Object Literal (9:42)
+// #############################  ⌨️ Object Literal (9:42)
 
 function addressMaker( city, state ){
   // const newAddress = {
@@ -90,7 +90,7 @@ function adrMaker(address){
 
 // adrMaker({city: 'Austin', state: 'Texas'});
 
-// ⌨️ For of loop (13:44)
+// #############################  ⌨️ For of loop (13:44)
 
 let incomes = [62000, 67000, 75000];
 let total = 0;
@@ -114,7 +114,7 @@ for( let income of incomes){
 
 // console.log(total);
 
-// ⌨️ Spread operator (17:51) 
+// #############################  ⌨️ Spread operator (17:51) 
 
 let examp1 = [1,2,3,4,5,6];
 let examp2 = [...examp1];
@@ -133,7 +133,7 @@ let examp4 = {
 // console.log(examp3);
 // console.log(examp4);
 
-// ⌨️ Rest operator (20:57)
+// #############################  ⌨️ Rest operator (20:57)
 
 function addOld(nums){
   console.log(arguments);
@@ -146,7 +146,7 @@ function addRest(...nums){
 // addOld(4,5,6,78,1);
 // addRest(4,5,6,78,1);
 
-// ⌨️ Arrow Functions (23:02)
+// #############################  ⌨️ Arrow Functions (23:02)
 
 function addArr(...nums){
 
@@ -155,29 +155,40 @@ function addArr(...nums){
   });
 
   let total2 = nums.reduce((x,y) => x+y);
-  
+
   console.log(total);
   console.log(total2);
 }
 
-addArr(4,5,7,8,12);
+// addArr(4,5,7,8,12);
 
-// ⌨️ Default Params (25:50)
+// #############################  ⌨️ Default Params (25:50)
 
-// ⌨️ Array.includes() (27:44)
+function addParam(numArray = []){
+  let total = 0;
+  numArray.forEach((element) => {
+    total += element;
+  });
+  console.log(total);
+  
+}
 
-// ⌨️ Let & const (28:58)
+addParam();
 
-// ⌨️ Export & import (32:53)
+// #############################  ⌨️ Array.includes() (27:44)
 
-// ⌨️ String.padStart(), String.padEnd() (35:29)
+// #############################  ⌨️ Let & const (28:58)
 
-// ⌨️ Classes (38:05)
+// #############################  ⌨️ Export & import (32:53)
 
-// ⌨️ Trailing commas (49:59)
+// #############################  ⌨️ String.padStart(), String.padEnd() (35:29)
 
-// ⌨️ Async/Await (51:27)
+// #############################  ⌨️ Classes (38:05)
 
-// ⌨️ Sets (1:01:19)
+// #############################  ⌨️ Trailing commas (49:59)
 
-// ⌨️ What's Next (1:04:08)
+// #############################  ⌨️ Async/Await (51:27)
+
+// #############################  ⌨️ Sets (1:01:19)
+
+// #############################  ⌨️ What's Next (1:04:08)
