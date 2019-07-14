@@ -104,7 +104,7 @@ for( let income of incomes){
   income += 5000;
 }
 
-console.log(incomes);
+// console.log(incomes);
 
 // for( const letter of flName ){
 //   console.log(letter);  
@@ -113,6 +113,23 @@ console.log(incomes);
 // console.log(total);
 
 // ⌨️ Spread operator (17:51) 
+
+let examp1 = [1,2,3,4,5,6];
+let examp2 = [...examp1];
+examp2.push(true);
+
+let examp3 = {
+  frName: 'Dylan'
+};
+
+let examp4 = {
+  ...examp3
+}
+
+// console.log(examp1);
+// console.log(examp2);
+// console.log(examp3);
+// console.log(examp4);
 
 // ⌨️ Rest operator (20:57)
 
