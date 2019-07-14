@@ -64,7 +64,7 @@ function addressMaker( city, state ){
   console.log(newAddress);
 }
 
-addressMaker('Austin','Texas');
+// addressMaker('Austin','Texas');
 
 function adrMaker(address){
   const { city, state } = address;
@@ -87,9 +87,30 @@ function adrMaker(address){
   
 }
 
-adrMaker({city: 'Austin', state: 'Texas'});
+// adrMaker({city: 'Austin', state: 'Texas'});
 
 // ⌨️ For of loop (13:44)
+let incomes = [62000, 67000, 75000];
+let total = 0;
+
+let flName = "Dylan what Israel";
+
+// for( const income of incomes){
+//   console.log(income);  
+//   total += income;
+// }
+
+for( let income of incomes){
+  income += 5000;
+}
+
+console.log(incomes);
+
+// for( const letter of flName ){
+//   console.log(letter);  
+// }
+
+// console.log(total);
 
 // ⌨️ Spread operator (17:51) 
 
@@ -105,7 +126,7 @@ adrMaker({city: 'Austin', state: 'Texas'});
 
 // ⌨️ Export & import (32:53)
 
-// ⌨️ String.padStrart(), String.padEnd() (35:29)
+// ⌨️ String.padStart(), String.padEnd() (35:29)
 
 // ⌨️ Classes (38:05)
 
