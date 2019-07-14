@@ -216,6 +216,14 @@ exam5.firstName = 'Dylan';
 
 // #############################  ⌨️ Export & import (32:53)
 
+{/* <script type="module" src="main.js"></script> */}
+
+import { data } from './example.js';
+let updateData = data;
+
+updateData.push(5);
+// console.log(updateData);
+
 // #############################  ⌨️ String.padStart(), String.padEnd() (35:29)
 
 // #############################  ⌨️ Classes (38:05)
