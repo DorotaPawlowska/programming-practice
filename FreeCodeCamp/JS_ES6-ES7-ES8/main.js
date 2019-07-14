@@ -169,13 +169,18 @@ function addParam(numArray = []){
   numArray.forEach((element) => {
     total += element;
   });
-  console.log(total);
-  
+  console.log(total);  
 }
 
-addParam();
+// addParam();
 
 // #############################  ⌨️ Array.includes() (27:44)
+
+let numArray2 = [1,2,3,4,5];
+
+console.log(numArray2.indexOf(0));
+console.log(numArray2.includes(0));
+console.log(numArray2.includes(2));
 
 // #############################  ⌨️ Let & const (28:58)
 
