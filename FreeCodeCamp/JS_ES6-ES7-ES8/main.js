@@ -229,7 +229,7 @@ updateData.push(5);
 let ex = 'Dylan';
 
 // console.log(ex.padStart(10, 'a'));
-console.log(ex.padEnd(10, 'a'));
+// console.log(ex.padEnd(10, 'a'));
 
 let ex2 = 'YouTube.com/CodingTutorials360';
 
@@ -237,6 +237,26 @@ let ex2 = 'YouTube.com/CodingTutorials360';
 // console.log(ex2.padEnd(1)); // ignoruje to ograniczenie
 
 // #############################  ⌨️ Classes (38:05)
+
+import { Animal, Cat } from './animal.js';
+
+let cat = new Animal('Cat', 4);
+let catC = new Cat('Cat', 4);
+
+// cat.legs = 3;
+// cat.makeNoise();
+// cat.makeNoise('Meow');
+
+catC.makeNoise();
+console.log(catC.metaData);
+
+// console.log(cat.type);
+// console.log(cat.legs);
+// console.log(cat.metaData); // getter 
+
+// console.log(Animal.return10()); // static method !!!
+
+
 
 // #############################  ⌨️ Trailing commas (49:59)
 
