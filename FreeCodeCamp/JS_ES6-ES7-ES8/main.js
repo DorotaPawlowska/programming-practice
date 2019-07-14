@@ -53,9 +53,41 @@ lastName = 'Clements';
 
 // ⌨️ Object Literal (9:42)
 
+function addressMaker( city, state ){
+  // const newAddress = {
+  //   newCity: city,
+  //   newState: state
+  // };
+  // const newAddress = { city: city, state: state };
+  const newAddress = { city, state };
 
+  console.log(newAddress);
+}
 
+addressMaker('Austin','Texas');
 
+function adrMaker(address){
+  const { city, state } = address;
+
+  // const newAddress = {
+  //   city,
+  //   state,
+  //   country: 'United States'
+  // };
+  const newAddress = {
+    ncity: city,
+    nstate: state,
+    country: 'United States'
+  };
+
+  // console.log(`${newAddress.city} ${newAddress.state} ${newAddress.country}`);
+  
+  const { ncity, nstate, country } = newAddress;
+  console.log(`${ncity} ${nstate} ${country}`);
+  
+}
+
+adrMaker({city: 'Austin', state: 'Texas'});
 
 // ⌨️ For of loop (13:44)
 
