@@ -178,11 +178,41 @@ function addParam(numArray = []){
 
 let numArray2 = [1,2,3,4,5];
 
-console.log(numArray2.indexOf(0));
-console.log(numArray2.includes(0));
-console.log(numArray2.includes(2));
+// console.log(numArray2.indexOf(0));
+// console.log(numArray2.includes(0));
+// console.log(numArray2.includes(2));
 
 // #############################  ⌨️ Let & const (28:58)
+
+if(false){
+  var exam = 5;
+}
+
+if(false){
+  let exam = 5;
+}
+
+// console.log(exam);
+
+var exam2;
+
+if(false){
+  exam2 = 5;
+}
+
+const exam3 = 5;
+const exam4 = [];
+const exam5 = {};
+// exam3 = 10;
+
+exam4.push(5);
+// exam4 = 3;
+
+exam5.firstName = 'Dylan';
+
+// console.log(exam3);
+// console.log(exam4);
+// console.log(exam5);
 
 // #############################  ⌨️ Export & import (32:53)
 
