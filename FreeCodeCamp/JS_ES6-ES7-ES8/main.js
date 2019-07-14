@@ -226,6 +226,16 @@ updateData.push(5);
 
 // #############################  ⌨️ String.padStart(), String.padEnd() (35:29)
 
+let ex = 'Dylan';
+
+// console.log(ex.padStart(10, 'a'));
+console.log(ex.padEnd(10, 'a'));
+
+let ex2 = 'YouTube.com/CodingTutorials360';
+
+// console.log(ex2.padStart(100)); // dodaje pust znaki do tekstu
+// console.log(ex2.padEnd(1)); // ignoruje to ograniczenie
+
 // #############################  ⌨️ Classes (38:05)
 
 // #############################  ⌨️ Trailing commas (49:59)
