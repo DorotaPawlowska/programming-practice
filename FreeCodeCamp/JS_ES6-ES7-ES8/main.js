@@ -132,6 +132,18 @@ let examp4 = {
 // console.log(examp4);
 
 // ⌨️ Rest operator (20:57)
+function addOld(nums){
+  console.log(arguments);
+}
+
+function addRest(...nums){
+  console.log(nums);
+}
+
+addOld(4,5,6,78,1);
+addRest(4,5,6,78,1);
+
+
 
 // ⌨️ Arrow Functions (23:02)
 
