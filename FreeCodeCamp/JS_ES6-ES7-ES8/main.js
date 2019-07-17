@@ -247,8 +247,8 @@ let catC = new Cat('Cat', 4);
 // cat.makeNoise();
 // cat.makeNoise('Meow');
 
-catC.makeNoise();
-console.log(catC.metaData);
+// catC.makeNoise();
+// console.log(catC.metaData);
 
 // console.log(cat.type);
 // console.log(cat.legs);
@@ -256,9 +256,17 @@ console.log(catC.metaData);
 
 // console.log(Animal.return10()); // static method !!!
 
-
-
 // #############################  ⌨️ Trailing commas (49:59)
+
+function adder(param1,){
+  const ex = {
+    name: 'Dylan',
+  };
+
+  console.log(ex);
+}
+
+adder(2);
 
 // #############################  ⌨️ Async/Await (51:27)
 
