@@ -266,9 +266,52 @@ function adder(param1,){
   console.log(ex);
 }
 
-adder(2);
+// adder(2);
 
 // #############################  ⌨️ Async/Await (51:27)
+
+const apiUrl = 'https://cors-anywhere.herokuapp.com/https://jsonplaceholder.typicode.com/users';
+
+function handleResponse(response) {
+  if (response.status === 404) {
+    return Promise.reject(response);
+  }
+  return response.json();
+}
+
+fetch(apiUrl)
+  .then(handleResponse)
+  .then(data => console.log('dane z serwera: ', data))
+  .catch(error => console.log('błąd: ', error));
+
+
+  async function getTop100Campers(){
+    const resp = await fetch(apiUrl);
+    const js = await resp.json();
+
+    console.log(js[10]);
+    
+  } 
+
+// getTop100Campers();
+
+// challenge
+
+function resolveafter3Sec(){
+  return new Promise(resolve => {
+    setTimeout( () => resolve('resolve'), 3000);
+  });
+}
+
+// resolveafter3Sec().then( data => console.log(data));
+
+async function getAsyncData(){
+  const res = await resolveafter3Sec();
+  console.log(res);
+  
+}
+
+getAsyncData();
 
 // #############################  ⌨️ Sets (1:01:19)
 
