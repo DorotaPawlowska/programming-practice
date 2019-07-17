@@ -286,11 +286,10 @@ fetch(apiUrl)
 
 
   async function getTop100Campers(){
-    const resp = await fetch(apiUrl);
-    const js = await resp.json();
+    // const resp = await fetch(apiUrl);
+    // const js = await resp.json();
 
-    console.log(js[10]);
-    
+    // console.log(js[10]);    
   } 
 
 // getTop100Campers();
@@ -307,12 +306,22 @@ function resolveafter3Sec(){
 
 async function getAsyncData(){
   const res = await resolveafter3Sec();
-  console.log(res);
-  
+  console.log(res);  
 }
 
 getAsyncData();
 
 // #############################  ⌨️ Sets (1:01:19)
+
+const eSet = new Set([1,1,1,1,1,1,1,2,2,2,2,2,2]);
+
+eSet.add(5);
+eSet.add(5).add(17);
+
+// console.log(eSet.delete(5));
+console.log(eSet.has(5));
+
+eSet.clear();
+console.log(eSet.size);
 
 // #############################  ⌨️ What's Next (1:04:08)
