@@ -10,25 +10,41 @@ body{
 .container{
   width: 1200px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  flex-wrap: wrap; 
 }
 
 .container .box{
   width: 580px;
-  height: 400px;
+  height: 300px;
   background: #000000;
   background-position: top;
-  transition: ease-in-out 8s;
+  /* transition: ease-in-out 8s; */
+  margin: 5px;
 }
 
 .container .box.box1{
   background: url(img1.jpg);
   background-size: cover;
+  transition: ease-in-out 8s;
 }
 
 .container .box.box2{
   background: url(img4.jpg);
   background-size: cover;
+  transition: ease-in-out 8s;
+}
+
+.container .box.box3{
+  background: url(img5.jpg);
+  background-size: cover;
+  transition: ease-in-out 8s;
+}
+
+.container .box.box4{
+  background: url(img6.jpg);
+  background-size: cover;
+  transition: ease-in-out 8s;
 }
 
 .container .box:hover{
