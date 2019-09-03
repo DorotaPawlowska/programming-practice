@@ -152,6 +152,39 @@ img{
   grid-column: 3/5;
 }
 
+/* footer */
+.section-footer{
+  background: var(--primary-color);
+  color: #ffffff;
+  padding: 4rem 0;
+}
+
+.section-footer .container{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+}
+
+.section-footer h2{
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.section-footer h3{
+  margin-bottom: 0.7rem;
+}
+
+.section-footer a{
+  line-height: 1.9;
+  color: #cccccc;
+}
+
+.section-footer a > i{
+  color: #555555;
+  margin-right: 0.5rem;
+}
+
+
 /* utilities */
 .btn{
   display: inline-block;
