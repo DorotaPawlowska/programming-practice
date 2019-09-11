@@ -3,13 +3,23 @@
 #include <time.h>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+
+// ==================================== const ++++++++++++++++++++++++++++++++++++++++++++
+
 #undef main // without this line there is - undefined reference to 'WinMain@16' - error!!
+
+#define GRAVITY 0.35f
+
+
+// ==================================== structs{} ++++++++++++++++++++++++++++++++++++++++++++
+
 
 typedef struct{
   float x, y;
   float dy;
   short life;
   char *name;
+  int onLedge;
 } Man;
 
 typedef struct{
@@ -38,6 +48,8 @@ typedef struct{
   // renderer
   SDL_Renderer *renderer;
 } GameState;
+
+// ==================================== functions() ++++++++++++++++++++++++++++++++++++++++++++
 
 void loadGame(GameState *game){
 
@@ -86,6 +98,8 @@ void loadGame(GameState *game){
 
   game->man.x = 320-40;
   game->man.y = 240-40;
+  game->man.dy = 0;
+  game->man.onLedge = 0;
 
   for(int i = 0; i < 100; i++){
     game->stars[i].x = rand()%640;
@@ -108,6 +122,13 @@ void loadGame(GameState *game){
 // useful utility function to see if two rectangles are colliding at all
 int collide2d(float x1, float y1, float x2, float y2, float wt1, float ht1, float wt2, float ht2){
   return (!((x1 > (x2+wt2)) || (x2 > (x1+wt1)) || (y1 > (y2+ht2)) || (y2 > (y1+ht1))));
+}
+
+void process(GameState *game){
+  Man *man = &game->man;
+  man->y += man->dy;
+
+  man->dy += GRAVITY;
 }
 
 void collisionDetect(GameState *game){
@@ -139,6 +160,7 @@ void collisionDetect(GameState *game){
 
         // bumped our head, stop any jump velocity
         game->man.dy = 0;
+        game->man.onLedge = 1; 
       }//are we landing on the ledge
       else if(my+mh > by && my < by){
         //correct y
@@ -146,6 +168,7 @@ void collisionDetect(GameState *game){
 
         // landed on this ledge, stop any jump velocity
         game->man.dy = 0;
+        game->man.onLedge = 1; 
       }
     }
   }
@@ -171,6 +194,14 @@ int processEvents(SDL_Window *window, GameState *game){
           case SDLK_ESCAPE:
             done = 1;
           break;
+          case SDLK_UP:
+            printf("%g\n", game->man.dy);
+            if(game->man.onLedge){
+              game->man.dy = -12;
+              game->man.onLedge = 0;
+            }
+          break;
+
           // case SDLK_RIGHT:
             // man->x += 10;
           // break;
@@ -196,12 +227,12 @@ int processEvents(SDL_Window *window, GameState *game){
   if ( state[SDL_SCANCODE_RIGHT] ) {
     game->man.x += 10;
   }
-  if ( state[SDL_SCANCODE_UP] ) {
-    game->man.y -= 10;
-  }
-  if ( state[SDL_SCANCODE_DOWN] ) {
-    game->man.y += 10;
-  }
+  // if ( state[SDL_SCANCODE_UP] ) {
+  //   game->man.y -= 10;
+  // }
+  // if ( state[SDL_SCANCODE_DOWN] ) {
+  //   game->man.y += 10;
+  // }
 
   return done;
 }
@@ -238,6 +269,7 @@ void doRender(SDL_Renderer *renderer, GameState *game){
   SDL_RenderPresent(renderer);
 }
 
+// ==================================== main() ++++++++++++++++++++++++++++++++++++++++++++
 
 int main(int argc, char *argv[]){
 
@@ -268,6 +300,8 @@ int main(int argc, char *argv[]){
   while(!done){
 
     done = processEvents(window, &gameState);
+
+    process(&gameState);
 
     //colision detect
     collisionDetect(&gameState);
