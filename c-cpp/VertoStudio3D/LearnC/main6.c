@@ -1,25 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 
 // ==================================== const ++++++++++++++++++++++++++++++++++++++++++++
 
 #undef main // without this line there is - undefined reference to 'WinMain@16' - error!!
-
 #define GRAVITY 0.35f
-
 
 // ==================================== structs{} ++++++++++++++++++++++++++++++++++++++++++++
 
-
 typedef struct{
   float x, y;
-  float dy;
+  float dx, dy;
   short life;
   char *name;
   int onLedge;
+
+  int animFrame;
 } Man;
 
 typedef struct{
@@ -44,6 +44,8 @@ typedef struct{
   SDL_Texture *star;
   SDL_Texture *manFrames[2];
   SDL_Texture *brick;
+
+  int time;
 
   // renderer
   SDL_Renderer *renderer;
@@ -99,7 +101,11 @@ void loadGame(GameState *game){
   game->man.x = 320-40;
   game->man.y = 240-40;
   game->man.dy = 0;
+  game->man.dx = 0;
   game->man.onLedge = 0;
+  game->man.animFrame = 0;
+  
+  game->time = 0;
 
   for(int i = 0; i < 100; i++){
     game->stars[i].x = rand()%640;
@@ -117,6 +123,9 @@ void loadGame(GameState *game){
   game->ledges[99].x = 350;
   game->ledges[99].y = 200;
 
+  game->ledges[98].x = 350;
+  game->ledges[98].y = 350;
+
 }
 
 // useful utility function to see if two rectangles are colliding at all
@@ -125,8 +134,24 @@ int collide2d(float x1, float y1, float x2, float y2, float wt1, float ht1, floa
 }
 
 void process(GameState *game){
+
+  // add time
+  game->time++;
+
+  // man movement
   Man *man = &game->man;
+  man->x += man->dx;
   man->y += man->dy;
+
+  if(man->dx != 0 && man->onLedge ){
+    if(game->time % 8 == 0){
+      if(man->animFrame == 0){
+        man->animFrame == 1;
+      } else{
+        man->animFrame == 0;
+      }
+    }
+  }
 
   man->dy += GRAVITY;
 }
@@ -138,38 +163,50 @@ void collisionDetect(GameState *game){
     float mx = game->man.x, my = game->man.y;
     float bx = game->ledges[i].x, by = game->ledges[i].y, bw = game->ledges[i].w, bh = game->ledges[i].h;
 
-    if( my+mh > by && my<by+bh){
-      // rubbing against right edge
-      if(mx < bx+bw && mx+mw > bx+bw){
-        //correct x
-        game->man.x = bx+bw;
-        mx = bx+bw;
-      }//rubbing against left edge
-      else if(mx+mw > bx && mx < bx){
-        //correct x
-        game->man.x = bx-mw;
-        mx = bx-mw;
-      }
-    }
-
-    if(mx+mw > bx && mx<bx+bw){
+    if( my+mh/2 > by && mx+mw/2 < bx+bw){
       //are we bumping our head?
-      if(my < by+bh && my > by){
+
+      if(my < by+bh && my > by && game->man.dy < 0){
         //correct y
         game->man.y = by+bh;
+        my = by+bh;
 
         // bumped our head, stop any jump velocity
         game->man.dy = 0;
-        game->man.onLedge = 1; 
-      }//are we landing on the ledge
-      else if(my+mh > by && my < by){
+        game->man.onLedge = 1;
+      }
+    }
+
+    if(mx+mw > bx && mx < bx+bw){
+      //are we landing on the leadge?
+      if(my+mh > by && my < by && game->man.dy > 0){
         //correct y
         game->man.y = by-mh;
+        my = by-mh;
 
         // landed on this ledge, stop any jump velocity
         game->man.dy = 0;
         game->man.onLedge = 1; 
       }
+    }
+
+    if(my+mh > by && my < by+bh){
+      // rubbing against right edge
+      if(mx < bx+bw && mx+mw > bx+bw && game->man.dx < 0){
+        // correct x
+        game->man.x = bx+bw;
+        mx = bx+bw;
+
+        game->man.dx = 0;
+      }// rubbing against right edge
+      else if(mx+mw > bx && mx < bx && game->man.dx > 0){
+        // correct x
+        game->man.x = bx-mw;
+        mx = bx-mw;
+
+        game->man.dx = 0;
+      }
+
     }
   }
 }
@@ -195,9 +232,9 @@ int processEvents(SDL_Window *window, GameState *game){
             done = 1;
           break;
           case SDLK_UP:
-            printf("%g\n", game->man.dy);
+            // printf("%g\n", game->man.dy);
             if(game->man.onLedge){
-              game->man.dy = -12;
+              game->man.dy = -8;
               game->man.onLedge = 0;
             }
           break;
@@ -221,11 +258,30 @@ int processEvents(SDL_Window *window, GameState *game){
   }
 
   const Uint8 *state = SDL_GetKeyboardState(NULL);
-  if ( state[SDL_SCANCODE_LEFT] ) {
-    game->man.x -= 10;
+
+  // more jumping
+  if ( state[SDL_SCANCODE_UP] ) {
+    game->man.dy -= 0.2f;
   }
-  if ( state[SDL_SCANCODE_RIGHT] ) {
-    game->man.x += 10;
+
+  // walking
+  if ( state[SDL_SCANCODE_LEFT] ) {
+    game->man.dx -= 0.5;
+    if(game->man.dx < -6){
+      game->man.dx = -6;
+    }
+  }
+  else if ( state[SDL_SCANCODE_RIGHT] ) {
+    game->man.dx += 0.5;
+    if(game->man.dx > 6){
+      game->man.dx = 6;
+    }  
+  }
+  else {
+    game->man.dx *= 0.8f;
+    if(fabsf(game->man.dx) < 0.1f){
+      game->man.dx = 0;
+    }
   }
   // if ( state[SDL_SCANCODE_UP] ) {
   //   game->man.y -= 10;
@@ -255,7 +311,7 @@ void doRender(SDL_Renderer *renderer, GameState *game){
 
   // draw a rectangle at man's position
   SDL_Rect rect = { game->man.x, game->man.y, 48, 48 };
-  SDL_RenderCopyEx(renderer, game->manFrames[0], NULL, &rect, 0, NULL, 0);
+  SDL_RenderCopyEx(renderer, game->manFrames[game->man.animFrame], NULL, &rect, 0, NULL, 0);
   // SDL_RenderFillRect(renderer, &rect);
 
 
