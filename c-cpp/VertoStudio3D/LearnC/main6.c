@@ -20,6 +20,8 @@ typedef struct{
   int onLedge;
 
   int animFrame;
+  int facingLeft;
+  int slowingDown;
 } Man;
 
 typedef struct{
@@ -104,6 +106,8 @@ void loadGame(GameState *game){
   game->man.dx = 0;
   game->man.onLedge = 0;
   game->man.animFrame = 0;
+  game->man.facingLeft = 0;
+  game->man.slowingDown = 0;
   
   game->time = 0;
 
@@ -143,12 +147,12 @@ void process(GameState *game){
   man->x += man->dx;
   man->y += man->dy;
 
-  if(man->dx != 0 && man->onLedge ){
+  if(man->dx != 0 && man->onLedge && !man->slowingDown){
     if(game->time % 8 == 0){
       if(man->animFrame == 0){
-        man->animFrame == 1;
+        man->animFrame = 1;
       } else{
-        man->animFrame == 0;
+        man->animFrame = 0;
       }
     }
   }
@@ -163,9 +167,8 @@ void collisionDetect(GameState *game){
     float mx = game->man.x, my = game->man.y;
     float bx = game->ledges[i].x, by = game->ledges[i].y, bw = game->ledges[i].w, bh = game->ledges[i].h;
 
-    if( my+mh/2 > by && mx+mw/2 < bx+bw){
+    if( my+mw/2 > by && mx+mw/2 < bx+bw){
       //are we bumping our head?
-
       if(my < by+bh && my > by && game->man.dy < 0){
         //correct y
         game->man.y = by+bh;
@@ -270,15 +273,21 @@ int processEvents(SDL_Window *window, GameState *game){
     if(game->man.dx < -6){
       game->man.dx = -6;
     }
+    game->man.facingLeft = 1;
+    game->man.slowingDown = 0;
   }
   else if ( state[SDL_SCANCODE_RIGHT] ) {
     game->man.dx += 0.5;
     if(game->man.dx > 6){
       game->man.dx = 6;
     }  
+    game->man.facingLeft = 0;
+    game->man.slowingDown = 0;
   }
   else {
+    game->man.animFrame = 0;
     game->man.dx *= 0.8f;
+    game->man.slowingDown = 1;
     if(fabsf(game->man.dx) < 0.1f){
       game->man.dx = 0;
     }
@@ -296,7 +305,7 @@ int processEvents(SDL_Window *window, GameState *game){
 void doRender(SDL_Renderer *renderer, GameState *game){
     
   // set the drawing color to blue 
-  SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+  SDL_SetRenderDrawColor(renderer, 128, 128, 255, 255);
 
   // Clear the screen (to blue)
   SDL_RenderClear(renderer);
@@ -311,7 +320,7 @@ void doRender(SDL_Renderer *renderer, GameState *game){
 
   // draw a rectangle at man's position
   SDL_Rect rect = { game->man.x, game->man.y, 48, 48 };
-  SDL_RenderCopyEx(renderer, game->manFrames[game->man.animFrame], NULL, &rect, 0, NULL, 0);
+  SDL_RenderCopyEx(renderer, game->manFrames[game->man.animFrame], NULL, &rect, 0, NULL, game->man.facingLeft);
   // SDL_RenderFillRect(renderer, &rect);
 
 
