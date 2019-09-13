@@ -163,11 +163,16 @@ void process(GameState *game){
 void collisionDetect(GameState *game){
   //check for collision with any ledges (brick blocks)
   for(int i = 0; i < 100; i++){
-    float mw = 48, mh = 48;
-    float mx = game->man.x, my = game->man.y;
-    float bx = game->ledges[i].x, by = game->ledges[i].y, bw = game->ledges[i].w, bh = game->ledges[i].h;
+    float mw = 48, 
+          mh = 48;
+    float mx = game->man.x,
+          my = game->man.y;
+    float bx = game->ledges[i].x, 
+          by = game->ledges[i].y,
+          bw = game->ledges[i].w,
+          bh = game->ledges[i].h;
 
-    if( my+mw/2 > by && mx+mw/2 < bx+bw){
+    if( my+mw/2 > bx && mx+mw/2 < bx+bw){
       //are we bumping our head?
       if(my < by+bh && my > by && game->man.dy < 0){
         //correct y
