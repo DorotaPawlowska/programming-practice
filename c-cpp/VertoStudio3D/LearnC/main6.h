@@ -11,6 +11,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_ttf.h"
 #include "SDL2/SDL_image.h"
+#include "SDL2/SDL_mixer.h"
 
 // ==================================== structs{} ++++++++++++++++++++++++++++++++++++++++++++
 
@@ -64,6 +65,10 @@ typedef struct{
   //time
   int time, deathCountdown;
   int statusState;
+
+  //sounds
+  int musicChannel;
+  Mix_Chunk *bgMusic, *jumpSound, *landSound, *dieSound;
 
   // renderer
   SDL_Renderer *renderer;

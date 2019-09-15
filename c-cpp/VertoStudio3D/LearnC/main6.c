@@ -75,6 +75,28 @@ void loadGame(GameState *game){
     exit(1);
   }
 
+  // load sounds
+  game->bgMusic = Mix_LoadWAV("C:\\Users\\Administrator\\Desktop\\GitHub\\mojeWprawki\\programming-practice\\c-cpp\\VertoStudio3D\\LearnC\\music\\music.wav");
+  if(game->bgMusic != NULL){
+    Mix_VolumeChunk(game->bgMusic, 8);
+  }
+
+  game->jumpSound = Mix_LoadWAV("C:\\Users\\Administrator\\Desktop\\GitHub\\mojeWprawki\\programming-practice\\c-cpp\\VertoStudio3D\\LearnC\\music\\jump.wav");
+  if(game->jumpSound != NULL){
+    Mix_VolumeChunk(game->jumpSound, 64);
+  }
+
+  game->dieSound = Mix_LoadWAV("C:\\Users\\Administrator\\Desktop\\GitHub\\mojeWprawki\\programming-practice\\c-cpp\\VertoStudio3D\\LearnC\\music\\die.wav");
+  if(game->dieSound != NULL){
+    Mix_VolumeChunk(game->dieSound, 8);
+  }
+
+  game->landSound = Mix_LoadWAV("C:\\Users\\Administrator\\Desktop\\GitHub\\mojeWprawki\\programming-practice\\c-cpp\\VertoStudio3D\\LearnC\\music\\land.wav");
+  if(game->landSound != NULL){
+    Mix_VolumeChunk(game->landSound, 64);
+  }
+
+
   game->label1 = NULL;
   game->label2 = NULL;
 
@@ -128,13 +150,22 @@ void process(GameState *game){
   // add time
   game->time++;
 
-  if(game->time > 120){
-    shutdown_status_lives(game);
-    game->statusState = STATUS_STATE_GAME;
+  if(game->statusState == STATUS_STATE_LIVES){
+    if(game->time > 120){
+      shutdown_status_lives(game);
+      game->statusState = STATUS_STATE_GAME;
+      game->musicChannel = Mix_PlayChannel(-1, game->bgMusic, -1);
+    } 
   }
+  else if(game->statusState == STATUS_STATE_GAMEOVER){
 
-  if(game->statusState == STATUS_STATE_GAME){
-
+    Mix_HaltChannel(game->musicChannel);
+    if(game->time > 190){
+      SDL_Quit();
+      exit(0);
+    }
+  }
+  else if(game->statusState == STATUS_STATE_GAME){
     if(!game->man.isDead){
       // man movement
       Man *man = &game->man;
@@ -153,38 +184,39 @@ void process(GameState *game){
 
       man->dy += GRAVITY;
     }
-    if(game->man.isDead && game->deathCountdown < 0){
-      game->deathCountdown = 120;
-    }
+      if(game->man.isDead && game->deathCountdown < 0){
+        game->deathCountdown = 120;
+      }
 
-    if(game->deathCountdown >= 0){
+      if(game->deathCountdown >= 0){
 
-      game->deathCountdown--;
-      
-      if(game->deathCountdown < 0){
-        // init_game_over(game);
-        // game->statusState = STATUS_STATE_GAMEOVER;
+        game->deathCountdown--;
+        
+        if(game->deathCountdown < 0){
+          // init_game_over(game);
+          // game->statusState = STATUS_STATE_GAMEOVER;
 
-        game->man.lives--;
+          game->man.lives--;
 
-        if(game->man.lives >= 0){
-          init_status_lives(game);
-          game->statusState = STATUS_STATE_LIVES;
-          game->time = 0;
+          if(game->man.lives >= 0){
+            init_status_lives(game);
+            game->statusState = STATUS_STATE_LIVES;
+            game->time = 0;
 
-          game->man.isDead = 0;
-          game->man.x = 120;
-          game->man.y = 240;
-          game->man.dx = 0;
-          game->man.dy = 0;
-          game->man.onLedge = 0;
+            game->man.isDead = 0;
+            game->man.x = 120;
+            game->man.y = 240;
+            game->man.dx = 0;
+            game->man.dy = 0;
+            game->man.onLedge = 0;
 
-        } else {
-          game->statusState = STATUS_STATE_GAMEOVER;
-          game->time = 0;
-        }
-      } 
-    }
+          } else {
+            // init_game_over(game);
+            game->statusState = STATUS_STATE_GAMEOVER;
+            game->time = 0;
+          }
+        } 
+      }
 
   }
   game->scrollX = -game->man.x+320;
@@ -197,10 +229,14 @@ void collisionDetect(GameState *game){
 
   for(int i = 0; i< NUM_STARS; i++){
     if(collide2d(game->man.x, game->man.y, game->stars[i].x, game->stars[i].y,48,48,32,32)){
-      game->man.isDead = 1;
+      if(!game->man.isDead){
+        game->man.isDead = 1;
+        Mix_HaltChannel(game->musicChannel);
+        Mix_PlayChannel(-1, game->dieSound, 0);
+      }
+      break;
     }
   }
-
 
   //check for collision with any ledges (brick blocks)
   for(int i = 0; i < 100; i++){
@@ -231,7 +267,10 @@ void collisionDetect(GameState *game){
 
         // landed on this ledge, stop any jump velocity
         game->man.dy = 0;
-        game->man.onLedge = 1; 
+        if(!game->man.onLedge){
+          Mix_PlayChannel(-1, game->landSound, 0);
+          game->man.onLedge = 1;
+        }
       }
     }
 
@@ -281,6 +320,7 @@ int processEvents(SDL_Window *window, GameState *game){
             if(game->man.onLedge){
               game->man.dy = -8;
               game->man.onLedge = 0;
+              Mix_PlayChannel(-1, game->jumpSound, 0);
             }
           break;
 
@@ -391,8 +431,10 @@ int main(int argc, char *argv[]){
   SDL_Window *window = NULL;               // Declare a window
   SDL_Renderer *renderer = NULL;           // Declare a renderer
   
-  SDL_Init(SDL_INIT_VIDEO);         // Initialize SDL2
+  SDL_Init(SDL_INIT_VIDEO | SDL_INIT_JOYSTICK | SDL_INIT_AUDIO);         // Initialize SDL2
 	
+  gameState.joystick = SDL_JoystickOpen(0);
+
   if(TTF_Init() == -1) {                                // Initialize SDL2_ttf
       printf("TTF_Init: %s\n", TTF_GetError());
       exit(2);
@@ -409,6 +451,10 @@ int main(int argc, char *argv[]){
 
   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
   gameState.renderer = renderer;
+
+  SDL_RenderSetLogicalSize(renderer, 640, 480);
+
+  Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096); // initial
 
   loadGame(&gameState);
 
@@ -442,6 +488,11 @@ int main(int argc, char *argv[]){
     SDL_DestroyTexture(gameState.label1);
   }
   TTF_CloseFont(gameState.font);
+
+  Mix_FreeChunk(gameState.bgMusic);
+  Mix_FreeChunk(gameState.jumpSound);
+  Mix_FreeChunk(gameState.landSound);
+  Mix_FreeChunk(gameState.dieSound);
 
   // Close and destroy the window
   SDL_DestroyWindow(window);
