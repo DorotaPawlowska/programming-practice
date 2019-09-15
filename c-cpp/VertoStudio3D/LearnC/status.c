@@ -9,9 +9,9 @@ void init_status_lives(GameState *gameState){
 
   SDL_Color white = { 255, 255, 255, 255};
   SDL_Surface *tmp = TTF_RenderText_Blended(gameState->font, str, white);
-  gameState->labelW = tmp->w;
-  gameState->labelH = tmp->h;
-  gameState->label = SDL_CreateTextureFromSurface(gameState->renderer, tmp);
+  gameState->label1W = tmp->w;
+  gameState->label1H = tmp->h;
+  gameState->label1 = SDL_CreateTextureFromSurface(gameState->renderer, tmp);
   SDL_FreeSurface(tmp);
 }
 
@@ -29,12 +29,12 @@ void draw_status_lives(GameState *gameState){
   // set the drawing color to white
   SDL_SetRenderDrawColor(gameState->renderer, 255, 255, 255, 255);
 
-  SDL_Rect textRect = { 320-20, 240-gameState->labelH/2, gameState->labelW, gameState->labelH };
-  SDL_RenderCopy(gameState->renderer, gameState->label, NULL, &textRect);
+  SDL_Rect textRect = { 320-20, 240-gameState->label1H/2, gameState->label1W, gameState->label1H };
+  SDL_RenderCopy(gameState->renderer, gameState->label1, NULL, &textRect);
 }
 
 void shutdown_status_lives(GameState *gameState){
-  SDL_DestroyTexture(gameState->label);
-  gameState->label = NULL;
+  SDL_DestroyTexture(gameState->label1);
+  gameState->label1 = NULL;
 }
 
