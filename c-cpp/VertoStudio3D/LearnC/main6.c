@@ -2,56 +2,13 @@
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
+#include "main6.h"
+#include "status.h"
 
 // ==================================== const ++++++++++++++++++++++++++++++++++++++++++++
 
 #undef main // without this line there is - undefined reference to 'WinMain@16' - error!!
 #define GRAVITY 0.35f
-
-// ==================================== structs{} ++++++++++++++++++++++++++++++++++++++++++++
-
-typedef struct{
-  float x, y;
-  float dx, dy;
-  short life;
-  char *name;
-  int onLedge;
-
-  int animFrame;
-  int facingLeft;
-  int slowingDown;
-} Man;
-
-typedef struct{
-  int x, y;
-} Star;
-
-typedef struct{
-  int x, y, w, h;
-} Ledge;
-
-typedef struct{
-  // Players
-  Man man;
-
-  // Stars
-  Star stars[100];
-
-  // Ledges
-  Ledge ledges[100];
-
-  // images
-  SDL_Texture *star;
-  SDL_Texture *manFrames[2];
-  SDL_Texture *brick;
-
-  int time;
-
-  // renderer
-  SDL_Renderer *renderer;
-} GameState;
 
 // ==================================== functions() ++++++++++++++++++++++++++++++++++++++++++++
 
@@ -96,9 +53,19 @@ void loadGame(GameState *game){
     SDL_Quit();
     exit(1);
   }
-
+  
   game->brick = SDL_CreateTextureFromSurface(game->renderer, surface);
   SDL_FreeSurface(surface);
+
+  // load fonts
+  game->font = TTF_OpenFont("C:\\Users\\Administrator\\Desktop\\GitHub\\mojeWprawki\\programming-practice\\c-cpp\\VertoStudio3D\\LearnC\\fonts\\crazy.ttf", 48);
+  if(!game->font){
+    printf("Cannot find font file!\n\n");
+    SDL_Quit();
+    exit(1);
+  }
+
+  game->label = NULL;
 
   game->man.x = 320-40;
   game->man.y = 240-40;
@@ -108,6 +75,9 @@ void loadGame(GameState *game){
   game->man.animFrame = 0;
   game->man.facingLeft = 0;
   game->man.slowingDown = 0;
+  game->statusState = STATUS_STATE_LIVES;
+
+  init_status_lives(game);
   
   game->time = 0;
 
@@ -142,22 +112,30 @@ void process(GameState *game){
   // add time
   game->time++;
 
-  // man movement
-  Man *man = &game->man;
-  man->x += man->dx;
-  man->y += man->dy;
-
-  if(man->dx != 0 && man->onLedge && !man->slowingDown){
-    if(game->time % 8 == 0){
-      if(man->animFrame == 0){
-        man->animFrame = 1;
-      } else{
-        man->animFrame = 0;
-      }
-    }
+  if(game->time > 122){
+    init_status_lives(game);
+    game->statusState = STATUS_STATE_GAME;
   }
 
-  man->dy += GRAVITY;
+  if(game->statusState != STATUS_STATE_GAME){
+    // man movement
+    Man *man = &game->man;
+    man->x += man->dx;
+    man->y += man->dy;
+
+    if(man->dx != 0 && man->onLedge && !man->slowingDown){
+      if(game->time % 8 == 0){
+        if(man->animFrame == 0){
+          man->animFrame = 1;
+        } else{
+          man->animFrame = 0;
+        }
+      }
+    }
+
+    man->dy += GRAVITY;
+  }
+
 }
 
 void collisionDetect(GameState *game){
@@ -308,32 +286,37 @@ int processEvents(SDL_Window *window, GameState *game){
 }
 
 void doRender(SDL_Renderer *renderer, GameState *game){
-    
-  // set the drawing color to blue 
-  SDL_SetRenderDrawColor(renderer, 128, 128, 255, 255);
 
-  // Clear the screen (to blue)
-  SDL_RenderClear(renderer);
+  if(game->statusState == STATUS_STATE_LIVES){
+    draw_status_lives(game);
+  }else if(game->statusState == STATUS_STATE_GAME){
+    // set the drawing color to blue 
+    SDL_SetRenderDrawColor(renderer, 128, 128, 255, 255);
 
-  // set the drawing color to white
-  SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    // Clear the screen (to blue)
+    SDL_RenderClear(renderer);
 
-  for(int i = 0; i < 100; i++){
-    SDL_Rect ledgeRect = { game->ledges[i].x, game->ledges[i].y, game->ledges[i].w, game->ledges[i].h};
-    SDL_RenderCopy(renderer, game->brick, NULL, &ledgeRect);
+    // set the drawing color to white
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+    for(int i = 0; i < 100; i++){
+      SDL_Rect ledgeRect = { game->ledges[i].x, game->ledges[i].y, game->ledges[i].w, game->ledges[i].h};
+      SDL_RenderCopy(renderer, game->brick, NULL, &ledgeRect);
+    }
+
+    // draw a rectangle at man's position
+    SDL_Rect rect = { game->man.x, game->man.y, 48, 48 };
+    SDL_RenderCopyEx(renderer, game->manFrames[game->man.animFrame], NULL, &rect, 0, NULL, game->man.facingLeft);
+    // SDL_RenderFillRect(renderer, &rect);
+
+    // draw the star image
+    // for(int i = 0; i < 100; i++){
+    //   SDL_Rect starRect = { game->stars[i].x, game->stars[i].y, 100, 100 };
+    //   SDL_RenderCopy(renderer, game->star, NULL, &starRect);
+    // }
   }
+    
 
-  // draw a rectangle at man's position
-  SDL_Rect rect = { game->man.x, game->man.y, 48, 48 };
-  SDL_RenderCopyEx(renderer, game->manFrames[game->man.animFrame], NULL, &rect, 0, NULL, game->man.facingLeft);
-  // SDL_RenderFillRect(renderer, &rect);
-
-
-  // draw the star image
-  // for(int i = 0; i < 100; i++){
-  //   SDL_Rect starRect = { game->stars[i].x, game->stars[i].y, 100, 100 };
-  //   SDL_RenderCopy(renderer, game->star, NULL, &starRect);
-  // }
 
   // we are done drawning, "present" to the screen  what weve drawn
   SDL_RenderPresent(renderer);
@@ -346,8 +329,14 @@ int main(int argc, char *argv[]){
   GameState gameState;
   SDL_Window *window = NULL;               // Declare a window
   SDL_Renderer *renderer = NULL;           // Declare a renderer
-
+  
   SDL_Init(SDL_INIT_VIDEO);         // Initialize SDL2
+	
+  if(TTF_Init()==-1) {                                // Initialize SDL2_ttf
+      printf("TTF_Init: %s\n", TTF_GetError());
+      exit(2);
+  }
+
 
   srand(time(NULL));
 
@@ -389,12 +378,17 @@ int main(int argc, char *argv[]){
   SDL_DestroyTexture(gameState.manFrames[0]);
   SDL_DestroyTexture(gameState.manFrames[1]);
   SDL_DestroyTexture(gameState.brick);
+  if(gameState.label != NULL){
+    SDL_DestroyTexture(gameState.label);
+  }
+  TTF_CloseFont(gameState.font);
 
   // Close and destroy the window
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
 
   // clean up
+  TTF_Quit();
   SDL_Quit();
 
   return 0;
