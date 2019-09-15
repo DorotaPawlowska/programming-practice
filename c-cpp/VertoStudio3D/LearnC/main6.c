@@ -58,7 +58,7 @@ void loadGame(GameState *game){
   SDL_FreeSurface(surface);
 
   // load fonts
-  game->font = TTF_OpenFont("C:\\Users\\Administrator\\Desktop\\GitHub\\mojeWprawki\\programming-practice\\c-cpp\\VertoStudio3D\\LearnC\\fonts\\crazy.ttf", 48);
+  game->font = TTF_OpenFont("C:\\Users\\Administrator\\Desktop\\GitHub\\mojeWprawki\\programming-practice\\c-cpp\\VertoStudio3D\\LearnC\\fonts\\pixel_caps.ttf", 18);
   if(!game->font){
     printf("Cannot find font file!\n\n");
     SDL_Quit();
@@ -75,6 +75,7 @@ void loadGame(GameState *game){
   game->man.animFrame = 0;
   game->man.facingLeft = 0;
   game->man.slowingDown = 0;
+  game->man.lives = 3;
   game->statusState = STATUS_STATE_LIVES;
 
   init_status_lives(game);
@@ -112,7 +113,7 @@ void process(GameState *game){
   // add time
   game->time++;
 
-  if(game->time > 122){
+  if(game->time > 120){
     init_status_lives(game);
     game->statusState = STATUS_STATE_GAME;
   }
@@ -315,9 +316,6 @@ void doRender(SDL_Renderer *renderer, GameState *game){
     //   SDL_RenderCopy(renderer, game->star, NULL, &starRect);
     // }
   }
-    
-
-
   // we are done drawning, "present" to the screen  what weve drawn
   SDL_RenderPresent(renderer);
 }
@@ -336,7 +334,6 @@ int main(int argc, char *argv[]){
       printf("TTF_Init: %s\n", TTF_GetError());
       exit(2);
   }
-
 
   srand(time(NULL));
 

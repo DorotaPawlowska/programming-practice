@@ -15,7 +15,7 @@
 typedef struct{
   float x, y;
   float dx, dy;
-  short life;
+  short lives;
   char *name;
   int onLedge;
 
@@ -47,6 +47,7 @@ typedef struct{
   SDL_Texture *manFrames[2];
   SDL_Texture *brick;
   SDL_Texture *label;
+  int labelW, labelH;
 
   // fonts
   TTF_Font *font;
