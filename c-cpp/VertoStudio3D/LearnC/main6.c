@@ -12,6 +12,16 @@
 
 // ==================================== functions() ++++++++++++++++++++++++++++++++++++++++++++
 
+void initStars(GameState *game){
+  // init start
+  for(int i = 0; i < NUM_STARS; i++){
+    game->stars[i].baseX = 320+rand()%38400;
+    game->stars[i].baseY = rand()%480;
+    game->stars[i].mode = rand()%2;
+    game->stars[i].phase = 2*3.14*(rand()%360)/360.0f;
+  }
+}
+
 void loadGame(GameState *game){
 
   SDL_Surface *surface = NULL;
@@ -118,13 +128,15 @@ void loadGame(GameState *game){
   game->scrollX = 0;
   game->deathCountdown = -1;
 
-  for(int i = 0; i < NUM_STARS; i++){
-    game->stars[i].x = 320+rand()%38400;
-    game->stars[i].y = rand()%480;
-  }
+  initStars(game);
+
+  // for(int i = 0; i < NUM_STARS; i++){
+  //   game->stars[i].x = 320+rand()%38400;
+  //   game->stars[i].y = rand()%480;
+  // }
 
   // init ledges
-  for(int i = 0; i < 100; i++){
+  for(int i = 0; i < NUM_LEDGES-20; i++){
     game->ledges[i].w = 256;
     game->ledges[i].h = 64;
     game->ledges[i].x = i*384;
@@ -132,11 +144,19 @@ void loadGame(GameState *game){
     else game->ledges[i].y = 300+100-rand()%200;
   }
 
-  game->ledges[99].x = 350;
-  game->ledges[99].y = 200;
+  for(int i = NUM_LEDGES-20; i < NUM_LEDGES; i++){
+    game->ledges[i].w = 256;
+    game->ledges[i].h = 64;
+    game->ledges[i].x = 350+rand()%38400;
+    if(i%2 == 0) game->ledges[i].y = 200;
+    else game->ledges[i].y = 350;
+  }
 
-  game->ledges[98].x = 350;
-  game->ledges[98].y = 350;
+  // game->ledges[99].x = 350;
+  // game->ledges[99].y = 200;
+
+  // game->ledges[98].x = 350;
+  // game->ledges[98].y = 350;
 
 }
 
@@ -159,7 +179,7 @@ void process(GameState *game){
   }
   else if(game->statusState == STATUS_STATE_GAMEOVER){
 
-    Mix_HaltChannel(game->musicChannel);
+    // Mix_HaltChannel(game->musicChannel);
     if(game->time > 190){
       SDL_Quit();
       exit(0);
@@ -182,51 +202,75 @@ void process(GameState *game){
         }
       }
 
+      if(man->x > 38320){
+        init_game_win(game);
+        game->statusState = STATUS_STATE_WIN;
+      }
+
       man->dy += GRAVITY;
+
+      for(int i = 0; i < NUM_STARS; i++){
+        game->stars[i].x = game->stars[i].baseX;
+        game->stars[i].y = game->stars[i].baseY;
+
+
+        if(game->stars[i].mode == 0){
+          game->stars[i].x = game->stars[i].baseX+sinf(game->stars[i].phase+game->time*0.06f)*75;
+        }
+        else{
+          game->stars[i].y = game->stars[i].baseY+cosf(game->stars[i].phase+game->time*0.06f)*75;
+        }
+      }
     }
-      if(game->man.isDead && game->deathCountdown < 0){
-        game->deathCountdown = 120;
-      }
 
-      if(game->deathCountdown >= 0){
+    if(game->man.isDead && game->deathCountdown < 0){
+      game->deathCountdown = 120;
+    }
 
-        game->deathCountdown--;
-        
-        if(game->deathCountdown < 0){
-          // init_game_over(game);
-          // game->statusState = STATUS_STATE_GAMEOVER;
+    if(game->deathCountdown >= 0){
 
-          game->man.lives--;
+      game->deathCountdown--;
+      
+      if(game->deathCountdown < 0){
+        // init_game_over(game);
+        // game->statusState = STATUS_STATE_GAMEOVER;
 
-          if(game->man.lives >= 0){
-            init_status_lives(game);
-            game->statusState = STATUS_STATE_LIVES;
-            game->time = 0;
+        game->man.lives--;
 
-            game->man.isDead = 0;
-            game->man.x = 120;
-            game->man.y = 240;
-            game->man.dx = 0;
-            game->man.dy = 0;
-            game->man.onLedge = 0;
+        if(game->man.lives >= 0){
+          init_status_lives(game);
+          game->statusState = STATUS_STATE_LIVES;
+          game->time = 0;
 
-          } else {
-            // init_game_over(game);
-            game->statusState = STATUS_STATE_GAMEOVER;
-            game->time = 0;
-          }
-        } 
-      }
+          game->man.isDead = 0;
+          game->man.x = 100;
+          game->man.y = 240-40;
+          game->man.dx = 0;
+          game->man.dy = 0;
+          game->man.onLedge = 0;
+          initStars(game);
 
+        } else {
+          init_game_over(game);
+          game->statusState = STATUS_STATE_GAMEOVER;
+          game->time = 0;
+        }
+      } 
+    }
   }
+
   game->scrollX = -game->man.x+320;
   if(game->scrollX > 0){
     game->scrollX = 0;
+  }
+  if(game->scrollX < -38000+320){
+    game->scrollX = -38000+320;
   }
 }
 
 void collisionDetect(GameState *game){
 
+  //Check for collision with enemies
   for(int i = 0; i< NUM_STARS; i++){
     if(collide2d(game->man.x, game->man.y, game->stars[i].x, game->stars[i].y,48,48,32,32)){
       if(!game->man.isDead){
@@ -238,14 +282,23 @@ void collisionDetect(GameState *game){
     }
   }
 
+  //check for falling
+  if(game->man.y > 480){
+    if(!game->man.isDead){
+      game->man.isDead = 1;
+      Mix_HaltChannel(game->musicChannel);
+      Mix_PlayChannel(-1, game->dieSound, 0);      
+    }
+  }
+
   //check for collision with any ledges (brick blocks)
-  for(int i = 0; i < 100; i++){
+  for(int i = 0; i < NUM_LEDGES; i++){
     float mw = 48, mh = 48;
     float mx = game->man.x, my = game->man.y;
     float bx = game->ledges[i].x, by = game->ledges[i].y,
           bw = game->ledges[i].w, bh = game->ledges[i].h;
 
-    if( my+mw/2 > bx && mx+mw/2 < bx+bw){
+    if( mx+mw/2 > bx && mx+mw/2 < bx+bw){
       //are we bumping our head?
       if(my < by+bh && my > by && game->man.dy < 0){
         //correct y
@@ -340,6 +393,12 @@ int processEvents(SDL_Window *window, GameState *game){
       break;
       }
     }
+    
+    // if(game->man.onLedge){
+    //   game->man.dy = -8;
+    //   game->man.onLedge = 0;
+    //   Mix_PlayChannel(-1, game->jumpSound, 0);
+    // }
   }
 
   const Uint8 *state = SDL_GetKeyboardState(NULL);
@@ -388,6 +447,11 @@ void doRender(SDL_Renderer *renderer, GameState *game){
 
   if(game->statusState == STATUS_STATE_LIVES){
     draw_status_lives(game);
+  }else if(game->statusState == STATUS_STATE_GAMEOVER){
+    draw_game_over(game);
+  }
+  else if(game->statusState == STATUS_STATE_WIN){
+    draw_game_win(game);
   }else if(game->statusState == STATUS_STATE_GAME){
     // set the drawing color to blue 
     SDL_SetRenderDrawColor(renderer, 128, 128, 255, 255);
@@ -398,9 +462,16 @@ void doRender(SDL_Renderer *renderer, GameState *game){
     // set the drawing color to white
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-    for(int i = 0; i < 100; i++){
+    // draw the ledges image
+    for(int i = 0; i < NUM_LEDGES; i++){
       SDL_Rect ledgeRect = { game->scrollX+game->ledges[i].x, game->ledges[i].y, game->ledges[i].w, game->ledges[i].h};
       SDL_RenderCopy(renderer, game->brick, NULL, &ledgeRect);
+    }
+
+    // draw the star image
+    for(int i = 0; i < NUM_STARS; i++){
+      SDL_Rect starRect = { game->scrollX+game->stars[i].x, game->stars[i].y, 100, 100 };
+      SDL_RenderCopy(renderer, game->star, NULL, &starRect);
     }
 
     // draw a rectangle at man's position
@@ -413,11 +484,6 @@ void doRender(SDL_Renderer *renderer, GameState *game){
       SDL_RenderCopyEx(renderer, game->fire, NULL, &rect, 0, NULL, (game->time%20 < 10));
     }
 
-    // draw the star image
-    for(int i = 0; i < 100; i++){
-      SDL_Rect starRect = { game->scrollX+game->stars[i].x, game->stars[i].y, 100, 100 };
-      SDL_RenderCopy(renderer, game->star, NULL, &starRect);
-    }
   }
   // we are done drawning, "present" to the screen  what weve drawn
   SDL_RenderPresent(renderer);
@@ -476,7 +542,6 @@ int main(int argc, char *argv[]){
 
     // wait a few seconds before quitting
     // SDL_Delay(10);
-
   }
 
   // shutdown game and unload all memory
@@ -486,6 +551,9 @@ int main(int argc, char *argv[]){
   SDL_DestroyTexture(gameState.brick);
   if(gameState.label1 != NULL){
     SDL_DestroyTexture(gameState.label1);
+  }
+  if(gameState.label2 != NULL){
+    SDL_DestroyTexture(gameState.label2);
   }
   TTF_CloseFont(gameState.font);
 
@@ -499,6 +567,7 @@ int main(int argc, char *argv[]){
   SDL_DestroyRenderer(renderer);
 
   // clean up
+  Mix_CloseAudio();
   TTF_Quit();
   SDL_Quit();
 

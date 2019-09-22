@@ -5,8 +5,10 @@
 #define STATUS_STATE_LIVES 0
 #define STATUS_STATE_GAME 1
 #define STATUS_STATE_GAMEOVER 2
+#define STATUS_STATE_WIN 3
 
-#define NUM_STARS 100
+#define NUM_STARS 50
+#define NUM_LEDGES 200
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_ttf.h"
@@ -28,7 +30,8 @@ typedef struct{
 } Man;
 
 typedef struct{
-  int x, y;
+  int x, y, baseX, baseY, mode;
+  float phase;
 } Star;
 
 typedef struct{
@@ -46,7 +49,7 @@ typedef struct{
   Star stars[NUM_STARS];
 
   // Ledges
-  Ledge ledges[100];
+  Ledge ledges[NUM_LEDGES];
 
   // images
   SDL_Texture *star;
@@ -72,6 +75,9 @@ typedef struct{
 
   // renderer
   SDL_Renderer *renderer;
+
+  // window
+  SDL_Window *window;
 } GameState;
 
 void doRender(SDL_Renderer *renderer, GameState *game);
