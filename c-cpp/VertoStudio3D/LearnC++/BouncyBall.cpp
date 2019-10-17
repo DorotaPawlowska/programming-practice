@@ -1,16 +1,16 @@
 #include "BouncyBall.h"
 #include <math.h>
 
-// void BouncyBall::setTexture(SDL_Texture *tex){
-  // texture = tex;
-// }
+void BouncyBall::setTexture(SDL_Texture *tex){
+  texture = tex;
+}
 
 
-// void BouncyBall::draw(SDL_Renderer *rend){
+void BouncyBall::draw(SDL_Renderer *rend){
 
-  // SDL_Rect rect = {(int)x, (int)y, 32, 32};
-  // SDL_RenderCopy(rend, texture, nullptr, &rect);
-// }
+  SDL_Rect rect = {(int)x, (int)y, 32, 32};
+  SDL_RenderCopy(rend, texture, nullptr, &rect);
+}
 
 void BouncyBall::update(){
   if(y+32 < 480){
@@ -20,7 +20,7 @@ void BouncyBall::update(){
     dy *= -elasticity;
     y += dy*2;
     if(fabsf(dy) < 0.1){
-      // dy = 0;
+      dy = 0;
     }
   }
 }
