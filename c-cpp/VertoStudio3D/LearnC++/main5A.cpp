@@ -2,12 +2,14 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "BouncyBall.h"
+#include "Plane.h"
 
 #undef main // without this line there is - undefined reference to 'WinMain@16' - error!!
 
 static const int nBalls = 10;
-static SDL_Texture *ball = nullptr;
+static SDL_Texture *ball = nullptr, *planeTex = nullptr;
 BouncyBall balls[nBalls];
+Plane plane;
 
 int processEvents(SDL_Window *window){
   SDL_Event event;
@@ -50,6 +52,7 @@ void doRender(SDL_Renderer *renderer){
   for(int i = 0; i < nBalls;  i++){
     balls[i].draw(renderer);
   }
+  plane.draw(renderer);
 
   SDL_RenderPresent(renderer);
 }
@@ -78,11 +81,22 @@ int main(int argc, char *argv[]){
   }
   SDL_FreeSurface(surface);
 
+  surface = IMG_Load("plane.png");
+  if(surface){
+    planeTex = SDL_CreateTextureFromSurface(renderer, surface);
+  } else {
+    return 1;
+  }
+  SDL_FreeSurface(surface);
+
   for(int i = 0; i < nBalls;  i++){
     balls[i].setTexture(ball);
     balls[i].setPos(50+i*32, 100);
     balls[i].setElasticity((float)i/nBalls);
   }
+
+  plane.setTexture(planeTex);
+  plane.setPos(100, 100);
 
   int done = 0;
 
@@ -93,6 +107,8 @@ int main(int argc, char *argv[]){
     for(int i = 0; i < nBalls;  i++){
       balls[i].update();
     }
+    plane.update();
+
 
     doRender(renderer);
 
@@ -102,6 +118,9 @@ int main(int argc, char *argv[]){
   // Close and destroy the window
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
+
+  SDL_DestroyTexture(ball);
+  SDL_DestroyTexture(planeTex);
 
   // clean up
   SDL_Quit();

@@ -8,8 +8,12 @@ const social_panel_container = document.querySelector('.social-panel-container')
 get_meal_btn.addEventListener('click', () => {
   fetch('https://www.themealdb.com/api/json/v1/1/random.php')
   .then(res => res.json())
-  .then(res => createMeal(res.meals[0]))
-  .catch(e => console.warn(e));
+  .then(res => {
+    createMeal(res.meals[0]);
+    })
+  .catch(e => {
+    console.warn(e);
+    })
 });
 
 const createMeal = (meal) => {
@@ -25,7 +29,7 @@ const createMeal = (meal) => {
   }
 
   const newInnerHTML = `
-    <div clss="row">
+    <div class="row">
       <div class="columns five">
         <img crs="${meal.strMealThumb}" alt="Meal Image">
         ${meal.strCategory ? `<p><strong>Category:</strong> ${meal.strCategory}</p>` : ''}

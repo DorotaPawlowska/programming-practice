@@ -25,10 +25,7 @@ void BouncyBall::update(){
   }
 }
 
-void BouncyBall::setPos(float x, float y){
-  this->x = x;
-  this->y = y;
-}
+
 
 void BouncyBall::setElasticity(float e){
   elasticity = e;
