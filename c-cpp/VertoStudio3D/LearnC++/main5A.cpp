@@ -4,12 +4,16 @@
 #include "BouncyBall.h"
 #include "Plane.h"
 
+#define MAX_OBJECTS 100
+
 #undef main // without this line there is - undefined reference to 'WinMain@16' - error!!
 
 static const int nBalls = 10;
-static SDL_Texture *ball = nullptr, *planeTex = nullptr;
-BouncyBall balls[nBalls];
-Plane plane;
+static SDL_Texture *ballTex = nullptr, *planeTex = nullptr;
+GameObject *gameObjects[MAX_OBJECTS] = { nullptr };
+int numGameObjects = 0;
+// BouncyBall balls[nBalls];
+// Plane plane;
 
 int processEvents(SDL_Window *window){
   SDL_Event event;
@@ -49,15 +53,21 @@ void doRender(SDL_Renderer *renderer){
   // SDL_Rect rect = {0, 0, 32, 32};
   // SDL_RenderCopy(renderer, ball, nullptr, &rect);
 
-  for(int i = 0; i < nBalls;  i++){
-    balls[i].draw(renderer);
+  for(int i = 0; i < MAX_OBJECTS;  i++){
+    if(gameObjects[i]){
+      gameObjects[i]->draw(renderer);
+    }
+    // balls[i].draw(renderer);
   }
-  plane.draw(renderer);
+  // plane.draw(renderer);
 
   SDL_RenderPresent(renderer);
 }
 
 int main(int argc, char *argv[]){
+
+  // GameObject obj; // =!!!!  czysta klasa wirtualna
+  // GameObject *obj = &plane; // =!!!! ale tak już można ???
 
   SDL_Window *window = NULL;               // Declare a window
   SDL_Renderer *renderer = NULL;           // Declare a renderer
@@ -75,7 +85,7 @@ int main(int argc, char *argv[]){
 
   auto surface = IMG_Load("ball.png");
   if(surface){
-    ball = SDL_CreateTextureFromSurface(renderer, surface);
+    ballTex = SDL_CreateTextureFromSurface(renderer, surface);
   } else {
     return 1;
   }
@@ -90,13 +100,19 @@ int main(int argc, char *argv[]){
   SDL_FreeSurface(surface);
 
   for(int i = 0; i < nBalls;  i++){
-    balls[i].setTexture(ball);
-    balls[i].setPos(50+i*32, 100);
-    balls[i].setElasticity((float)i/nBalls);
+    BouncyBall *ball = new BouncyBall;
+    ball->setTexture(ballTex);
+    ball->setPos(50+i*32, 100);
+    ball->setElasticity((float)i/nBalls);
+
+    gameObjects[numGameObjects] = ball;
+    numGameObjects++;
   }
 
-  plane.setTexture(planeTex);
-  plane.setPos(100, 100);
+  Plane *plane = new Plane;
+  plane->setTexture(planeTex);
+  plane->setPos(100, 100);
+  gameObjects[numGameObjects++] = plane;
 
   int done = 0;
 
@@ -104,22 +120,31 @@ int main(int argc, char *argv[]){
 
     done = processEvents(window);
 
-    for(int i = 0; i < nBalls;  i++){
-      balls[i].update();
+    for(int i = 0; i < MAX_OBJECTS;  i++){
+      if(gameObjects[i]){
+        gameObjects[i]->update();
+      }
     }
-    plane.update();
-
+    // plane.update();
 
     doRender(renderer);
 
     SDL_Delay(10);
   }
 
+  for(int i = 0; i < MAX_OBJECTS;  i++){
+    if(gameObjects[i]){
+      delete gameObjects[i];
+      gameObjects[i] = nullptr;
+    }
+  }
+
+
   // Close and destroy the window
   SDL_DestroyWindow(window);
   SDL_DestroyRenderer(renderer);
 
-  SDL_DestroyTexture(ball);
+  SDL_DestroyTexture(ballTex);
   SDL_DestroyTexture(planeTex);
 
   // clean up

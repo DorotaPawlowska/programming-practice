@@ -5,9 +5,11 @@
 class BouncyBall : public GameObject{
 
 public:
+
+  virtual ~BouncyBall(){};
   void setTexture(SDL_Texture *tex);
-  void draw(SDL_Renderer *rend);
-  void update();
+  virtual void draw(SDL_Renderer *rend);
+  virtual void update();
 
   void setElasticity(float e);
 

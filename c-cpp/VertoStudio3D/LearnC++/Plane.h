@@ -2,9 +2,10 @@
 
 class Plane : public GameObject{
   public:
+    virtual ~Plane(){};
     void setTexture(SDL_Texture *tex);
-    void draw(SDL_Renderer *rend);
-    void update();
+    virtual void draw(SDL_Renderer *rend);
+    virtual void update();
 
   private:
     SDL_Texture *texture = nullptr; 

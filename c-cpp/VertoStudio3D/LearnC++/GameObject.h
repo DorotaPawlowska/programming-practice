@@ -6,9 +6,10 @@
 class GameObject{
   public: 
     GameObject();
+    virtual ~GameObject(){};
 
-    void draw(SDL_Renderer *rend);
-    void update();
+    virtual void draw(SDL_Renderer *rend)=0;
+    virtual void update()=0;
 
     void setPos(float x, float y);
 
