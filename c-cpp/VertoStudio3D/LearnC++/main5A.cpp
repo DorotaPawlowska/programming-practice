@@ -1,8 +1,11 @@
 #include <stdio.h>
+#include <iostream>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "BouncyBall.h"
 #include "Plane.h"
+
+using namespace std;
 
 #define MAX_OBJECTS 100
 
@@ -109,6 +112,8 @@ int main(int argc, char *argv[]){
     numGameObjects++;
   }
 
+
+
   Plane *plane = new Plane;
   plane->setTexture(planeTex);
   plane->setPos(100, 100);
@@ -120,12 +125,24 @@ int main(int argc, char *argv[]){
 
     done = processEvents(window);
 
+    int numBalls = 0, numPlanes = 0;
+
     for(int i = 0; i < MAX_OBJECTS;  i++){
       if(gameObjects[i]){
         gameObjects[i]->update();
+
+        Plane *planePtr = dynamic_cast<Plane *>(gameObjects[i]);
+        BouncyBall *ballPtr = dynamic_cast<BouncyBall *>(gameObjects[i]);
+        if(ballPtr != nullptr){
+          // can use ball safely
+          numBalls++;
+        } else if(planePtr != nullptr){
+          numPlanes++;
+        }
       }
     }
     // plane.update();
+    cout << numPlanes << ", " << numBalls << endl;
 
     doRender(renderer);
 
