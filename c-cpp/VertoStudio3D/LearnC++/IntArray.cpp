@@ -16,7 +16,7 @@ IntArray::IntArray(int n){
   // printf("alloc of %p\n", this);
   
   size = n;
-  data = (int *)malloc(sizeof(int)*n);
+  data = new int[n];//(int *)malloc(sizeof(int)*n);
 }
 
 IntArray::IntArray(const IntArray &arr){
@@ -36,10 +36,11 @@ IntArray::IntArray(const IntArray &arr){
 
 void IntArray::operator =(const IntArray &arr){
   if(data)
-    free(data);
+    delete data;
+    // free(data);
 
   size = arr.size;
-  data = (int *)malloc(sizeof(int)*size);
+  data = new int[size]; //(int *)malloc(sizeof(int)*size);
 
   // printf("assignment operator from %p to %p\n", &arr, this);
 

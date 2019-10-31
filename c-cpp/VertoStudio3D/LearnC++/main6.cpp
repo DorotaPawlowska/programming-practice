@@ -1,10 +1,11 @@
 #include <string>
 #include <stdio.h>
+#include <iostream>
 #include "IntArray.h"
 
 using namespace std;
 
-void func(){
+IntArray *createArray(){
   // IntArray a;
   IntArray a(100), b(200);
 
@@ -37,19 +38,23 @@ void func(){
   //i.operator!();
   // !i;
 
-  IntArray c = a + b;
-  string s1 = "hi ";
-  string s2 = "there";
-  string s3 = s1 + s2;
+  // IntArray c = a + b;
+  // string s1 = "hi ";
+  // string s2 = "there";
+  // string s3 = s1 + s2;
 
   // c[101].operator =(50);
-  c[101] = 50;
+
+  IntArray *c = new IntArray(a+b);
+  // (*c)[101] = 50;
+  c->set(101, 50);
+  return c;
 
   // printf("%d\n", a.get(10));
   // printf("%d\n", c.get(10));
   // printf("%d\n", c.get(0));
-  printf("%d\n", c.get(101));
-  printf("%d\n", c[101]);
+  // printf("%d\n", c.get(101));
+  // printf("%d\n", c[101]);
   // printf("%s\n", s3.c_str());
   // a.setSize();
   // int i = a.get(n);
@@ -58,7 +63,10 @@ void func(){
 
 int main(){
 
-  func();
-  
+  IntArray *result = createArray();
+
+  cout << result->get(101) << endl;
+
+  delete result;  
   return 0;
 }
