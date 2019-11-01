@@ -1,13 +1,13 @@
 #include <string>
 #include <stdio.h>
 #include <iostream>
-#include "IntArray.h"
+#include "Array.h"
 
 using namespace std;
 
-IntArray *createArray(){
-  // IntArray a;
-  IntArray a(100), b(200);
+Array<float> *createArray(){
+  // Array a;
+  Array<float> a(100), b(200);
 
   for(int i = 0; i < 100; i++){
     a.set(i, i*2);
@@ -18,16 +18,16 @@ IntArray *createArray(){
   }
   
 
-  // IntArray c(a);
-  // IntArray c = a;
+  // Array c(a);
+  // Array c = a;
 
   // ----------- Operator Overloading
 
-  // IntArray c(1);
+  // Array c(1);
   // c = a;
   // c = 5;
 
-  // IntArray c = a;
+  // Array c = a;
   //+,-,<,<=,!,(),[],(int)x, = itp.
   // int i = 1, j = 2;
   // int r;
@@ -38,14 +38,14 @@ IntArray *createArray(){
   //i.operator!();
   // !i;
 
-  // IntArray c = a + b;
+  // Array c = a + b;
   // string s1 = "hi ";
   // string s2 = "there";
   // string s3 = s1 + s2;
 
   // c[101].operator =(50);
 
-  IntArray *c = new IntArray(a+b);
+  Array<float> *c = new Array<float>(a+b);
   // (*c)[101] = 50;
   c->set(101, 50);
   return c;
@@ -63,7 +63,7 @@ IntArray *createArray(){
 
 int main(){
 
-  IntArray *result = createArray();
+  Array<float> *result = createArray();
 
   cout << result->get(101) << endl;
 
