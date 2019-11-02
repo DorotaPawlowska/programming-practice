@@ -1,4 +1,7 @@
+#include <vector>
+#include <list>
 #include <stdio.h>
+#include <cstdlib>
 #include <iostream>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
@@ -7,14 +10,14 @@
 
 using namespace std;
 
-#define MAX_OBJECTS 100
+// #define MAX_OBJECTS 100
 
 #undef main // without this line there is - undefined reference to 'WinMain@16' - error!!
 
 static const int nBalls = 10;
 static SDL_Texture *ballTex = nullptr, *planeTex = nullptr;
-GameObject *gameObjects[MAX_OBJECTS] = { nullptr };
-int numGameObjects = 0;
+list<GameObject *> gameObjects;
+// int numGameObjects = 0;
 // BouncyBall balls[nBalls];
 // Plane plane;
 
@@ -48,6 +51,45 @@ int processEvents(SDL_Window *window){
   return done;
 }
 
+void doUpdate(){
+
+  list<list<GameObject *>::iterator> toDie;
+  int numBalls = 0, numPlanes = 0;
+
+  for(auto it = gameObjects.begin(); it != gameObjects.end(); it++){
+    auto gameObject = *it;
+    gameObject->update();
+
+    Plane *planePtr = dynamic_cast<Plane *>(gameObject);
+    BouncyBall *ballPtr = dynamic_cast<BouncyBall *>(gameObject);
+    if(ballPtr != nullptr){
+      // can use ball safely
+      numBalls++;
+    } else if(planePtr != nullptr){
+      if(planePtr->getX() > 600){
+        // //delete plane
+        toDie.push_back(it);
+      }
+      numPlanes++;
+    }
+  }
+
+  for(auto iit : toDie){
+    cout << "delete" << endl;
+    delete *iit;
+    gameObjects.erase(iit);
+  }
+
+  if(numPlanes == 0){
+    for(int i = 0; i < 5; i++){
+      Plane *plane = new Plane;
+      plane->setTexture(planeTex);
+      plane->setPos(-100-rand()%150, rand()%380);
+      gameObjects.push_back(plane);  
+    }
+  }
+}
+
 void doRender(SDL_Renderer *renderer){
   SDL_SetRenderDrawColor(renderer, 240, 240, 255, 255);
   SDL_RenderClear(renderer);
@@ -56,12 +98,17 @@ void doRender(SDL_Renderer *renderer){
   // SDL_Rect rect = {0, 0, 32, 32};
   // SDL_RenderCopy(renderer, ball, nullptr, &rect);
 
-  for(int i = 0; i < MAX_OBJECTS;  i++){
-    if(gameObjects[i]){
-      gameObjects[i]->draw(renderer);
-    }
-    // balls[i].draw(renderer);
+  for(auto gameObject : gameObjects){
+    gameObject->draw(renderer);
   }
+
+
+  // for(int i = 0; i < MAX_OBJECTS;  i++){
+  //   if(gameObjects[i]){
+  //     gameObjects[i]->draw(renderer);
+  //   }
+  //   // balls[i].draw(renderer);
+  // }
   // plane.draw(renderer);
 
   SDL_RenderPresent(renderer);
@@ -108,16 +155,11 @@ int main(int argc, char *argv[]){
     ball->setPos(50+i*32, 100);
     ball->setElasticity((float)i/nBalls);
 
-    gameObjects[numGameObjects] = ball;
-    numGameObjects++;
+    gameObjects.push_back(ball);
+
+    // gameObjects[numGameObjects] = ball;
+    // numGameObjects++;
   }
-
-
-
-  Plane *plane = new Plane;
-  plane->setTexture(planeTex);
-  plane->setPos(100, 100);
-  gameObjects[numGameObjects++] = plane;
 
   int done = 0;
 
@@ -125,36 +167,21 @@ int main(int argc, char *argv[]){
 
     done = processEvents(window);
 
-    int numBalls = 0, numPlanes = 0;
-
-    for(int i = 0; i < MAX_OBJECTS;  i++){
-      if(gameObjects[i]){
-        gameObjects[i]->update();
-
-        Plane *planePtr = dynamic_cast<Plane *>(gameObjects[i]);
-        BouncyBall *ballPtr = dynamic_cast<BouncyBall *>(gameObjects[i]);
-        if(ballPtr != nullptr){
-          // can use ball safely
-          numBalls++;
-        } else if(planePtr != nullptr){
-          numPlanes++;
-        }
-      }
-    }
-    // plane.update();
-    cout << numPlanes << ", " << numBalls << endl;
+    doUpdate();
 
     doRender(renderer);
 
     SDL_Delay(10);
   }
 
-  for(int i = 0; i < MAX_OBJECTS;  i++){
-    if(gameObjects[i]){
-      delete gameObjects[i];
-      gameObjects[i] = nullptr;
-    }
+  // for(int i = 0; i < MAX_OBJECTS;  i++){
+  for(auto gameObject : gameObjects){
+    // if(gameObjects[i]){
+      delete gameObject;
+      // gameObjects[i] = nullptr;
+    // }
   }
+  gameObjects.clear();
 
 
   // Close and destroy the window

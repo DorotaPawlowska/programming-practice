@@ -12,6 +12,8 @@ class GameObject{
     virtual void update()=0;
 
     void setPos(float x, float y);
+    float getX();
+    float getY();
 
   protected:
     float x = 0, y = 0;
