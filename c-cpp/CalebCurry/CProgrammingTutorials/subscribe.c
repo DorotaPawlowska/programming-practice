@@ -1,12 +1,10 @@
 #include <stdio.h>
 
 int main(){
-  int xLoveMe;
-  xLoveMe = 10;
-  
-  int y = xLoveMe / 2;
+  int x = 10;  
+  int y = x / 2;
 
-  printf();
+  printf("the magic number is: %i\n the value of x is %i\n", y);
   return 0;
 }
 
