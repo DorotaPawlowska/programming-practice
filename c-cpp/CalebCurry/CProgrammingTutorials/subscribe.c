@@ -1,10 +1,11 @@
 #include <stdio.h>
 
 int main(){
-  int x = 10;  
-  int y = x / 2;
+  int radius;
+  printf("please enter a radius:");
+  scanf("%i", &radius); // address of operator
 
-  printf("the magic number is: %i\n the value of x is %i\n", y);
+  printf("the given radius is %i\n", radius);
   return 0;
 }
 
