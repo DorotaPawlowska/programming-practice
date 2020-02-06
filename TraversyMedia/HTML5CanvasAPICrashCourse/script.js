@@ -39,59 +39,100 @@ const ctx = canvas.getContext('2d');
 // PATHS
 
 // triangle
-ctx.beginPath();
-ctx.moveTo(50, 50);
-ctx.lineTo(150, 50);
-ctx.lineTo(100, 200);
+// ctx.beginPath();
+// ctx.moveTo(50, 50);
+// ctx.lineTo(150, 50);
+// ctx.lineTo(100, 200);
 // ctx.lineTo(50, 50);
-ctx.closePath();
+// ctx.closePath();
 // ctx.stroke();
-ctx.fillStyle = 'coral';
-ctx.fill();
+// ctx.fillStyle = 'coral';
+// ctx.fill();
 
-ctx.beginPath();
-ctx.moveTo(200, 50);
-ctx.lineTo(150, 200);
-ctx.lineTo(250, 200);
-ctx.closePath();
-ctx.stroke();
+// ctx.beginPath();
+// ctx.moveTo(200, 50);
+// ctx.lineTo(150, 200);
+// ctx.lineTo(250, 200);
+// ctx.closePath();
+// ctx.stroke();
 
 // rectangle
-ctx.beginPath();
-ctx.rect(300, 50, 150, 100);
-ctx.fillStyle = 'teal';
-ctx.fill();
+// ctx.beginPath();
+// ctx.rect(300, 50, 150, 100);
+// ctx.fillStyle = 'teal';
+// ctx.fill();
 
 // arcs (circles)
-ctx.beginPath();
+// ctx.beginPath();
 // ctx.arc(400, 400, 40, 0, Math.PI * 2, true);
 
-const centerX = canvas.width / 2;
-const centerY = canvas.height / 2;
+// const centerX = canvas.width / 2;
+// const centerY = canvas.height / 2;
 
 // draw head
-ctx.arc(centerX, centerY, 100, 0, Math.PI * 2);
+// ctx.arc(centerX, centerY, 100, 0, Math.PI * 2);
 //move to mouth
-ctx.moveTo(centerX+50, centerY);
+// ctx.moveTo(centerX+50, centerY);
 //draw the mouth
-ctx.arc(centerX, centerY, 50, 0, Math.PI, false);
+// ctx.arc(centerX, centerY, 50, 0, Math.PI, false);
 //move to left eye
-ctx.moveTo(centerX-30, centerY-40);
+// ctx.moveTo(centerX-30, centerY-40);
 //draw left eye
-ctx.arc(centerX-40, centerY-40, 10, 0, Math.PI * 2);
+// ctx.arc(centerX-40, centerY-40, 10, 0, Math.PI * 2);
 //move to right eye
-ctx.moveTo(centerX+50, centerY-40);
+// ctx.moveTo(centerX+50, centerY-40);
 //draw right eye
-ctx.arc(centerX+40, centerY-40, 10, 0, Math.PI * 2);
+// ctx.arc(centerX+40, centerY-40, 10, 0, Math.PI * 2);
 
-// quadratic curve
-ctx.moveTo(75, 25);
-ctx.quadraticCurveTo(25, 25, 25, 62.5);
-ctx.quadraticCurveTo(25, 100, 50, 100);
-ctx.quadraticCurveTo(50, 120, 30, 125);
-ctx.quadraticCurveTo(60, 120, 65, 100);
-ctx.quadraticCurveTo(125, 100, 125, 62.5);
-ctx.quadraticCurveTo(125, 25, 75, 25);
+// quadratic curve - speach bubble
+// ctx.moveTo(75, 25);
+// ctx.quadraticCurveTo(25, 25, 25, 62.5);
+// ctx.quadraticCurveTo(25, 100, 50, 100);
+// ctx.quadraticCurveTo(50, 120, 30, 125);
+// ctx.quadraticCurveTo(60, 120, 65, 100);
+// ctx.quadraticCurveTo(125, 100, 125, 62.5);
+// ctx.quadraticCurveTo(125, 25, 75, 25);
 
-ctx.stroke();
+// ctx.stroke();
 
+
+// ANIMATIONs
+// 1
+const circle = {
+  x: 200,
+  y: 200,
+  size: 30,
+  dx: 5,
+  dy: 4,
+};
+
+function drawCircle(){
+  ctx.beginPath();
+  ctx.arc(circle.x, circle.y, circle.size, 0, Math.PI * 2);
+  ctx.fillStyle = 'purple';
+  ctx.fill();
+}
+
+function update(){
+  ctx.clearRect(0,0, canvas.width, canvas.height);
+  drawCircle();
+
+  // change position
+  circle.x += circle.dx;
+  circle.y += circle.dy;
+
+  //detect side walls
+  if(circle.x + circle.size > canvas.width || circle.x - circle.size < 0 ){
+    circle.dx *= -1;
+    // circle.dy *= -1;
+  }
+  // detect top and bottom walls
+  if(circle.y + circle.size > canvas.height || circle.y - circle.size < 0 ){
+    circle.dy *= -1;
+    // circle.dy *= -1;
+  }
+
+  requestAnimationFrame(update);
+}
+
+update();
