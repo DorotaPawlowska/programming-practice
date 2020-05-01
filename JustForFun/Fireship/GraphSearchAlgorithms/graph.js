@@ -57,7 +57,6 @@ function bfs(start){
 }
 
 // dfs depth first search
-
 let steps = 0;
 function dfs(start, visited = new Set()){
   steps++; // zaczynam od pierwszego wywołania funkcji
