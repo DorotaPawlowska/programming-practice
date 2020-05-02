@@ -35,13 +35,13 @@ console.log(res);
 //pass an object as a function's parameters
 const profileUpdate = (profileData) => {
   const { name, age, nationality, location } = profileData;
-  //d o something with this variables
+  // do something with this variables
 }
 
 const profileUpdate2 = ({ name, age, nationality, location }) => {
-  //d o something with this variables
+  // do something with this variables
 }
 
-const profileUpdate2 = ({ name, age }) => {
-  //d o something with this variables
+const profileUpdate3 = ({ name, age }) => {
+  // do something with this variables
 }
