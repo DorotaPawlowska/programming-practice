@@ -37,6 +37,8 @@ function getComplement(color){
     case COLOR_VIOLET:
       return COLOR_YELLOW;
     default:
-      throw new Exception('unknown color: '+color);
+      throw `unknown color: ${color}`;
   }
 }
+
+console.log(getComplement(COLOR_RED));
