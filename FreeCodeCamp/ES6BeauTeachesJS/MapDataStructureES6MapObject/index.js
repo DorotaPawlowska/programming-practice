@@ -61,7 +61,7 @@ map2.set(keyObj, 'obj value');
 map2.set(keyFunc, 'func value');
 map2.set(NaN, 'NaN value');
 
-console.log(map2.size());
+console.log(map2.size);
 
 console.log(map2.get('hello'));
 console.log(map2.get(keyObj));
