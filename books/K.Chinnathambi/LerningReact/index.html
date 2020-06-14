@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React!</title>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <style>
+    #container{
+      padding: 50px;
+      background-color: #eeeeee;
+    }
+    #container h1{
+      font-size: 144px;
+      font-family: sans-serif;
+      color: #0080a8;
+    }
+  </style>
+</head>
+<body>
+  <div id="container"></div>
+  <script type="text/babel">
+    ReactDOM.render(
+      <h1>Sherlock Holmes</h1>,
+      document.querySelector('#container')
+    );
+  </script>
+</body>
+</html>
