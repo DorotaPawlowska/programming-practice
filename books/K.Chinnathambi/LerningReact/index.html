@@ -19,22 +19,51 @@
   <script type="text/babel">
     const destination = document.querySelector("#container");
 
-    class Letter extends React.Component {
+    class Square extends React.Component{
       render(){
-        const letterStyle = {
-          padding: 10,
-          margin: 10,
-          backgroundColor: this.props.bgcolor,
-          color: "#333333",
-          display: "inline-block",
-          fontFamily: "monospace",
-          fontSize: 32,
-          textAlign: "center"
+
+        const squareStyle = {
+          height: 150,
+          backgroundColor: this.props.color
         };
 
-        return (
-          <div style={letterStyle}>
-            {this.props.children}
+        return(
+          <div style={squareStyle}>
+          
+          </div>
+        );
+      }
+    }
+
+    class Label extends React.Component{
+      render(){
+        const labelStyle = {
+          fontFamily: "sans-serif",
+          fontWeight: "bold",
+          padding: 13,
+          margin: 0
+        };
+
+        return(
+          <p style={labelStyle}>{this.props.color}</p>
+        );
+      }
+    }
+
+    class Card extends React.Component{
+      render(){
+        const cardStyle = {
+          height: 200,
+          width: 150,
+          padding: 0,
+          backgroundColor: "#ffffff",
+          boxShadow: "0px 0px 5px #666666"
+        };
+
+        return(
+          <div style={cardStyle}>
+            <Square color={this.props.color}/>
+            <Label color={this.props.color}/>
           </div>
         );
       }
@@ -42,11 +71,7 @@
 
     ReactDOM.render(
       <div>
-        <Letter bgcolor="#58b3ff">A</Letter>
-        <Letter bgcolor="#ff605f">E</Letter>
-        <Letter bgcolor="#ffd52e">I</Letter>
-        <Letter bgcolor="#49dd8e">O</Letter>
-        <Letter bgcolor="#ae99ff">U</Letter>
+        <Card color="#ffa737"/>
       </div>,
       destination
     );
