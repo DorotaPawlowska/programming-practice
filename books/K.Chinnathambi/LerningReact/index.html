@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stylizacja w bibliotece React!</title>
+  <title>Przekazywanie właściwości w bibliotece React!</title>
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
@@ -19,17 +19,13 @@
   <script type="text/babel">
     const destination = document.querySelector("#container");
 
-    class Square extends React.Component{
+    class Display extends React.Component{
       render(){
-
-        const squareStyle = {
-          height: 150,
-          backgroundColor: this.props.color
-        };
-
         return(
-          <div style={squareStyle}>
-          
+          <div>
+            <p>{this.props.color}</p>
+            <p>{this.props.num}</p>
+            <p>{this.props.size}</p>
           </div>
         );
       }
@@ -37,33 +33,17 @@
 
     class Label extends React.Component{
       render(){
-        const labelStyle = {
-          fontFamily: "sans-serif",
-          fontWeight: "bold",
-          padding: 13,
-          margin: 0
-        };
-
         return(
-          <p style={labelStyle}>{this.props.color}</p>
+          <Display {...this.props}/>
         );
       }
     }
 
-    class Card extends React.Component{
+    class Shirt extends React.Component{
       render(){
-        const cardStyle = {
-          height: 200,
-          width: 150,
-          padding: 0,
-          backgroundColor: "#ffffff",
-          boxShadow: "0px 0px 5px #666666"
-        };
-
         return(
-          <div style={cardStyle}>
-            <Square color={this.props.color}/>
-            <Label color={this.props.color}/>
+          <div>
+            <Label {...this.props}/>
           </div>
         );
       }
@@ -71,7 +51,7 @@
 
     ReactDOM.render(
       <div>
-        <Card color="#ffa737"/>
+        <Shirt color="jasnoniebieski" num="3,14" size="średni"/>
       </div>,
       destination
     );
