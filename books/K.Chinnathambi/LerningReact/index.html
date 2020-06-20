@@ -3,44 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Komponenty React!</title>
+  <title>Stylizacja w bibliotece React!</title>
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
+  <style>
+    #container{
+      padding: 50px;
+      background-color: #ffffff;
+    }
+  </style>
 </head>
 <body>
   <div id="container"></div>
   <script type="text/babel">
+    const destination = document.querySelector("#container");
 
-    class HelloWorld extends React.Component{
+    class Letter extends React.Component {
       render(){
-        return <p>Witaj, {this.props.greetTarget}!</p>
-      }
-    }
+        const letterStyle = {
+          padding: 10,
+          margin: 10,
+          backgroundColor: this.props.bgcolor,
+          color: "#333333",
+          display: "inline-block",
+          fontFamily: "monospace",
+          fontSize: 32,
+          textAlign: "center"
+        };
 
-    class Buttonify extends React.Component{
-      render(){
-        return(
-          <div>
-            <button type={this.props.behavior}>{this.props.children}</button>
+        return (
+          <div style={letterStyle}>
+            {this.props.children}
           </div>
-        )
+        );
       }
     }
 
     ReactDOM.render(
       <div>
-        <HelloWorld greetTarget="batman"/>
-        <HelloWorld greetTarget="superman"/>
-        <HelloWorld greetTarget="ironman"/>
-        <HelloWorld greetTarget="bono"/>
-        <HelloWorld greetTarget="megaman"/>
-        <HelloWorld greetTarget="catwoman"/>
-        <HelloWorld greetTarget="nicolas"/>
-        <Buttonify behavior="submit">Wyślij dane</Buttonify>
+        <Letter bgcolor="#58b3ff">A</Letter>
+        <Letter bgcolor="#ff605f">E</Letter>
+        <Letter bgcolor="#ffd52e">I</Letter>
+        <Letter bgcolor="#49dd8e">O</Letter>
+        <Letter bgcolor="#ae99ff">U</Letter>
       </div>,
-      document.querySelector("#container")
+      destination
     );
 
   </script>
