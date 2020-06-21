@@ -7,52 +7,92 @@
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-  <style>
-    #container{
-      padding: 50px;
-      background-color: #ffffff;
-    }
-  </style>
 </head>
 <body>
   <div id="container"></div>
+
   <script type="text/babel">
+
     const destination = document.querySelector("#container");
 
-    class Display extends React.Component{
+    class LightningCounter extends React.Component{
+      constructor(props){
+        super(props);
+        this.state = {
+          strikes: 0
+        };
+        this.timerTrick = this.timerTrick.bind(this);
+      }
+
+      timerTrick(){
+        this.setState({
+          strikes: this.state.strikes + 100
+        });
+      }
+
+      componentDidMount(){
+        setInterval(this.timerTrick, 1000);
+      }
+
       render(){
-        return(
-          <div>
-            <p>{this.props.color}</p>
-            <p>{this.props.num}</p>
-            <p>{this.props.size}</p>
-          </div>
+        const counterStyle = {
+          color: "#66ffff",
+          fontSize: 50
+        };
+
+        const count = this.state.strikes.toLocaleString();
+
+        return (
+          <h1 style={counterStyle}>{count}</h1>
         );
       }
     }
 
-    class Label extends React.Component{
+    class LightningCounterDisplay extends React.Component{
       render(){
-        return(
-          <Display {...this.props}/>
-        );
-      }
-    }
+        const commonStyle = {
+          margin: 0,
+          padding: 0
+        };
 
-    class Shirt extends React.Component{
-      render(){
-        return(
-          <div>
-            <Label {...this.props}/>
+        const divStyle = {
+          width: 250,
+          textAlign: "center",
+          backgroundColor: "black",
+          padding: 40,
+          fontFamily: "sans-serif",
+          color: "#999999",
+          borderRadius: 10
+        };
+
+        const textStyles = {
+          emphasis: {
+            fontSize: 38,
+            ...commonStyle
+          },
+          smallEmphasis: {
+            ...commonStyle
+          },
+          small: {
+            fontSize: 17,
+            opacity: 0.5,
+            ...commonStyle
+          }
+        };
+
+        return (
+          <div style={divStyle}>
+            <LightningCounter />
+            <h2 style={textStyles.smallEmphasis}>Liczba uderzeń piorunów</h2>
+            <h2 style={textStyles.emphasis}>na całym świecie</h2>
+            <h2 style={textStyles.small}>(od czasu otwarcia strony)</h2>
           </div>
         );
       }
-    }
+    }    
 
     ReactDOM.render(
-      <div>
-        <Shirt color="jasnoniebieski" num="3,14" size="średni"/>
-      </div>,
+      <LightningCounterDisplay />,
       destination
     );
 
