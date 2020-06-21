@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Przekazywanie właściwości w bibliotece React!</title>
+  <title>Zdarzenia</title>
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
@@ -20,46 +20,91 @@
   <script type="text/babel">
 
     const destination = document.querySelector("#container");
-
-    class Circle extends React.Component{
+    
+    class Counter extends React.Component{
       render(){
-        const circleStyle = {
-          padding: 10,
-          margin: 20,
-          display: "inline-block",
-          backgroundColor: this.props.bgColor,
-          borderRadius: "50%",
-          width: 100,
-          height: 100
+        const textStyle = {
+          fontSize: 72,
+          fontFamily: "sans-serif",
+          color: "#333333",
+          fontWeight: "bold"
         };
 
         return(
-          <div style={circleStyle}>
-          
+          <div style={textStyle}>
+            {this.props.display}
           </div>
         );
       }
     }
 
-    // const theCircle = <Circle bgColor="#f9c240"/>
-    // function showCircle(){
-    //   const colors = [ "#393e41", "#e94f37", "#1c89bf", "#a1d363"];
-    //   let ran = Math.floor(Math.random() * colors.length);
+    class CounterParent extends React.Component{
+      constructor(props){
+        super(props);
 
-    //   return <Circle bgColor={colors[ran]}/>;
-    // }
+        this.state = {
+          count: 0
+        };
 
-    const colors = [ "#393e41", "#e94f37", "#1c89bf", "#a1d363", "#85ffc7", "#297373", "#ff8552", "#a40e4c"];
-    let renderData = [];
+        this.increase = this.increase.bind(this);
+      }
 
-    for(let i = 0; i < colors.length; i++){
-      let color = colors[i];
-      renderData.push(<Circle key={i + color} bgColor={color} />);
+      increase(e){
+        let currentCount = this.state.count;
+
+        if(e.shiftKey){
+          currentCount += 10;
+        } else {
+          currentCount += 1;
+        }
+
+        this.setState({
+          count: currentCount
+        });
+      }
+
+      render(){
+        const backgroundStyle = {
+          padding: 50,
+          backgroundColor: "#ffc53a",
+          width: 250,
+          height: 100,
+          borderRadius: 10,
+          textAlign: "center"
+        };
+
+        const buttonStyle = {
+          fontSize: "1em",
+          width: 30,
+          height: 30,
+          fontFamily: "sans-serif",
+          color: "#333333",
+          fontWeight: "bold",
+          lineHeight: "3px"
+        };
+
+        return(
+          <div style={backgroundStyle}>
+            <Counter display={this.state.count} />
+            <PlusButton clickHandler={this.increase} style={buttonStyle}>+</PlusButton>
+          </div>
+        );
+      }
+    }
+
+    class PlusButton extends React.Component {
+      render(){
+        return(
+          <button onClick={this.props.clickHandler}>
+            +
+          </button>
+        )
+      }
     }
 
     ReactDOM.render(
       <div>
-        {renderData}
+        <CounterParent />
       </div>,
       destination
     );
