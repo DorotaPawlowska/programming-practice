@@ -7,6 +7,12 @@
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <style>
+    #container{
+      padding: 50px;
+      background-color: #ffffff;
+    }
+  </style>
 </head>
 <body>
   <div id="container"></div>
@@ -15,84 +21,46 @@
 
     const destination = document.querySelector("#container");
 
-    class LightningCounter extends React.Component{
-      constructor(props){
-        super(props);
-        this.state = {
-          strikes: 0
-        };
-        this.timerTrick = this.timerTrick.bind(this);
-      }
-
-      timerTrick(){
-        this.setState({
-          strikes: this.state.strikes + 100
-        });
-      }
-
-      componentDidMount(){
-        setInterval(this.timerTrick, 1000);
-      }
-
+    class Circle extends React.Component{
       render(){
-        const counterStyle = {
-          color: "#66ffff",
-          fontSize: 50
+        const circleStyle = {
+          padding: 10,
+          margin: 20,
+          display: "inline-block",
+          backgroundColor: this.props.bgColor,
+          borderRadius: "50%",
+          width: 100,
+          height: 100
         };
 
-        const count = this.state.strikes.toLocaleString();
-
-        return (
-          <h1 style={counterStyle}>{count}</h1>
+        return(
+          <div style={circleStyle}>
+          
+          </div>
         );
       }
     }
 
-    class LightningCounterDisplay extends React.Component{
-      render(){
-        const commonStyle = {
-          margin: 0,
-          padding: 0
-        };
+    // const theCircle = <Circle bgColor="#f9c240"/>
+    // function showCircle(){
+    //   const colors = [ "#393e41", "#e94f37", "#1c89bf", "#a1d363"];
+    //   let ran = Math.floor(Math.random() * colors.length);
 
-        const divStyle = {
-          width: 250,
-          textAlign: "center",
-          backgroundColor: "black",
-          padding: 40,
-          fontFamily: "sans-serif",
-          color: "#999999",
-          borderRadius: 10
-        };
+    //   return <Circle bgColor={colors[ran]}/>;
+    // }
 
-        const textStyles = {
-          emphasis: {
-            fontSize: 38,
-            ...commonStyle
-          },
-          smallEmphasis: {
-            ...commonStyle
-          },
-          small: {
-            fontSize: 17,
-            opacity: 0.5,
-            ...commonStyle
-          }
-        };
+    const colors = [ "#393e41", "#e94f37", "#1c89bf", "#a1d363", "#85ffc7", "#297373", "#ff8552", "#a40e4c"];
+    let renderData = [];
 
-        return (
-          <div style={divStyle}>
-            <LightningCounter />
-            <h2 style={textStyles.smallEmphasis}>Liczba uderzeń piorunów</h2>
-            <h2 style={textStyles.emphasis}>na całym świecie</h2>
-            <h2 style={textStyles.small}>(od czasu otwarcia strony)</h2>
-          </div>
-        );
-      }
-    }    
+    for(let i = 0; i < colors.length; i++){
+      let color = colors[i];
+      renderData.push(<Circle key={i + color} bgColor={color} />);
+    }
 
     ReactDOM.render(
-      <LightningCounterDisplay />,
+      <div>
+        {renderData}
+      </div>,
       destination
     );
 
