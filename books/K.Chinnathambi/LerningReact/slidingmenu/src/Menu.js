@@ -3,6 +3,9 @@ import "./Menu.css";
 
 class Menu extends Component{
   render(){
+
+    console.log("wyśiwetlenie Menu");
+
     let visibility = "hide";
     if(this.props.menuVisibility){
       visibility = "show";
