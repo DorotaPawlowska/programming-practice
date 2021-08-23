@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+  <title>Document</title>
+  <style>
+    invisible {
+      display: none; /* elementy z tą klasą nie są wyświetlane */
+    }
+  </style>
+  <script type="text/javascript">
+    
+    var node; // węzeł = aktualna pozycja na drzewie wiedzy
+
+    function question (new_node, html){
+      $('#dialog').append(html);
+
+      if($(new_node).length == 0){
+        return (true)
+      } else {
+        node = new_node;
+
+        if($(node).children().length == 0)
+          $('#dialog').append('Czy to, ' + $(node).attr('string') + '?');
+        else
+          $('#dialog').append($(node).attr('string') + '?');
+
+        return (false);
+      }
+    }
+
+    function restart(){
+      $('.start-hidden').hide();
+      $('#question,#what').val('');
+      question($('#root>div'), '<div><b>Pomyśl o jakimś zwierzęciu.</b></div>');
+      $('#yesno').show();
+    }
+
+    $(function(){
+      // JavaScript - jQuery
+      restart();
+      
+      $('#done-question').click(function(){
+        $(node).wrap('<div string="' + $('#question').val() + '"></div>');
+        $(node).parent().prepend('<div string="' + $('#what').val() + '"></div>');
+        $('#dialog').append("<div>Dzięki! Zapamiętam to zwierzę.</div><p>");
+        restart();
+      });
+
+      $('#done-what').click(function(){
+        $('#what-is-it').hide();
+        $('#new').text($('#what').val());
+        $('#old').text($(node).attr('string'));
+        $('#new-question').show();
+        $('#dialog div:last').append(' <i>' + $('#what').val() + '</i>');
+      });
+
+      $('#yes').click(function(){
+        if(question($(node).children(':first-child'), ' <i>yes</i><br>')){
+          $('#dialog').append("<div>Wiedziałem! Jestem taki mądry!</div><p>");
+          restart();
+        }
+      });
+
+      $('#no').click(function(){
+        if(question($(node).children(':last-child'), '<i>no</i><br>')){
+          $('#yesno').hide();
+          $('#dialog').append('<div>Poddaję się. Co to za zwierzę?</div>');
+          $('#what-is-it').show();
+        }
+      });
+    });  
+  </script>
+  
+</head>
+<body>
+  <!-- drzewo wiedzy -->
+  <div id="root" class="invisible">
+      <div string="Czy ono szczeka">
+        <div string="pies"></div>
+        <div string="kot"></div>
+      </div>
+  </div>
+
+  <div id="dialog">
+  <!-- rozmowa -->
+  </div>
+
+  <!-- dialog uzyskujacy nowe zwierzę -->
+  <div id="what-is-it" class="start-hidden">
+    <input type="text" id="what">
+    <button id="done-what">Zrobione</button>
+  </div>
+
+  <!-- dialog uzyskujacy nowe pytanie -->
+  <div id="new-question" class="start-hidden">
+    Jakim pytaniem mógłbym odróżnić 
+    <span id="new"></span> od <span id="old"></span>?
+    <input type="text" id="question">
+    <button id="done-question">Zrobione</button>
+  </div>
+
+  <!-- guziki 'tak' i 'nie' -->
+  <div id="yesno" class="start-hidden">
+    <button id="yes">Tak</button>
+    <button id="no">Nie</button>
+  </div>
+
+</body>
+</html>
